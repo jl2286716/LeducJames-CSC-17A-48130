@@ -17,6 +17,8 @@ void determineDays();
 void pedictPopInc();
 void createTempTable();
 float celsius(float);
+void displayWeather();
+void searchStrings();
 
 #incluse <iostream>
 using namespace std;
@@ -45,9 +47,9 @@ int main(){
 				break;
 			case 607: createTempTable();
 				break;
-			case 706: 
+			case 706: displayWeather();
 				break;
-			case 807:
+			case 807: searchStrings();
 				break;
 			//case 0: exit(0);
 				//break;
@@ -55,6 +57,8 @@ int main(){
 		}
 
 	}while(choice != 0);
+	
+	cout << endl << "Good bye!";
 	
 	return 0;
 )
@@ -288,7 +292,7 @@ int main(){
 		// Add pause & clear.
 	}
 
-//6.7: Celsius Temperature Table
+// 6.7: Celsius Temperature Table
 	// The formula for converting a temperature from Fahrenheit to Celsius is
 		// C = (5 / 9) * (F - 32)
 		// F = degrees Fahrenheit & C = degrees Celsius
@@ -325,8 +329,28 @@ int main(){
 		return c;
 	}
 	
+// 7.6: Rain or Shine
+	// An amateur meteorologist wants to keep track of weather conditions during the past year's
+	// three-month summer season and has designated each day as either rainy ('R'), cloudy ('C'),
+	// or sunny ('S'). Write a program that stores this information in a 3 x 30 array of characters,
+	// where the row indicates the month (0 = June, 1 = July, 2 = August) and the column indicates
+	// the day of the month. Note that data are not being collected for the 31st of any month.
+	// The program should begin by reading the weather data in from a file. Then it should create a
+	// report that displays, for each month and for the whole three-month period, how many days were
+	// rainy, how many were cloudy, and how many were sunny. It should also report which of the three
+	// months had the largest number of rainy days. Data for the program can be found in the
+	// RainOrShine.txt file.
+	void displayWeather(){
 	
+	}
 	
+// 8.7: Binary String Search
+	// Modify the 'binarySearch' function presented in chapter 8 so it searches an array of strings
+	// instead of an array on ints. Test the function with a driver program. Use Program 8-8 as a
+	// skeleton to complete. (The array must be sorted before the binary search will work.)
+	void searchStrings(){
+		
+	}
 	
 	
 	
