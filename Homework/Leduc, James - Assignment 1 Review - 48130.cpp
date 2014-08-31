@@ -2,7 +2,7 @@
 	Programmer: James Leduc
 	Program Name: Gaddis_8thEd_Assignment01
 	Date Created: 08/30/2014
-	Date Modified: 08/30/2014
+	Date Modified: 08/31/2014
 	Purpose: A menu driven program to run scripts from chapters 3-8 in
 		"Starting Out With C++: From Control Structures Through Objects" by Tony Gaddis, 8th Edition:
 		3.12 (pg144), 3.13 (pg144), 4.10 (pg221), 5.11 (pg295), 6.7 (pg368), 7.6 (pg449), 8.7 (pg493)
@@ -20,7 +20,8 @@ float celsius(float);
 void displayWeather();
 void searchStrings();
 
-#incluse <iostream>
+#include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main(){
@@ -61,7 +62,7 @@ int main(){
 	cout << endl << "Good bye!";
 	
 	return 0;
-)
+}
 
 // Function Definitions
 
@@ -105,9 +106,7 @@ int main(){
 			 << fahr << " degrees Fahrenheit." << endl;
 		
 		system("pause");
-		system("cls"); // or 'clear'
-		
-		return 0; // May need to remove in 'void' function.
+		system("cls");
 	}
 
 // 3.13: Currency
@@ -138,9 +137,8 @@ int main(){
 		cout << endl << "$" << dollars << " (USD) is equal to " << euroConvert
 			<< " Euros (EUR) and " << yenConvert << " Japanese Yen (JPY)." << endl;
 			
-		// Add pause & clear.
-		
-		return 0; // May need to remove in 'void' function.
+		system("pause");
+		system("cls");
 	}
 	
 // 4.10: Days in a Month
@@ -151,6 +149,7 @@ int main(){
 			
 		// Create variables.
 		int month, year, days;
+		float leap;
 		
 		cout << "This program shows the number of days in a given month of a given year." << endl;
 		
@@ -161,11 +160,11 @@ int main(){
 			cin >> month;
 			
 			// Prompt user to enter valid data.
-			if(month < 1 && > 12){
+			if(month < 1 && month > 12){
 				cout << "Please enter a valid month (1-12)!" << endl;
 			}
 			
-		}while(month < 1 && > 12);
+		}while(month < 1 && month > 12);
 		
 		//Get and validate year.
 		do{
@@ -174,11 +173,11 @@ int main(){
 			cin >> year;
 			
 			// Prompt user to enter valid data.
-			if(year < 0 && > 9999){
+			if(year < 0 && year > 9999){
 				cout << "Please enter a valid year (0-9999)!" << endl;
 			}
 			
-		}while(year < 0 && > 9999);
+		}while(year < 0 && year > 9999);
 				
 		// Determine days in month.
 		switch(month){
@@ -186,7 +185,8 @@ int main(){
 				break;
 			case 2: // February
 				// Calculate leap year. Note: may need to adjust for years 1-3.
-				if(year % 4.0 = 0.0){
+				leap = year % 4;
+				if(leap = 0){
 					days = 29; // Leap year.
 				}else{
 					days = 28; // Normal year.
@@ -217,9 +217,8 @@ int main(){
 		// Display number of days in month.
 		cout << endl << days << " days" << endl;
 	
-		// Add pause & clear.
-	
-		return 0: // May need to remove in 'void' function.
+		system("pause");
+		system("cls");
 	}
 	
 // 5.11: Population
@@ -289,7 +288,8 @@ int main(){
 			 << dailyIncrease << " over " << numOfDays << " day(s), the resulting population will be "
 			 << population << " organisms.";
 		
-		// Add pause & clear.
+		system("pause");
+		system("cls");
 	}
 
 // 6.7: Celsius Temperature Table
@@ -318,6 +318,9 @@ int main(){
 			// Display results.
 			cout << fahrTemp << "F = " << celcTemp << "C" << endl;
 		}
+		
+		system("pause");
+		system("cls");
 	}
 	
 	// Converts Fahrenheit to Celsius. Passes 'fahrTemp' as 'f' and returns 'c' for 'celcTemp'.
