@@ -13,6 +13,7 @@
 void convertCelsius();
 void convertCurrency();
 void determineDays();
+void pedictPopInc();
 
 #incluse <iostream>
 using namespace std;
@@ -22,16 +23,16 @@ int main(){
 	int choice;
 	
 	cout << "Please choose from the list below" << endl
-		<< "by entering the problem number." << endl
-		<< "Enter 0 to end the program." << endl << endl
-		<< "312: Celsius to Fahrenheit" << endl
-		<< "313: Currency" << endl
-		<< "410: Days in a Month" << endl
-		<< "511: Population" << endl
-		<< "607: Celsius Temperature Table" << endl
-		<< "706: Rain or Shine" << endl
-		<< "807: Binary String Search" << endl << endl
-		<< "Your choice: " << endl << endl;
+		 << "by entering the problem number." << endl
+		 << "Enter 0 to end the program." << endl << endl
+		 << "312: Celsius to Fahrenheit" << endl
+		 << "313: Currency" << endl
+		 << "410: Days in a Month" << endl
+		 << "511: Population" << endl
+		 << "607: Celsius Temperature Table" << endl
+		 << "706: Rain or Shine" << endl
+		 << "807: Binary String Search" << endl << endl
+		 << "Your choice: " << endl << endl;
 		
 	cin >> choice;
 	
@@ -42,7 +43,7 @@ int main(){
 			break;
 		case 410: determineDays();
 			break;
-		case 511: 
+		case 511: pedictPopInc();
 			break;
 		case 607:
 			break;
@@ -60,7 +61,7 @@ int main(){
 
 // Function Definitions
 
-// Chap03_Prob12: Celsius to Fahrenheit
+// 3.12: Celsius to Fahrenheit
 	// Write a program that converts Celsius temperatures to Fahrenheit temperatures.
 	// The formula is: F = ((9 / 5) * C) + 32
 	// F = degrees Fahrenheit & C = degrees Celsius.
@@ -81,7 +82,7 @@ int main(){
 		
 		// Display results.
 		cout << endl << celc << " degrees Celsius equals " 
-			<< fahr << " degrees Fahrenheit." << endl;
+			 << fahr << " degrees Fahrenheit." << endl;
 		
 		system("pause");
 		system("cls"); // or 'clear'
@@ -89,7 +90,7 @@ int main(){
 		return 0; // May need to remove in 'void' function.
 	}
 
-// Chap03_Prob13: Currency
+// 3.13: Currency
 	// Write a program that will convert U.S. dollar amounts to Japanese yen and to euros,
 	// storing the conversion factors in the constants YEN_PER_DOLLAR and EUROS_PER_DOLLAR.
 	// Format your currency amounts in fixed-point notation, with two decimal places of
@@ -114,15 +115,15 @@ int main(){
 		cout << setprecision(2) << fixed << showpoint;
 		
 		// Display results.
-		cout << endl << "$" << dollars << " is equal to " << euroConvert
-			<< " Euros and " << yenConvert << " Japanese Yen." << endl;
+		cout << endl << "$" << dollars << " (USD) is equal to " << euroConvert
+			<< " Euros (EUR) and " << yenConvert << " Japanese Yen (JPY)." << endl;
 			
 		// Add pause & clear.
 		
 		return 0; // May need to remove in 'void' function.
 	}
 	
-// Chap04_Prob10: Days in a Month
+// 4.10: Days in a Month
 	// Write a program that asks the user to enter the month (letting the user enter an integer
 	// in the range of 1 through 12) and the year. The program should then display the number of
 	// days in that month.
@@ -198,3 +199,73 @@ int main(){
 	
 		return 0: // May need to remove in 'void' function.
 	}
+	
+// 5.11: Population
+	// Write a program that will predict the size of a population of organisms.
+	// The program should ask the user for the starting number of organisms, their average daily
+	// population increase (as a percentage), and the number of days they will multiply.
+	// A loop should display the size of the population for each day.
+	// Input Validation:
+		// Do not accept a number less than 2 for the starting size of the population.
+		// Do not accept a negative number for average daily population increase.
+		// Do not accept a number less than 1 for the number of days they will multiply.
+	void pedictPopInc(){
+		
+		// Create variables.
+		int startingNum, // Starting number of organisms. 2 and above.
+			population; // Predicted population increase.
+		float dailyIncrease, // Average daily population increase. Positive numbers only.
+			numOfDays; // Number of days they will multiply. 1 and above.
+			
+		cout << "This programs calculates a projected population growth." << endl;
+		
+		// Get and validate the beginning population number.
+		do{
+			cout << "Enter the beginning population number (must be an integer above 1): ";
+			cin >> startingNum;
+			
+			if(startingNum < 2){
+				cout << "Invalid input! Please enter an integer above 1!";
+			}
+			
+		}while(startingNum < 2);
+		
+		// Get and validate the average daily increase.
+		do{
+			cout << endl << "Enter the average daily increase (positive percentage only): ";
+			cin >> dailyIncrease;
+			
+			if(dailyIncrease <= 0){ // Test for decimal results.
+				cout << "Invalid input! Please enter a positive percentage only!";
+			}
+			
+		}while(dailyIncrease <= 0);
+		
+		// Get and validate the number of days the population will multiply.
+		do{
+			cout << endl << "Enter the number of days the population will multiply"
+			<< endl << "(at least 1 day must elapse): ";
+			cin >> numOfDays;
+			
+			if(numOfDays < 1){
+				cout << "Invalid input! At least 1 day MUST elapse!";
+			}
+			
+		}while(numOfDays < 1);
+			
+		dailyIncrease /= 100; // Convert percentage to decimal
+		population = startingNum; // Initialize the population.
+			
+		// Calculate population increase.
+		for(i = 0; i < numOfDays; i++){
+			population *= dailyIncrease;
+		}
+		
+		dailyIncrease *= 100; // Convert decimal back to percentage.
+		
+		cout << endl << "If a population of " << startingNum << " organisms increases at a rate of %"
+			 << dailyIncrease << " over " << numOfDays << " day(s), the resulting population will be "
+			 << population << " organisms.";
+		
+	}
+		
