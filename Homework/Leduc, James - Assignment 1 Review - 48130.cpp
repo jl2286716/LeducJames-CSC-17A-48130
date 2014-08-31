@@ -23,14 +23,37 @@ int main(){
 	
 	cout << "Please choose from the list below" << endl
 		<< "by entering the problem number." << endl
-		<< "Enter 0 to end the program." << endl
+		<< "Enter 0 to end the program." << endl << endl
 		<< "312: Celsius to Fahrenheit" << endl
 		<< "313: Currency" << endl
 		<< "410: Days in a Month" << endl
 		<< "511: Population" << endl
 		<< "607: Celsius Temperature Table" << endl
 		<< "706: Rain or Shine" << endl
-		<< "807: Binary String Search" << endl;
+		<< "807: Binary String Search" << endl << endl
+		<< "Your choice: " << endl << endl;
+		
+	cin >> choice;
+	
+	switch(choice){
+		case 312: convertCelsius();
+			break;
+		case 313: convertCurrency();
+			break;
+		case 410: determineDays();
+			break;
+		case 511: 
+			break;
+		case 607:
+			break;
+		case 706: 
+			break;
+		case 807:
+			break;
+		case 0: exit(0);
+			break;
+		default: cout << "Invalid! Please choose from the available choices!";
+	}
 
 	return 0;
 )
@@ -60,15 +83,15 @@ int main(){
 		cout << endl << celc << " degrees Celsius equals " 
 			<< fahr << " degrees Fahrenheit." << endl;
 		
-		return 0;
+		system("pause");
+		system("cls"); // or 'clear'
+		
+		return 0; // May need to remove in 'void' function.
 	}
 
 // Chap03_Prob13: Currency
 	// Write a program that will convert U.S. dollar amounts to Japanese yen and to euros,
 	// storing the conversion factors in the constants YEN_PER_DOLLAR and EUROS_PER_DOLLAR.
-	// To get the most up-to-date exchange rates, search the Internet using the term
-	// "currency exchange rate". If you cannot find the most recent exchange rates,
-	// use the following: 1 Dollar = 98.93 Yen ; 1 Dollar = 0.74 Euros.
 	// Format your currency amounts in fixed-point notation, with two decimal places of
 	// precision, and be sure the decimal point is always displayed.
 	void convertCurrency(){
@@ -93,22 +116,16 @@ int main(){
 		// Display results.
 		cout << endl << "$" << dollars << " is equal to " << euroConvert
 			<< " Euros and " << yenConvert << " Japanese Yen." << endl;
+			
+		// Add pause & clear.
 		
-		return 0;	
+		return 0; // May need to remove in 'void' function.
 	}
 	
 // Chap04_Prob10: Days in a Month
 	// Write a program that asks the user to enter the month (letting the user enter an integer
 	// in the range of 1 through 12) and the year. The program should then display the number of
-	// days in that month. Use the following criteria to identify leap years:
-		// 1. Determine whether the year is divisible by 100. If it is, then it is a leap year if
-		// 	and only if it is divisible by 400. For example, 2000 is a leap year but 2100 is not.
-		// 2. If the year is not divisible by 100, then it is a leap year if and only if it is
-		// 	divisible by 4. For example, 2008 is a leap year but 2009 is not.
-	// Here is a sample run of the program:
-		// Enter a month (1-12): 2[Enter]
-		// Enter a year: 2008[Enter]
-		// 29 days
+	// days in that month.
 	void determineDays(){
 			
 		// Create variables.
@@ -140,53 +157,44 @@ int main(){
 			
 		}while(year < 0 && > 9999);
 				
-		// Calculate days in month.
+		// Determine days in month.
 		switch(month){
-			case 1: // January
-				days = 31;
+			case 1: days = 31; // January
 				break;
 			case 2: // February
-				// Calculate leap year. Note: may have to adjust for years 1-3.
+				// Calculate leap year. Note: may need to adjust for years 1-3.
 				if(year % 4.0 = 0.0){
-					days = 29;
+					days = 29; // Leap year.
 				}else{
-					days = 28;
+					days = 28; // Normal year.
 				}
 				break;
-			case 3: // March
-				days = 31;
+			case 3: days = 31; // March
 				break;
-			case 4: // April
-				days = 30;
+			case 4: days = 30; // April
 				break;
-			case 5: // May
-				days = 31;
+			case 5: days = 31; // May
 				break;
-			case 6: // June
-				days = 30;
+			case 6: days = 30; // June
 				break;
-			case 7: // July
-				days = 31;
+			case 7: days = 31; // July
 				break;
-			case 8: // August
-				days = 31;
+			case 8: days = 31; // August
 				break;
-			case 9: // September
-				days = 30;
+			case 9: days = 30; // September
 				break;
-			case 10: // October
-				days = 31;
+			case 10: days = 31; // October
 				break;
-			case 11: // November
-				days = 30;
+			case 11: days = 30; // November
 				break;
-			case 12: // December
-				days = 31;
+			case 12: days = 31; // December
 				break;
 		}
 			
 		// Display number of days in month.
 		cout << endl << days << " days" << endl;
 	
-		return 0:
+		// Add pause & clear.
+	
+		return 0: // May need to remove in 'void' function.
 	}
