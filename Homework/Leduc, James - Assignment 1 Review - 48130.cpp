@@ -38,6 +38,9 @@ int main(){
 		// Calculate degree conversion from Celsius to Fahrenheit.
 		fahr = ((9 / 5) * celc) + 32;
 		
+		// Set precision and show decimal point.
+		cout << setprecision(2) << fixed << showpoint;
+		
 		// Display results.
 		cout << endl << celc << " degrees Celsius equals " << fahr << " degrees Fahrenheit.";
 		
