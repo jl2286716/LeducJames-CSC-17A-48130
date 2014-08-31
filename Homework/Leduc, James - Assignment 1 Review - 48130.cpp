@@ -14,6 +14,8 @@ void convertCelsius();
 void convertCurrency();
 void determineDays();
 void pedictPopInc();
+void createTempTable();
+float celsius(float);
 
 #incluse <iostream>
 using namespace std;
@@ -32,9 +34,9 @@ int main(){
 		 << "607: Celsius Temperature Table" << endl
 		 << "706: Rain or Shine" << endl
 		 << "807: Binary String Search" << endl << endl
-		 << "Your choice: " << endl << endl;
-		
+		 << "Your choice: ";
 	cin >> choice;
+	cout << endl << endl;
 	
 	switch(choice){
 		case 312: convertCelsius();
@@ -45,7 +47,7 @@ int main(){
 			break;
 		case 511: pedictPopInc();
 			break;
-		case 607:
+		case 607: createTempTable();
 			break;
 		case 706: 
 			break;
@@ -132,6 +134,8 @@ int main(){
 		// Create variables.
 		int month, year, days;
 		
+		cout << "This program shows the number of days in a given month of a given year." << endl;
+		
 		// Get and validate month.
 		do{
 			// Get month from user.
@@ -217,7 +221,7 @@ int main(){
 		float dailyIncrease, // Average daily population increase. Positive numbers only.
 			numOfDays; // Number of days they will multiply. 1 and above.
 			
-		cout << "This programs calculates a projected population growth." << endl;
+		cout << "This program calculates a projected population growth." << endl;
 		
 		// Get and validate the beginning population number.
 		do{
@@ -253,19 +257,64 @@ int main(){
 			
 		}while(numOfDays < 1);
 			
-		dailyIncrease /= 100; // Convert percentage to decimal
+		//dailyIncrease /= 100; // Convert percentage to decimal
 		population = startingNum; // Initialize the population.
 			
 		// Calculate population increase.
-		for(i = 0; i < numOfDays; i++){
-			population *= dailyIncrease;
+		for(int i = 0; i < numOfDays; i++){
+			population *= (dailyIncrease/100);
 		}
 		
-		dailyIncrease *= 100; // Convert decimal back to percentage.
+		//dailyIncrease *= 100; // Convert decimal back to percentage.
 		
 		cout << endl << "If a population of " << startingNum << " organisms increases at a rate of %"
 			 << dailyIncrease << " over " << numOfDays << " day(s), the resulting population will be "
 			 << population << " organisms.";
 		
+		// Add pause & clear.
 	}
+
+//6.7: Celsius Temperature Table
+	// The formula for converting a temperature from Fahrenheit to Celsius is
+		// C = (5 / 9) * (F - 32)
+		// F = degrees Fahrenheit & C = degrees Celsius
+	// Write a function named celsius that accepts a Fahrenheit temperature as an argument.
+	// The function should return the temperature, converted to Celsius. Demonstrate the function
+	// by calling it in a loop that displays a table of the Fahrenheit temperatures 0 through 20
+	// and their Celsius equivalents.
+	void createTempTable(){
+		// Create variables.
+		float celcTemp, // Degrees Celsius.
+			fahrTemp = 0; // Degrees Fahrenheit initialized to 0.
+			
+		cout << "This program displays Fahrenheit temperatures 0 through 20"
+			 << endl << "and their Celsius equivalents." << endl << endl;
 		
+		for(fahrTemp; fahrTemp <= 20; fahrTemp++){
+		
+			celcTemp = celsius(fahrTemp);
+			
+			// Set precision.
+			cout << setprecision(2) << fixed << showpoint;
+			
+			// Display results.
+			cout << fahrTemp << "F = " << celcTemp << "C" << endl;
+		}
+	}
+	
+	// Converts Fahrenheit to Celsius. Passes 'fahrTemp' as 'f' and returns 'c' for 'celcTemp'.
+	float celsius(float f){
+		float c; //Variable for degrees Celsius.
+		
+		c = (5 / 9) * (f - 32);
+	
+		return c;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
