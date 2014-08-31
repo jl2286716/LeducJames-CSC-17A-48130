@@ -345,6 +345,18 @@ int main(){
 	// RainOrShine.txt file.
 	void displayWeather(){
 	
+		// Create variables and initialize array.
+		char arr[][];
+	
+		cout << "This program will now read in the weather conditions from a text file" << endl
+			 << "for the Summer months in 30 day increments and display them on screen." << endl
+			 << "It will also display the month with the most rainy days." << endl
+			 << "0 = June, 1 = July, 2 = August" << endl
+			 << "R = rainy, C = cloudy, S = sunny" << endl << endl;
+			 
+			 
+		system("pause");
+		system("cls");
 	}
 	
 // 8.7: Binary String Search
@@ -353,6 +365,9 @@ int main(){
 	// skeleton to complete. (The array must be sorted before the binary search will work.)
 	void searchStrings(){
 		
+		
+		system("pause");
+		system("cls");
 	}
 	
 	
