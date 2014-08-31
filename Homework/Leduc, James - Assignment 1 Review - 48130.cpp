@@ -99,23 +99,35 @@ int main(){
 		// Create variables.
 		int month, year, days;
 		
-		// Get month from user.
-		cout << "Enter a month (1-12): ";
-		cin >> month;
+		// Get and validate month.
+		do{
+			// Get month from user.
+			cout << "Enter a month (1-12): ";
+			cin >> month;
+			
+			// Prompt user to enter valid data.
+			if(month < 1 && > 12){
+				cout << "Please enter a valid month (1-12)!" << endl;
+			}
+			
+		}while(month < 1 && > 12);
 		
-		// Validate month.
-		
-		
-		// Get year from user.
-		cout << endl << "Enter a year: ";
-		cin >> year;
-		
-		// Validate year.
-		
+		//Get and validate year.
+		do{
+			// Get year from user.
+			cout << endl << "Enter a year: ";
+			cin >> year;
+			
+			// Prompt user to enter valid data.
+			if(year < 0 && > 9999){
+				cout << "Please enter a valid year (0-9999)!" << endl;
+			}
+			
+		}while(year < 0 && > 9999);
 		
 		// Calculate leap year.
 		
-		
+			
 		// Display number of days in month.
 		cout << endl << days << " days" << endl;
 	
