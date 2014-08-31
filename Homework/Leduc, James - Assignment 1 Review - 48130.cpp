@@ -10,6 +10,7 @@
 */
 
 // Function Prototypes
+void showMenu();
 void convertCelsius();
 void convertCurrency();
 void determineDays();
@@ -24,44 +25,57 @@ int main(){
 
 	int choice;
 	
-	cout << "Please choose from the list below" << endl
-		 << "by entering the problem number." << endl
-		 << "Enter 0 to end the program." << endl << endl
-		 << "312: Celsius to Fahrenheit" << endl
-		 << "313: Currency" << endl
-		 << "410: Days in a Month" << endl
-		 << "511: Population" << endl
-		 << "607: Celsius Temperature Table" << endl
-		 << "706: Rain or Shine" << endl
-		 << "807: Binary String Search" << endl << endl
-		 << "Your choice: ";
-	cin >> choice;
-	cout << endl << endl;
-	
-	switch(choice){
-		case 312: convertCelsius();
-			break;
-		case 313: convertCurrency();
-			break;
-		case 410: determineDays();
-			break;
-		case 511: pedictPopInc();
-			break;
-		case 607: createTempTable();
-			break;
-		case 706: 
-			break;
-		case 807:
-			break;
-		case 0: exit(0);
-			break;
-		default: cout << "Invalid! Please choose from the available choices!";
-	}
+	cout << "Homework Assignment 1: Review (from Gaddis, 8th Edition)" << endl << endl;
 
+	do{
+		// Display menu of choices.
+		showMenu();
+		
+		cin >> choice;
+		cout << endl << endl;
+
+		switch(choice){
+			case 312: convertCelsius();
+				break;
+			case 313: convertCurrency();
+				break;
+			case 410: determineDays();
+				break;
+			case 511: pedictPopInc();
+				break;
+			case 607: createTempTable();
+				break;
+			case 706: 
+				break;
+			case 807:
+				break;
+			//case 0: exit(0);
+				//break;
+			default: cout << "Invalid! Please choose from the available choices!";
+		}
+
+	}while(choice != 0);
+	
 	return 0;
 )
 
 // Function Definitions
+
+// Display menu of choices.
+	void showMenu(){	
+		cout << "Please choose from the list below" << endl
+			 << "by entering the number on the left." << endl
+			 << "Enter 0 to end the program." << endl << endl
+			 << "312: Celsius to Fahrenheit" << endl
+			 << "313: Currency" << endl
+			 << "410: Days in a Month" << endl
+			 << "511: Population" << endl
+			 << "607: Celsius Temperature Table" << endl
+			 << "706: Rain or Shine" << endl
+			 << "807: Binary String Search" << endl << endl
+			 << "Your choice: ";
+	}
+
 
 // 3.12: Celsius to Fahrenheit
 	// Write a program that converts Celsius temperatures to Fahrenheit temperatures.
@@ -287,8 +301,8 @@ int main(){
 		float celcTemp, // Degrees Celsius.
 			fahrTemp = 0; // Degrees Fahrenheit initialized to 0.
 			
-		cout << "This program displays Fahrenheit temperatures 0 through 20"
-			 << endl << "and their Celsius equivalents." << endl << endl;
+		cout << "This program displays Fahrenheit temperatures from" << endl
+			 << "0 through 20 and their Celsius equivalents." << endl << endl;
 		
 		for(fahrTemp; fahrTemp <= 20; fahrTemp++){
 		
