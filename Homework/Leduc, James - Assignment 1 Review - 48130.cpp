@@ -16,23 +16,63 @@ using namespace std;
 
 int main(){
 
+
+	return 0;
 )
 
 // Function Definitions
 
 // Chap03_Prob12: Celsius to Fahrenheit
-// Write a program that converts Celsius temperatures to Fahrenheit temperatures.
-// The formula is: F = ((9 / 5) * C) + 32
-// F = degrees Fahrenheit & C = degrees Celsius
-int Chap03_Prob12(){
-	float celc, fahr; // Create and initialize degree variables
+	// Write a program that converts Celsius temperatures to Fahrenheit temperatures.
+	// The formula is: F = ((9 / 5) * C) + 32
+	// F = degrees Fahrenheit & C = degrees Celsius.
+	int Chap03_Prob12(){
+		
+		// Create degree variables.
+		float celc, fahr;
+		
+		// Get input from user.
+		cout << "Please enter a degree in Celsius to convert it to Fahrenheit: ";
+		cin >> celc;
+		
+		// Calculate degree conversion from Celsius to Fahrenheit.
+		fahr = ((9 / 5) * celc) + 32;
+		
+		// Display results.
+		cout << endl << celc << " degrees Celsius equals " << fahr << " degrees Fahrenheit.";
+		
+		return 0;
+	}
+
+// Chap03_Prob13: Currency
+	// Write a program that will convert U.S. dollar amounts to Japanese yen and to euros,
+	// storing the conversion factors in the constants YEN_PER_DOLLAR and EUROS_PER_DOLLAR.
+	// To get the most up-to-date exchange rates, search the Internet using the term
+	// "currency exchange rate". If you cannot find the most recent exchange rates,
+	// use the following: 1 Dollar = 98.93 Yen ; 1 Dollar = 0.74 Euros.
+	// Format your currency amounts in fixed-point notation, with two decimal places of
+	// precision, and be sure the decimal point is always displayed.
+	int Chap03_Prob13(){
 	
-	cout << "Please enter a degree in Celsius to convert it to Fahrenheit: ";
-	cin >> celc;
+		// Create conversion constants. Most current conversions as of 08/30/2014.
+		const float YEN_PER_DOLLAR = 104.08, EUROS_PER_DOLLAR = 0.76;
 	
-	fahr = ((9 / 5) * celc) + 32;
+		// Create currency variables.
+		float dollars, euroConvert, yenConvert;
 	
-	cout << endl << celc << " degrees Celsius equals " << fahr << " degrees Fahrenheit.";
-	
-	return 0;
-}
+		// Get input from user.
+		cout << "Please enter a U.S Dollar amount to convert into Euros and Japanese Yen: $";
+		cin >> dollars;
+		
+		// Calculate conversion.
+		euroConvert = dollars * EUROS_PER_DOLLAR;
+		yenConvert = dollars * YEN_PER_DOLLAR;
+		
+		// Set precision and show decimal point.
+		cout << setprecision(2) << fixed << showpoint;
+		
+		// Display results.
+		cout << endl << "$" << dollars << " is " << euroConvert << " Euros and " << yenConvert << " Japanese Yen.";
+		
+		return 0;	
+	}
