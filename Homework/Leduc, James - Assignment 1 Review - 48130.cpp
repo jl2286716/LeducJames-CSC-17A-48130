@@ -22,6 +22,7 @@ void searchStrings();
 
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 using namespace std;
 
 int main(){
@@ -99,6 +100,7 @@ int main(){
 		fahr = ((9 / 5) * celc) + 32;
 		
 		// Set precision and show decimal point.
+		// Uses <iomanip>
 		cout << setprecision(2) << fixed << showpoint;
 		
 		// Display results.
@@ -131,6 +133,7 @@ int main(){
 		yenConvert = dollars * YEN_PER_DOLLAR;
 		
 		// Set precision and show decimal point.
+		// Uses <iomanip>
 		cout << setprecision(2) << fixed << showpoint;
 		
 		// Display results.
@@ -313,6 +316,7 @@ int main(){
 			celcTemp = celsius(fahrTemp);
 			
 			// Set precision.
+			// Uses <iomanip>
 			cout << setprecision(2) << fixed << showpoint;
 			
 			// Display results.
@@ -343,10 +347,13 @@ int main(){
 	// rainy, how many were cloudy, and how many were sunny. It should also report which of the three
 	// months had the largest number of rainy days. Data for the program can be found in the
 	// RainOrShine.txt file.
+	// Uses <fstream>
 	void displayWeather(){
 	
-		// Create variables and initialize array.
-		char arr[][];
+		const int ROWS = 3, COLS = 30; // Set array size.
+		char arr[ROWS][COLS]; // Create and initialize array.
+		int rowHead, colHead;  // Column and row header variables.
+		ifstream inFile; // Input file stream object.
 	
 		cout << "This program will now read in the weather conditions from a text file" << endl
 			 << "for the Summer months in 30 day increments and display them on screen." << endl
@@ -354,7 +361,31 @@ int main(){
 			 << "0 = June, 1 = July, 2 = August" << endl
 			 << "R = rainy, C = cloudy, S = sunny" << endl << endl;
 			 
+			// Open RainOrShine.txt file.
+			inFile.open("RainOrShine.txt");
 			 
+			// Fill array with RainOrShine.txt data.
+			for(int i = 0; !inFile.eof(); i++){
+				inFile >> arr[0][i]; // June weather conditions.
+				inFile >> arr[1][i]; // July weather conditions.
+				inFile >> arr[2][i]; // August weather conditions.
+			}
+			 
+			// Close RainOrShine.txt file.
+			inFile.close();
+			 
+			// Display array with headers
+			cout << " ";
+			for(int h = 0; h < COLS; h++){
+				cout << h;
+			}
+			for(int r = 0; r < ROWS; r++){
+				cout << r;
+				for(int c = 0; c < COLS; c++){
+					cout << arr[r][c];
+				}
+			}
+			
 		system("pause");
 		system("cls");
 	}
