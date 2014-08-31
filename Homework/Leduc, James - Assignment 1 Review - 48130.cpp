@@ -95,6 +95,29 @@ int main(){
 		// Enter a year: 2008[Enter]
 		// 29 days
 	int Chap04_Prob10(){
+			
+		// Create variables.
+		int month, year, days;
+		
+		// Get month from user.
+		cout << "Enter a month (1-12): ";
+		cin >> month;
+		
+		// Validate month.
+		
+		
+		// Get year from user.
+		cout << endl << "Enter a year: ";
+		cin >> year;
+		
+		// Validate year.
+		
+		
+		// Calculate leap year.
+		
+		
+		// Display number of days in month.
+		cout << endl << days << " days" << endl;
 	
 		return 0:
 	}
