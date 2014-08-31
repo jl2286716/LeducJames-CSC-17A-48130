@@ -19,6 +19,18 @@ using namespace std;
 
 int main(){
 
+	int choice;
+	
+	cout << "Please choose from the list below" << endl
+		<< "by entering the problem number." << endl
+		<< "Enter 0 to end the program." << endl
+		<< "312: Celsius to Fahrenheit" << endl
+		<< "313: Currency" << endl
+		<< "410: Days in a Month" << endl
+		<< "511: Population" << endl
+		<< "607: Celsius Temperature Table" << endl
+		<< "706: Rain or Shine" << endl
+		<< "807: Binary String Search" << endl;
 
 	return 0;
 )
@@ -46,7 +58,7 @@ int main(){
 		
 		// Display results.
 		cout << endl << celc << " degrees Celsius equals " 
-		<< fahr << " degrees Fahrenheit." << endl;
+			<< fahr << " degrees Fahrenheit." << endl;
 		
 		return 0;
 	}
@@ -79,8 +91,8 @@ int main(){
 		cout << setprecision(2) << fixed << showpoint;
 		
 		// Display results.
-		cout << endl << "$" << dollars << " is equal to " 
-		<< euroConvert << " Euros and " << yenConvert << " Japanese Yen." << endl;
+		cout << endl << "$" << dollars << " is equal to " << euroConvert
+			<< " Euros and " << yenConvert << " Japanese Yen." << endl;
 		
 		return 0;	
 	}
@@ -133,8 +145,8 @@ int main(){
 			case 1: // January
 				days = 31;
 				break;
-			case 2:  // February
-				// Calculate leap year.
+			case 2: // February
+				// Calculate leap year. Note: may have to adjust for years 1-3.
 				if(year % 4.0 = 0.0){
 					days = 29;
 				}else{
