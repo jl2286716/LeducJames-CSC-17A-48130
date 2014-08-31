@@ -10,6 +10,9 @@
 */
 
 // Function Prototypes
+void convertCelsius();
+void convertCurrency();
+void determineDays();
 
 #incluse <iostream>
 using namespace std;
@@ -26,7 +29,7 @@ int main(){
 	// Write a program that converts Celsius temperatures to Fahrenheit temperatures.
 	// The formula is: F = ((9 / 5) * C) + 32
 	// F = degrees Fahrenheit & C = degrees Celsius.
-	int Chap03_Prob12(){
+	void convertCelsius(){
 		
 		// Create degree variables.
 		float celc, fahr;
@@ -56,7 +59,7 @@ int main(){
 	// use the following: 1 Dollar = 98.93 Yen ; 1 Dollar = 0.74 Euros.
 	// Format your currency amounts in fixed-point notation, with two decimal places of
 	// precision, and be sure the decimal point is always displayed.
-	int Chap03_Prob13(){
+	void convertCurrency(){
 	
 		// Create conversion constants. Most current conversions as of 08/30/2014.
 		const float YEN_PER_DOLLAR = 104.08, EUROS_PER_DOLLAR = 0.76;
@@ -94,7 +97,7 @@ int main(){
 		// Enter a month (1-12): 2[Enter]
 		// Enter a year: 2008[Enter]
 		// 29 days
-	int Chap04_Prob10(){
+	void determineDays(){
 			
 		// Create variables.
 		int month, year, days;
@@ -124,9 +127,51 @@ int main(){
 			}
 			
 		}while(year < 0 && > 9999);
-		
-		// Calculate leap year.
-		
+				
+		// Calculate days in month.
+		switch(month){
+			case 1: // January
+				days = 31;
+				break;
+			case 2:  // February
+				// Calculate leap year.
+				if(year % 4.0 = 0.0){
+					days = 29;
+				}else{
+					days = 28;
+				}
+				break;
+			case 3: // March
+				days = 31;
+				break;
+			case 4: // April
+				days = 30;
+				break;
+			case 5: // May
+				days = 31;
+				break;
+			case 6: // June
+				days = 30;
+				break;
+			case 7: // July
+				days = 31;
+				break;
+			case 8: // August
+				days = 31;
+				break;
+			case 9: // September
+				days = 30;
+				break;
+			case 10: // October
+				days = 31;
+				break;
+			case 11: // November
+				days = 30;
+				break;
+			case 12: // December
+				days = 31;
+				break;
+		}
 			
 		// Display number of days in month.
 		cout << endl << days << " days" << endl;
