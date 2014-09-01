@@ -19,11 +19,12 @@ void createTempTable();
 float celsius(float);
 void displayWeather();
 void searchStrings();
-int binarySearch(const int [], int, int);
+int binarySearch(const string [], int, string);
 
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <stream>
 using namespace std;
 
 int main(){
@@ -401,32 +402,24 @@ int main(){
 	// Modify the 'binarySearch' function presented in chapter 8 so it searches an array of strings
 	// instead of an array on ints. Test the function with a driver program. Use Program 8-8 as a
 	// skeleton to complete. (The array must be sorted before the binary search will work.)
+	// Uses <stream>
 	void searchStrings(){
-		const int SIZE = 20;
-		int idNums[SIZE] = {101, 142, 147, 189, 199, 207, 222, 234, 289, 296,
-							310, 319, 388, 394, 417, 429, 447, 521, 536, 600};
-		int results, int empID;
+		const int NUM_NAMES = 20;
+		string names[NUM_NAMES] = {"Collins, Bill", "Smith, Bart", "Allen, Jim", "Griffin, Jim",
+									"Stamey, Marty", "Rose, Geri", "Taylor, Terri", "Johnson, Jill",
+									"Allison, Jeff", "Looney, Joe", "Wolfe, Bill", "James, Jean",
+									"Weaver, Jim", "Pore, Bob", "Rutherford, Greg", "Javens, Renee",
+									"arrison, Rose", "Setzer, Cathy", "Pike, Gordon", "Holland, Beth"};
+									
+		// Insert your code
 		
-		// Get ID# to search for.
-		cout << "Enter employee ID to search for: ";
-		cin >> empID;
-		
-		// Search for ID.
-		results = binarySearch(idNums, SIZE, empID);
-		
-		// If results contain -1 the ID was not found.
-		if (results == -1){
-			cout << "That number does not exist in array. \n";
-		}else{
-			// Otherwise results contain the subscript of ID in array.
-			cout << "That ID is found at " << results << " in array.\n";
-		}
 		
 		system("pause");
 		system("cls");
 	}
 	
-	int binarySearch(const int array[], int size, int value){
+	// Adjust value/name variables
+	int binarySearch(const string array[], int size, string name){
 		int first = 0, 							// First array element
 			last = size - 1,  					// Last array element
 			middle, 							// Midpoint of search
