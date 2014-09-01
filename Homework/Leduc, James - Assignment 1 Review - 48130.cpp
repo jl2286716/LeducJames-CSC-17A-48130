@@ -19,6 +19,7 @@ void createTempTable();
 float celsius(float);
 void displayWeather();
 void searchStrings();
+int binarySearch(const int [], int, int);
 
 #include <iostream>
 #include <iomanip>
@@ -184,30 +185,30 @@ int main(){
 				
 		// Determine days in month.
 		switch(month){
-			case 1: days = 31; // January
+			case 1: days = 31; 	// January
 				break;
-			case 2: // February
+			case 2: 			// February
 				// Calculate leap year. Note: may need to adjust for years 1-3.
 				leap = year % 4;
 				if(leap = 0){
-					days = 29; // Leap year.
+					days = 29; 	// Leap year.
 				}else{
-					days = 28; // Normal year.
+					days = 28; 	// Normal year.
 				}
 				break;
-			case 3: days = 31; // March
+			case 3: days = 31; 	// March
 				break;
-			case 4: days = 30; // April
+			case 4: days = 30; 	// April
 				break;
-			case 5: days = 31; // May
+			case 5: days = 31; 	// May
 				break;
-			case 6: days = 30; // June
+			case 6: days = 30; 	// June
 				break;
-			case 7: days = 31; // July
+			case 7: days = 31; 	// July
 				break;
-			case 8: days = 31; // August
+			case 8: days = 31; 	// August
 				break;
-			case 9: days = 30; // September
+			case 9: days = 30; 	// September
 				break;
 			case 10: days = 31; // October
 				break;
@@ -236,10 +237,10 @@ int main(){
 	void pedictPopInc(){
 		
 		// Create variables.
-		int startingNum, // Starting number of organisms. 2 and above.
-			population; // Predicted population increase.
-		float dailyIncrease, // Average daily population increase. Positive numbers only.
-			numOfDays; // Number of days they will multiply. 1 and above.
+		int startingNum, 		// Starting number of organisms. 2 and above.
+			population; 		// Predicted population increase.
+		float dailyIncrease, 	// Average daily population increase. Positive numbers only.
+			numOfDays; 			// Number of days they will multiply. 1 and above.
 			
 		cout << "This program calculates a projected population growth." << endl;
 		
@@ -268,7 +269,7 @@ int main(){
 		// Get and validate the number of days the population will multiply.
 		do{
 			cout << endl << "Enter the number of days the population will multiply"
-			<< endl << "(at least 1 day must elapse): ";
+				 << endl << "(at least 1 day must elapse): ";
 			cin >> numOfDays;
 			
 			if(numOfDays < 1){
@@ -277,15 +278,12 @@ int main(){
 			
 		}while(numOfDays < 1);
 			
-		//dailyIncrease /= 100; // Convert percentage to decimal
 		population = startingNum; // Initialize the population.
 			
 		// Calculate population increase.
 		for(int i = 0; i < numOfDays; i++){
 			population *= (dailyIncrease/100);
 		}
-		
-		//dailyIncrease *= 100; // Convert decimal back to percentage.
 		
 		cout << endl << "If a population of " << startingNum << " organisms increases at a rate of %"
 			 << dailyIncrease << " over " << numOfDays << " day(s), the resulting population will be "
@@ -305,8 +303,8 @@ int main(){
 	// and their Celsius equivalents.
 	void createTempTable(){
 		// Create variables.
-		float celcTemp, // Degrees Celsius.
-			fahrTemp = 0; // Degrees Fahrenheit initialized to 0.
+		float celcTemp, 	// Degrees Celsius.
+			fahrTemp = 0; 	// Degrees Fahrenheit initialized to 0.
 			
 		cout << "This program displays Fahrenheit temperatures from" << endl
 			 << "0 through 20 and their Celsius equivalents." << endl << endl;
@@ -350,10 +348,9 @@ int main(){
 	// Uses <fstream>
 	void displayWeather(){
 	
-		const int ROWS = 3, COLS = 30; // Set array size.
-		char arr[ROWS][COLS]; // Create and initialize array.
-		int rowHead, colHead;  // Column and row header variables.
-		ifstream inFile; // Input file stream object.
+		const int ROWS = 3, COLS = 30; 	// Set array size.
+		char arr[ROWS][COLS]; 			// Create and initialize array.
+		ifstream inFile; 				// Input file stream object.
 	
 		cout << "This program will now read in the weather conditions from a text file" << endl
 			 << "for the Summer months in 30 day increments and display them on screen." << endl
@@ -374,17 +371,27 @@ int main(){
 			// Close RainOrShine.txt file.
 			inFile.close();
 			 
-			// Display array with headers
+			// Display column headers.
 			cout << " ";
 			for(int h = 0; h < COLS; h++){
 				cout << h;
 			}
+			cout << endl;
+			
+			// Display array with row headers.
 			for(int r = 0; r < ROWS; r++){
 				cout << r;
 				for(int c = 0; c < COLS; c++){
 					cout << arr[r][c];
 				}
+				cout << endl;
 			}
+			
+			// Search array for how many times 'R' appears on each row.
+			
+			// Compare row totals.
+			
+			// Display which month had the most rainy days (the most 'R's).
 			
 		system("pause");
 		system("cls");
@@ -395,13 +402,50 @@ int main(){
 	// instead of an array on ints. Test the function with a driver program. Use Program 8-8 as a
 	// skeleton to complete. (The array must be sorted before the binary search will work.)
 	void searchStrings(){
+		const int SIZE = 20;
+		int idNums[SIZE] = {101, 142, 147, 189, 199, 207, 222, 234, 289, 296,
+							310, 319, 388, 394, 417, 429, 447, 521, 536, 600};
+		int results, int empID;
 		
+		// Get ID# to search for.
+		cout << "Enter employee ID to search for: ";
+		cin >> empID;
+		
+		// Search for ID.
+		results = binarySearch(idNums, SIZE, empID);
+		
+		// If results contain -1 the ID was not found.
+		if (results == -1){
+			cout << "That number does not exist in array. \n";
+		}else{
+			// Otherwise results contain the subscript of ID in array.
+			cout << "That ID is found at " << results << " in array.\n";
+		}
 		
 		system("pause");
 		system("cls");
 	}
 	
-	
+	int binarySearch(const int array[], int size, int value){
+		int first = 0, 							// First array element
+			last = size - 1,  					// Last array element
+			middle, 							// Midpoint of search
+			position = -1; 						// Position of search value
+		bool found = false; 					// Flag
+		
+		while (!found && first <= last){
+			middle = (first + last) / 2; 		// Calculate midpoint
+			if (array[middle] == value){ 		// If value is found at mid
+				found = true;
+				position = middle;
+			}else if(array[middle] > value){ 	// If value is in lower half
+				last = middle - 1;
+			}else{ 								// If value is in upper half
+				first = middle + 1;
+			}
+		}
+		return position;
+	}
 	
 	
 	
