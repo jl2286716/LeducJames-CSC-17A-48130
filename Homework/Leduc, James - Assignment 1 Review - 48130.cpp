@@ -362,53 +362,58 @@ int main(){
 			 << "0 = June, 1 = July, 2 = August" << endl
 			 << "R = rainy, C = cloudy, S = sunny" << endl << endl;
 			 
-			// Open RainOrShine.txt file.
-			inFile.open("RainOrShine.txt");
-			 
-			// Fill array with RainOrShine.txt data.
-			for(int i = 0; !inFile.eof(); i++){
-				inFile >> arr[0][i]; // June weather conditions.
-				inFile >> arr[1][i]; // July weather conditions.
-				inFile >> arr[2][i]; // August weather conditions.
-			}
-			 
-			// Close RainOrShine.txt file.
-			inFile.close();
-			 
-			// Display column headers.
-			cout << " ";
-			for(int h = 0; h < COLS; h++){
-				cout << h;
+		// Open RainOrShine.txt file.
+		inFile.open("RainOrShine.txt");
+		 
+		// Fill array with RainOrShine.txt data.
+		for(int i = 0; !inFile.eof(); i++){
+			inFile >> arr[0][i]; // June weather conditions.
+			inFile >> arr[1][i]; // July weather conditions.
+			inFile >> arr[2][i]; // August weather conditions.
+		}
+		 
+		// Close RainOrShine.txt file.
+		inFile.close();
+		 
+		// Display column headers.
+		cout << " ";
+		for(int h = 0; h < COLS; h++){
+			cout << h;
+		}
+		cout << endl;
+		
+		// Display array with row headers.
+		for(int r = 0; r < ROWS; r++){
+			cout << r;
+			for(int c = 0; c < COLS; c++){
+				cout << arr[r][c];
 			}
 			cout << endl;
-			
-			// Display array with row headers.
-			for(int r = 0; r < ROWS; r++){
-				cout << r;
-				for(int c = 0; c < COLS; c++){
-					cout << arr[r][c];
-				}
-				cout << endl;
-			}
-			
-			// Search array for how many times 'R' appears on each row.
-			for(rInCount = 0; rInCount < ROWS; rInCount++){
-				for(cInCount = 0; cInCount < COLS; cInCount++){
-					if(arr[rInCount][cInCount] == 'R'){
-						if(rInCount = 0){
-							jun++;
-						}else if(rInCount = 1){
-							jul++;
-						}else if(rInCount = 2){
-							aug++;
-						}
+		}
+		
+		// Search array for how many times 'R' appears on each row.
+		for(rInCount = 0; rInCount < ROWS; rInCount++){
+			for(cInCount = 0; cInCount < COLS; cInCount++){
+				if(arr[rInCount][cInCount] == 'R'){
+					if(rInCount = 0){
+						jun++;
+					}else if(rInCount = 1){
+						jul++;
+					}else if(rInCount = 2){
+						aug++;
 					}
 				}
 			}
-			
-			// Compare row totals.
-			
-			// Display which month had the most rainy days (the most 'R's).
+		}
+		
+		// Compare row totals and display which month had the most rainy days (the most 'R's).
+		if(jun > jul && jun > aug){
+			cout << endl << "June had the most rainy days this summer: " << jun << " rainy days." << endl;
+		}else if(jul > aug){
+			cout << endl << "July had the most rainy days this summer: " << jul << " rainy days." << endl;
+		}else{
+			cout << endl << "August had the most rainy days this summer: " << aug << " rainy days." << endl;
+		}
 			
 		system("pause");
 		system("cls");
