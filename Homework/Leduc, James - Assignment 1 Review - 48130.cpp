@@ -406,7 +406,7 @@ int main(){
 			}
 		}
 		
-		// Compare row totals and display which month had the most rainy days (the most 'R's).
+		// Compare and display which month had the most rainy days (the most 'R's).
 		if(jun > jul && jun > aug){
 			cout << endl << "June had the most rainy days this summer: " << jun << " rainy days." << endl;
 		}else if(jul > aug){
