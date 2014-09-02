@@ -352,9 +352,9 @@ int main(){
 		ifstream inFile; 				// Input file stream object.
 		int rInCount,					// Array row index counter.
 			cInCount,					// Array column index counter.
-			jun,						// June rainy day counter/totals.
-			jul,						// July rainy day counter/totals.
-			aug;						// August rainy day counter/totals.
+			jun = 0,					// June rainy day counter/totals.
+			jul = 0,					// July rainy day counter/totals.
+			aug = 0;					// August rainy day counter/totals.
 	
 		cout << "This program will now read in the weather conditions from a text file" << endl
 			 << "for the Summer months in 30 day increments and display them on screen." << endl
