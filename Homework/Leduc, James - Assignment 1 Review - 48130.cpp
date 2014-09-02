@@ -352,6 +352,12 @@ int main(){
 		const int ROWS = 3, COLS = 30; 	// Set array size.
 		char arr[ROWS][COLS]; 			// Create and initialize array.
 		ifstream inFile; 				// Input file stream object.
+		int rInCount,					// Array row index counter.
+			cInCount,					// Array column index counter.
+			countR;						// 'R' (Rainy day) counter.
+			jun,						// June rainy day totals.
+			jul,						// July rainy day totals.
+			aug;						// August rainy day totals.
 	
 		cout << "This program will now read in the weather conditions from a text file" << endl
 			 << "for the Summer months in 30 day increments and display them on screen." << endl
@@ -389,6 +395,21 @@ int main(){
 			}
 			
 			// Search array for how many times 'R' appears on each row.
+			for(rInCount = 0; rInCount < ROWS; rInCount++){
+				for(cInCount = 0; cInCount < COLS; cInCount++){
+					if(arr[rInCount][cInCount] == 'R'){
+						countR++;
+					}
+				}
+				// nest into above if and adjust counters
+				if(rInCount = 0){
+					jun = countR;
+				}else if(rInCount = 1){
+					jul = countR;
+				}else if(rInCount = 2){
+					aug = countR;
+				}
+			}
 			
 			// Compare row totals.
 			
