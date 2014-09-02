@@ -16,10 +16,10 @@ void convertCurrency();
 void determineDays();
 void pedictPopInc();
 void createTempTable();
-float celsius(float);
+	float celsius(float);
 void displayWeather();
 void searchStrings();
-int binarySearch(const string [], int, string);
+	int binarySearch(const string [], int, string);
 
 #include <iostream>
 #include <iomanip>
@@ -55,8 +55,6 @@ int main(){
 				break;
 			case 807: searchStrings();
 				break;
-			//case 0: exit(0);
-				//break;
 			default: cout << "Invalid! Please choose from the available choices!";
 		}
 
@@ -349,7 +347,7 @@ int main(){
 	// Uses <fstream>
 	void displayWeather(){
 	
-		const int ROWS = 3, COLS = 30; 	// Set array size.
+		const int ROWS = 3, COLS = 30; 	// Initialize array size.
 		char arr[ROWS][COLS]; 			// Create and initialize array.
 		ifstream inFile; 				// Input file stream object.
 		int rInCount,					// Array row index counter.
@@ -403,7 +401,7 @@ int main(){
 							jul++;
 						}else if(rInCount = 2){
 							aug++;
-						}else{/*do nothing*/}
+						}
 					}
 				}
 			}
