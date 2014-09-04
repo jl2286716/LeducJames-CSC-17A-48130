@@ -21,10 +21,12 @@ void displayWeather();
 void searchStrings();
 int binarySearch(const string [], int, string);
 
+// Libraries
 #include <iostream>
 #include <iomanip>
 #include <fstream>
 #include <stream>
+
 using namespace std;
 
 int main(){
