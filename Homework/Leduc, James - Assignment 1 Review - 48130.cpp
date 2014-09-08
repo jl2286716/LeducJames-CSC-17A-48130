@@ -16,10 +16,10 @@ void convertCurrency();
 void determineDays();
 void pedictPopInc();
 void createTempTable();
-float celsius(float);
+	float celsius(float);
 void displayWeather();
 void searchStrings();
-int binarySearch(const string [], int, string);
+	int binarySearch(const string [], int, string);
 
 // Libraries
 #include <iostream>
@@ -57,8 +57,6 @@ int main(){
 				break;
 			case 807: searchStrings();
 				break;
-			//case 0: exit(0);
-				//break;
 			default: cout << "Invalid! Please choose from the available choices!";
 		}
 
@@ -351,9 +349,14 @@ int main(){
 	// Uses <fstream>
 	void displayWeather(){
 	
-		const int ROWS = 3, COLS = 30; 	// Set array size.
+		const int ROWS = 3, COLS = 30; 	// Initialize array size.
 		char arr[ROWS][COLS]; 			// Create and initialize array.
 		ifstream inFile; 				// Input file stream object.
+		int rInCount,					// Array row index counter.
+			cInCount,					// Array column index counter.
+			jun = 0,					// June rainy day counter/totals.
+			jul = 0,					// July rainy day counter/totals.
+			aug = 0;					// August rainy day counter/totals.
 	
 		cout << "This program will now read in the weather conditions from a text file" << endl
 			 << "for the Summer months in 30 day increments and display them on screen." << endl
@@ -361,40 +364,58 @@ int main(){
 			 << "0 = June, 1 = July, 2 = August" << endl
 			 << "R = rainy, C = cloudy, S = sunny" << endl << endl;
 			 
-			// Open RainOrShine.txt file.
-			inFile.open("RainOrShine.txt");
-			 
-			// Fill array with RainOrShine.txt data.
-			for(int i = 0; !inFile.eof(); i++){
-				inFile >> arr[0][i]; // June weather conditions.
-				inFile >> arr[1][i]; // July weather conditions.
-				inFile >> arr[2][i]; // August weather conditions.
-			}
-			 
-			// Close RainOrShine.txt file.
-			inFile.close();
-			 
-			// Display column headers.
-			cout << " ";
-			for(int h = 0; h < COLS; h++){
-				cout << h;
+		// Open RainOrShine.txt file.
+		inFile.open("RainOrShine.txt");
+		 
+		// Fill array with RainOrShine.txt data.
+		for(int i = 0; !inFile.eof(); i++){
+			inFile >> arr[0][i]; // June weather conditions.
+			inFile >> arr[1][i]; // July weather conditions.
+			inFile >> arr[2][i]; // August weather conditions.
+		}
+		 
+		// Close RainOrShine.txt file.
+		inFile.close();
+		 
+		// Display column headers.
+		cout << " ";
+		for(int h = 0; h < COLS; h++){
+			cout << h;
+		}
+		cout << endl;
+		
+		// Display array with row headers.
+		for(int r = 0; r < ROWS; r++){
+			cout << r;
+			for(int c = 0; c < COLS; c++){
+				cout << arr[r][c];
 			}
 			cout << endl;
-			
-			// Display array with row headers.
-			for(int r = 0; r < ROWS; r++){
-				cout << r;
-				for(int c = 0; c < COLS; c++){
-					cout << arr[r][c];
+		}
+		
+		// Search array for how many times 'R' appears on each row.
+		for(rInCount = 0; rInCount < ROWS; rInCount++){
+			for(cInCount = 0; cInCount < COLS; cInCount++){
+				if(arr[rInCount][cInCount] == 'R'){
+					if(rInCount = 0){
+						jun++;
+					}else if(rInCount = 1){
+						jul++;
+					}else if(rInCount = 2){
+						aug++;
+					}
 				}
-				cout << endl;
 			}
-			
-			// Search array for how many times 'R' appears on each row.
-			
-			// Compare row totals.
-			
-			// Display which month had the most rainy days (the most 'R's).
+		}
+		
+		// Compare and display which month had the most rainy days (the most 'R's).
+		if(jun > jul && jun > aug){
+			cout << endl << "June had the most rainy days this summer: " << jun << " rainy days." << endl;
+		}else if(jul > aug){
+			cout << endl << "July had the most rainy days this summer: " << jul << " rainy days." << endl;
+		}else{
+			cout << endl << "August had the most rainy days this summer: " << aug << " rainy days." << endl;
+		}
 			
 		system("pause");
 		system("cls");
