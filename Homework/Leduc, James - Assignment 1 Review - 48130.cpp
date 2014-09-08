@@ -18,14 +18,14 @@ void pedictPopInc();
 void createTempTable();
 	float celsius(float);
 void displayWeather();
-void searchStrings();
-	int binarySearch(const string [], int, string);
+//void searchStrings();
+	//int binarySearch(const string [], int, string);
 
 // Libraries
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include <stream>
+//#include <stream>
 
 using namespace std;
 
@@ -55,8 +55,8 @@ int main(){
 				break;
 			case 706: displayWeather();
 				break;
-			case 807: searchStrings();
-				break;
+			//case 807: searchStrings();
+				//break;
 			default: cout << "Invalid! Please choose from the available choices!";
 		}
 
@@ -80,7 +80,7 @@ int main(){
 			 << "511: Population" << endl
 			 << "607: Celsius Temperature Table" << endl
 			 << "706: Rain or Shine" << endl
-			 << "807: Binary String Search" << endl << endl
+			 /*<< "807: Binary String Search" << endl*/ << endl
 			 << "Your choice: ";
 	}
 
@@ -99,7 +99,7 @@ int main(){
 		cin >> celc;
 		
 		// Calculate degree conversion from Celsius to Fahrenheit.
-		fahr = ((9 / 5) * celc) + 32;
+		fahr = ((9.0 / 5.0) * celc) + 32.0;
 		
 		// Set precision and show decimal point.
 		// Uses <iomanip>
@@ -165,11 +165,11 @@ int main(){
 			cin >> month;
 			
 			// Prompt user to enter valid data.
-			if(month < 1 && month > 12){
+			if(month < 1 || month > 12){
 				cout << "Please enter a valid month (1-12)!" << endl;
 			}
 			
-		}while(month < 1 && month > 12);
+		}while(month < 1 || month > 12);
 		
 		//Get and validate year.
 		do{
@@ -178,11 +178,11 @@ int main(){
 			cin >> year;
 			
 			// Prompt user to enter valid data.
-			if(year < 0 && year > 9999){
+			if(year < 0 || year > 9999){
 				cout << "Please enter a valid year (0-9999)!" << endl;
 			}
 			
-		}while(year < 0 && year > 9999);
+		}while(year < 0 || year > 9999);
 				
 		// Determine days in month.
 		switch(month){
@@ -191,7 +191,7 @@ int main(){
 			case 2: 			// February
 				// Calculate leap year. Note: may need to adjust for years 1-3.
 				leap = year % 4;
-				if(leap = 0){
+				if(leap == 0){
 					days = 29; 	// Leap year.
 				}else{
 					days = 28; 	// Normal year.
@@ -243,7 +243,7 @@ int main(){
 		float dailyIncrease, 	// Average daily population increase. Positive numbers only.
 			numOfDays; 			// Number of days they will multiply. 1 and above.
 			
-		cout << "This program calculates a projected population growth." << endl;
+		cout << "This program calculates a projected population growth." << endl << endl;
 		
 		// Get and validate the beginning population number.
 		do{
@@ -286,9 +286,10 @@ int main(){
 			population *= (dailyIncrease/100);
 		}
 		
-		cout << endl << "If a population of " << startingNum << " organisms increases at a rate of %"
-			 << dailyIncrease << " over " << numOfDays << " day(s), the resulting population will be "
-			 << population << " organisms.";
+		cout << endl << "If a population of " << startingNum << " organisms increases at a rate of "
+			 << dailyIncrease << "% over " << numOfDays << " day(s),"
+			 << endl << "the resulting population will be "
+			 << population << " organisms." << endl << endl;
 		
 		system("pause");
 		system("cls");
@@ -330,7 +331,7 @@ int main(){
 	float celsius(float f){
 		float c; //Variable for degrees Celsius.
 		
-		c = (5 / 9) * (f - 32);
+		c = (5.0 / 9.0) * (f - 32.0);
 	
 		return c;
 	}
@@ -354,9 +355,16 @@ int main(){
 		ifstream inFile; 				// Input file stream object.
 		int rInCount,					// Array row index counter.
 			cInCount,					// Array column index counter.
-			jun = 0,					// June rainy day counter/totals.
-			jul = 0,					// July rainy day counter/totals.
-			aug = 0;					// August rainy day counter/totals.
+			junR = 0,					// June rainy day counter/totals.
+			julR = 0,					// July rainy day counter/totals.
+			augR = 0,					// August rainy day counter/totals.
+			junC = 0,					// June cloudy day counter/totals.
+			julC = 0,					// July cloudy day counter/totals.
+			augC = 0,					// August cloudy day counter/totals.
+			junS = 0,					// June sunny day counter/totals.
+			julS = 0,					// July sunny day counter/totals.
+			augS = 0;					// August sunny day counter/totals.
+
 	
 		cout << "This program will now read in the weather conditions from a text file" << endl
 			 << "for the Summer months in 30 day increments and display them on screen." << endl
@@ -365,23 +373,24 @@ int main(){
 			 << "R = rainy, C = cloudy, S = sunny" << endl << endl;
 			 
 		// Open RainOrShine.txt file.
-		inFile.open("RainOrShine.txt");
-		 
-		// Fill array with RainOrShine.txt data.
-		for(int i = 0; !inFile.eof(); i++){
-			inFile >> arr[0][i]; // June weather conditions.
-			inFile >> arr[1][i]; // July weather conditions.
-			inFile >> arr[2][i]; // August weather conditions.
+		inFile.open("RainOrShine.txt", ios::in);
+		
+		if(inFile.fail()){
+			cout << "File opening failed";
 		}
-		 
+
+		
+		for(int i = 0; i < 3; i++)
+		{
+			for(int j = 0; j < 30; j++)
+			{
+				inFile >> arr[i][j];
+			}
+		}
+	 
 		// Close RainOrShine.txt file.
 		inFile.close();
-		 
-		// Display column headers.
-		cout << " ";
-		for(int h = 0; h < COLS; h++){
-			cout << h;
-		}
+
 		cout << endl;
 		
 		// Display array with row headers.
@@ -397,26 +406,74 @@ int main(){
 		for(rInCount = 0; rInCount < ROWS; rInCount++){
 			for(cInCount = 0; cInCount < COLS; cInCount++){
 				if(arr[rInCount][cInCount] == 'R'){
-					if(rInCount = 0){
-						jun++;
-					}else if(rInCount = 1){
-						jul++;
-					}else if(rInCount = 2){
-						aug++;
+					if(rInCount == 0){
+						junR++;
+					}else if(rInCount == 1){
+						julR++;
+					}else if(rInCount == 2){
+						augR++;
 					}
 				}
 			}
 		}
 		
+		// Search array for how many times 'C' appears on each row.
+		for(rInCount = 0; rInCount < ROWS; rInCount++){
+			for(cInCount = 0; cInCount < COLS; cInCount++){
+				if(arr[rInCount][cInCount] == 'C'){
+					if(rInCount == 0){
+						junC++;
+					}else if(rInCount == 1){
+						julC++;
+					}else if(rInCount == 2){
+						augC++;
+					}
+				}
+			}
+		}
+
+		// Search array for how many times 'S' appears on each row.
+		for(rInCount = 0; rInCount < ROWS; rInCount++){
+			for(cInCount = 0; cInCount < COLS; cInCount++){
+				if(arr[rInCount][cInCount] == 'S'){
+					if(rInCount == 0){
+						junS++;
+					}else if(rInCount == 1){
+						julS++;
+					}else if(rInCount == 2){
+						augS++;
+					}
+				}
+			}
+		}
+
 		// Compare and display which month had the most rainy days (the most 'R's).
-		if(jun > jul && jun > aug){
-			cout << endl << "June had the most rainy days this summer: " << jun << " rainy days." << endl;
-		}else if(jul > aug){
-			cout << endl << "July had the most rainy days this summer: " << jul << " rainy days." << endl;
+		if(junR > julR && junR > augR){
+			cout << endl << "June had the most rainy days this summer: " << junR << " rainy days." << endl;
+		}else if(julR > augR){
+			cout << endl << "July had the most rainy days this summer: " << julR << " rainy days." << endl;
 		}else{
-			cout << endl << "August had the most rainy days this summer: " << aug << " rainy days." << endl;
+			cout << endl << "August had the most rainy days this summer: " << augR << " rainy days." << endl;
 		}
 			
+		// Compare and display which month had the most coudy days (the most 'C's).
+		if(junC > julC && junC > augC){
+			cout << endl << "June had the most coudy days this summer: " << junC << " coudy days." << endl;
+		}else if(julC > augC){
+			cout << endl << "July had the most coudy days this summer: " << julC << " coudy days." << endl;
+		}else{
+			cout << endl << "August had the most coudy days this summer: " << augC << " coudy days." << endl;
+		}
+
+		// Compare and display which month had the most sunny days (the most 'S's).
+		if(junS > julS && junS > augS){
+			cout << endl << "June had the most sunny days this summer: " << junS << " sunny days." << endl;
+		}else if(julS > augS){
+			cout << endl << "July had the most sunny days this summer: " << julS << " sunny days." << endl;
+		}else{
+			cout << endl << "August had the most sunny days this summer: " << augS << " sunny days." << endl;
+		}
+
 		system("pause");
 		system("cls");
 	}
@@ -426,7 +483,7 @@ int main(){
 	// instead of an array on ints. Test the function with a driver program. Use Program 8-8 as a
 	// skeleton to complete. (The array must be sorted before the binary search will work.)
 	// Uses <stream>
-	void searchStrings(){
+/*	void searchStrings(){
 		const int NUM_NAMES = 20;
 		string names[NUM_NAMES] = {"Collins, Bill", "Smith, Bart", "Allen, Jim", "Griffin, Jim",
 									"Stamey, Marty", "Rose, Geri", "Taylor, Terri", "Johnson, Jill",
@@ -462,6 +519,6 @@ int main(){
 		}
 		return position;
 	}
-	
+*/
 	
 	
