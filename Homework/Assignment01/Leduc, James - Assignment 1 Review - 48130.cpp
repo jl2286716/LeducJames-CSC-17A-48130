@@ -9,6 +9,14 @@
 		Two problems from chapters 5 through 8 should include flowcharts.
 */
 
+// Libraries
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
 // Function Prototypes
 void showMenu();
 void convertCelsius();
@@ -19,14 +27,8 @@ void createTempTable();
 	float celsius(float);
 void displayWeather();
 void searchStrings();
-
-// Libraries
-#include <iostream>
-#include <iomanip>
-#include <fstream>
-//#include <stream>
-
-using namespace std;
+	string binarySearch(const string, int, string);
+	void sortArray(int [], int);
 
 int main(){
 
@@ -480,7 +482,6 @@ int main(){
 	// Modify the 'binarySearch' function presented in chapter 8 so it searches an array of strings
 	// instead of an array on ints. Test the function with a driver program. Use Program 8-8 as a
 	// skeleton to complete. (The array must be sorted before the binary search will work.)
-	// Uses <stream>
 	void searchStrings(){
 		const int NUM_NAMES = 20;
 		string names[NUM_NAMES] = {"Collins, Bill", "Smith, Bart", "Allen, Jim", "Griffin, Jim",
@@ -498,7 +499,7 @@ int main(){
 	}
 
 	// The Binary Search Function
-	sring binarySearch(const string array[], int numElems, int value){
+	string binarySearch(const string array, int numElems, string value){
 		int first = 0,				// First array element.
 			last = numElems - 1,	// Last array element.
 			middle,					// Midpoint of search.
