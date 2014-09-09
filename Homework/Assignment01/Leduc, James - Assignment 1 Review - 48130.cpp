@@ -18,8 +18,7 @@ void pedictPopInc();
 void createTempTable();
 	float celsius(float);
 void displayWeather();
-//void searchStrings();
-	//int binarySearch(const string [], int, string);
+void searchStrings();
 
 // Libraries
 #include <iostream>
@@ -55,8 +54,8 @@ int main(){
 				break;
 			case 706: displayWeather();
 				break;
-			//case 807: searchStrings();
-				//break;
+			case 807: searchStrings();
+				break;
 			default: cout << "Invalid! Please choose from the available choices!";
 		}
 
@@ -80,7 +79,7 @@ int main(){
 			 << "511: Population" << endl
 			 << "607: Celsius Temperature Table" << endl
 			 << "706: Rain or Shine" << endl
-			 /*<< "807: Binary String Search" << endl*/ << endl
+			 << "807: Binary String Search" << endl << endl
 			 << "Your choice: ";
 	}
 
@@ -376,7 +375,7 @@ int main(){
 		inFile.open("RainOrShine.txt", ios::in);
 		
 		if(inFile.fail()){
-			cout << "File opening failed";
+			cout << "File opening failed!";
 		}
 
 		
@@ -483,7 +482,7 @@ int main(){
 	// instead of an array on ints. Test the function with a driver program. Use Program 8-8 as a
 	// skeleton to complete. (The array must be sorted before the binary search will work.)
 	// Uses <stream>
-/*	void searchStrings(){
+	void searchStrings(){
 		const int NUM_NAMES = 20;
 		string names[NUM_NAMES] = {"Collins, Bill", "Smith, Bart", "Allen, Jim", "Griffin, Jim",
 									"Stamey, Marty", "Rose, Geri", "Taylor, Terri", "Johnson, Jill",
@@ -493,32 +492,8 @@ int main(){
 									
 		// Insert your code
 		
+		cout << endl << "I have no idea what I'm supposed to do with this..." << endl << endl;
 		
 		system("pause");
 		system("cls");
 	}
-	
-	// Adjust value/name variables
-	int binarySearch(const string array[], int size, string name){
-		int first = 0, 							// First array element
-			last = size - 1,  					// Last array element
-			middle, 							// Midpoint of search
-			position = -1; 						// Position of search value
-		bool found = false; 					// Flag
-		
-		while (!found && first <= last){
-			middle = (first + last) / 2; 		// Calculate midpoint
-			if (array[middle] == value){ 		// If value is found at mid
-				found = true;
-				position = middle;
-			}else if(array[middle] > value){ 	// If value is in lower half
-				last = middle - 1;
-			}else{ 								// If value is in upper half
-				first = middle + 1;
-			}
-		}
-		return position;
-	}
-*/
-	
-	
