@@ -367,7 +367,7 @@ int main(){
 	
 		cout << "This program will now read in the weather conditions from a text file" << endl
 			 << "for the Summer months in 30 day increments and display them on screen." << endl
-			 << "It will also display the month with the most rainy days." << endl
+			 << "It will also display the months with the most rainy, cloudy, and sunny days." << endl
 			 << "0 = June, 1 = July, 2 = August" << endl
 			 << "R = rainy, C = cloudy, S = sunny" << endl << endl;
 			 
@@ -379,9 +379,9 @@ int main(){
 		}
 
 		
-		for(int i = 0; i < 3; i++)
+		for(int i = 0; i < ROWS; i++)
 		{
-			for(int j = 0; j < 30; j++)
+			for(int j = 0; j < COLS; j++)
 			{
 				inFile >> arr[i][j];
 			}
@@ -455,13 +455,13 @@ int main(){
 			cout << endl << "August had the most rainy days this summer: " << augR << " rainy days." << endl;
 		}
 			
-		// Compare and display which month had the most coudy days (the most 'C's).
+		// Compare and display which month had the most cloudy days (the most 'C's).
 		if(junC > julC && junC > augC){
-			cout << endl << "June had the most coudy days this summer: " << junC << " coudy days." << endl;
+			cout << endl << "June had the most cloudy days this summer: " << junC << " cloudy days." << endl;
 		}else if(julC > augC){
-			cout << endl << "July had the most coudy days this summer: " << julC << " coudy days." << endl;
+			cout << endl << "July had the most cloudy days this summer: " << julC << " cloudy days." << endl;
 		}else{
-			cout << endl << "August had the most coudy days this summer: " << augC << " coudy days." << endl;
+			cout << endl << "August had the most cloudy days this summer: " << augC << " cloudy days." << endl;
 		}
 
 		// Compare and display which month had the most sunny days (the most 'S's).
