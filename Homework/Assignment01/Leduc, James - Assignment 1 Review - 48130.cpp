@@ -305,7 +305,7 @@ int main(){
 	// and their Celsius equivalents.
 	void createTempTable(){
 		// Create variables.
-		float celcTemp, 	// Degrees Celsius.
+		float celsTemp, 	// Degrees Celsius.
 			fahrTemp = 0; 	// Degrees Fahrenheit initialized to 0.
 			
 		cout << "This program displays Fahrenheit temperatures from" << endl
@@ -313,14 +313,14 @@ int main(){
 		
 		for(fahrTemp; fahrTemp <= 20; fahrTemp++){
 		
-			celcTemp = celsius(fahrTemp);
+			celsTemp = celsius(fahrTemp);
 			
 			// Set precision.
 			// Uses <iomanip>
 			cout << setprecision(2) << fixed << showpoint;
 			
 			// Display results.
-			cout << fahrTemp << "F = " << celcTemp << "C" << endl;
+			cout << fahrTemp << "F = " << celsTemp << "C" << endl;
 		}
 		
 		system("pause");
