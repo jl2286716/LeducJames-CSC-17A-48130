@@ -517,5 +517,22 @@ int main(){
 			}
 		}
 		return position;
+	}
 
+	// The Bubble Sort Function
+	void sortArray(int array[], int size){
+		bool swap;
+		int temp;
+
+		do{
+			swap = false;
+			for (int count = 0; count < (size - 1); count++){
+				if (array[count] > array[count + 1]){
+					temp = array[count];
+					array[count] = array[count + 1];
+					array[count + 1] = temp;
+					swap = true;
+				}
+			}
+		}while (swap);
 	}
