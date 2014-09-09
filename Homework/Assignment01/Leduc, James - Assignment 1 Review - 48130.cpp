@@ -488,7 +488,7 @@ int main(){
 									"Stamey, Marty", "Rose, Geri", "Taylor, Terri", "Johnson, Jill",
 									"Allison, Jeff", "Looney, Joe", "Wolfe, Bill", "James, Jean",
 									"Weaver, Jim", "Pore, Bob", "Rutherford, Greg", "Javens, Renee",
-									"arrison, Rose", "Setzer, Cathy", "Pike, Gordon", "Holland, Beth"};
+									"Harrison, Rose", "Setzer, Cathy", "Pike, Gordon", "Holland, Beth"};
 									
 		// Insert your code
 		
