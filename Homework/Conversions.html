@@ -2,46 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Base 10 to Base 2 Converter</title>
+        <title>Base 10 to Binary</title>
     </head>
     
     <body>
 		<script>
-			var origiNum = prompt("Please enter a base 10 value to convert.");
-			//var base;
-			
-			//do{
-				//base = prompt("Do you want to convert to base 2 (binary), base 8 (octal), or base 16 (hexadecimal)?");
-				
-				//if(base != 2 || base != 8 || base != 16){
-					//confirm("Invalid base! Please, enter 2, 8, or 16");
-				//}
-			
-			//}while(base != 2 || base != 8 || base != 16);
-			
+			var origiNum = prompt("Please enter a base 10 value to convert to binary.");
 			var firstNum = 0;
-			var num = origiNum;
+			var num = origiNum;					
+			var intNum = parseInt(origiNum);	// Returns the value to the left of the decimal.
+			var deciNum = origiNum - intNum;	// Returns the value to the right of the decimal.
 			var numVal = 0;
-			var numArr = [];
-			var arrLen = 0;
-			
-			firstNum = origiNum%2;
+			var wholeArr = [];					// Array to store the digits left of the decimal (Whole digits).
+			var deciArr = [];					// Array to store the digits right of the decimal (Fractional digits).
+			var wholeArrLen = 0;				// Size of wholeArr Array (Whole number array size).
+			var deciArrLen = 0;					// Size of deciArr Array (Fractional number array size).
 
-			numArr[0] = firstNum;
-			
+			firstNum = intNum%2;				// Converts the first Whole binary digit.
+			wholeArr[0] = firstNum;				// Writes the first converted value into the Whole Number Array.
 			for(var i = 1; num > 2 ; i++){
-				numVal = parseInt(num/2)%2;
+				numVal = parseInt(num/2)%2;		// Calculate/Convert
 				
-				numArr[i] = numVal;
-				num /= 2;
+				wholeArr[i] = numVal;			// Write the value into the Whole Number Array.
+				num /= 2;						// 
 			}
 			
-			numArr.reverse();
-			arrLen = numArr.length;		
+			wholeArr.reverse(); 				// Flips the array of Whole numbers
+			wholeArrLen = wholeArr.length;		// Calculates the length of the Whole Number Array.
 			
-			for(var n = 0; n < arrLen; n++){
-				document.write(numArr[n]);
+			for(var n = 0; n < wholeArrLen; n++){
+				document.write(wholeArr[n]);	// Writes the Whole binary number
 			}
+			
+			// Write code to evaluate and display the Fractional digits.
+			
 		</script>
     </body>
 </html>
