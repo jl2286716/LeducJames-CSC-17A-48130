@@ -16,21 +16,21 @@
 			var fracVal = 0;					// Holds the Fractional binary digit.
 			var wholeArr = [];					// Array to store the digits left of the decimal (Whole digits).
 			var deciArr = [];					// Array to store the digits right of the decimal (Fractional digits).
-			var wholeArrLen = 0;				// Size of wholeArr Array (Whole number array size).
-			var deciArrLen = 0;					// Size of deciArr Array (Fractional number array size).
+			var wholeArrLen = 0;				// Size of 'wholeArr' array (Whole number array size).
+			var deciArrLen = 0;					// Size of 'deciArr' array (Fractional number array size).
 			
 		// Convert and display left side of decimal digits.
-			firstNum = intNum%2;				// Converts the first Whole binary digit.
-			wholeArr[0] = firstNum;				// Writes the first converted value into the Whole Number Array.
+			firstNum = intNum%2;				// Converts the first binary digit.
+			wholeArr[0] = firstNum;				// Writes the first converted value into the 'wholeArr' array.
 			
 			for(var i = 1; num > 2 ; i++){
-				numVal = parseInt(num/2)%2;		// Calculate/Convert
-				wholeArr[i] = numVal;			// Write the value into the Whole Number Array.
-				num /= 2;						// Cut the evaluated number in half.
+				numVal = parseInt(num/2)%2;		// Calculate/Convert.
+				wholeArr[i] = numVal;			// Write the value into the 'wholeArr' array.
+				num /= 2;						// Divide the number by its base to continue the conversion.
 			}
 			
-			wholeArr.reverse(); 				// Flips the array of Whole numbers
-			wholeArrLen = wholeArr.length;		// Calculates the length of the Whole Number Array.
+			wholeArr.reverse(); 				// Flips the array of 'wholeArr' array.
+			wholeArrLen = wholeArr.length;		// Calculates the length of the 'wholeArr' array
 			
 			for(var n = 0; n < wholeArrLen; n++){
 				document.write(wholeArr[n]);	// Writes the Whole binary number
@@ -46,20 +46,20 @@
 			var decimal = ".";
 			
 			for(var j = 0; j < deciLen; j++){
-				fracVal = deciNum * 2;
-				numSplit = (fracVal + "").split(".");
-				leadSlice = numSplit.slice(0,1);
-				numSlice = numSplit.slice(1,deciLen - j);
-				deciArr[j] = leadSlice;
-				deciNum = decimal.concat(numSlice);
-				deciNum = parseFloat(deciNum);
+				fracVal = deciNum * 2;						// Calculate/Convert.
+				numSplit = (fracVal + "").split(".");		// Splits the conversion at the decimal.
+				leadSlice = numSplit.slice(0,1);			// Return the digit before the decimal to be placed into the 'deciArr' array.
+				numSlice = numSplit.slice(1,deciLen - j);	// Return the digits after the decimal to continue the conversion.
+				deciArr[j] = leadSlice;						// Place the leading 1 or 0 into the 'deciArr' array.
+				deciNum = decimal.concat(numSlice);			// Put the decimal back into place.
+				deciNum = parseFloat(deciNum);				// Parse the concatenation into a float.
 			}
 			
 			document.write(decimal);		// Writes the decimal point.
-			deciArrLen = deciArr.length;	// Calculates the length of the Fractional Number Array.
+			deciArrLen = deciArr.length;	// Calculates the length of the 'deciArr' array.
 			
 			for(var n = 0; n < deciArrLen; n++){
-				document.write(deciArr[n]);	// Writes the binary to the right of decimal.
+				document.write(deciArr[n]);	// Writes the binary digits to the right of decimal.
 			}
 			
 		</script>
