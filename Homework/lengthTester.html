@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Base 10 to Binary</title>
+    </head>
+    
+    <body>
+		<script>
+			var origiNum = prompt("Please enter a base 10 value to convert into binary.");
+			var fracLen = (origiNum + '').replace('.','').length;	// Returns the length of a float.
+			var intLen = ~~(Math.log(origiNum) / Math.LN10 + 1);	// Returns the length of an integer.
+			var deciLen = fracLen - intLen;
+			//document.write(fracLen);
+			
+			var numSplit = (origiNum + "").split(".");
+			var leadSlice = numSplit.slice(0,1);
+			var numSlice = numSplit.slice(1,deciLen);
+			document.write(numSplit);
+			document.write(leadSlice);
+			document.write(numSlice);
+
+		</script>
+    </body>
+</html>

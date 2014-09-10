@@ -7,24 +7,26 @@
     
     <body>
 		<script>
-			var origiNum = prompt("Please enter a base 10 value to convert to binary.");
+			var origiNum = prompt("Please enter a base 10 value to convert into binary.");
 			var firstNum = 0;
 			var num = origiNum;					
 			var intNum = parseInt(origiNum);	// Returns the value to the left of the decimal.
 			var deciNum = origiNum - intNum;	// Returns the value to the right of the decimal.
-			var numVal = 0;
+			var numVal = 0;						// Holds the Whole binary digit.
+			var fracVal = 0;					// Holds the Fractional binary digit.
 			var wholeArr = [];					// Array to store the digits left of the decimal (Whole digits).
 			var deciArr = [];					// Array to store the digits right of the decimal (Fractional digits).
 			var wholeArrLen = 0;				// Size of wholeArr Array (Whole number array size).
 			var deciArrLen = 0;					// Size of deciArr Array (Fractional number array size).
-
+			
+		// Convert and display left side of decimal digits.
 			firstNum = intNum%2;				// Converts the first Whole binary digit.
 			wholeArr[0] = firstNum;				// Writes the first converted value into the Whole Number Array.
+			
 			for(var i = 1; num > 2 ; i++){
 				numVal = parseInt(num/2)%2;		// Calculate/Convert
-				
 				wholeArr[i] = numVal;			// Write the value into the Whole Number Array.
-				num /= 2;						// 
+				num /= 2;						// Cut the evaluated number in half.
 			}
 			
 			wholeArr.reverse(); 				// Flips the array of Whole numbers
@@ -34,8 +36,44 @@
 				document.write(wholeArr[n]);	// Writes the Whole binary number
 			}
 			
-			// Write code to evaluate and display the Fractional digits.
+		// Convert and display right side of decimal digits.
+			var fracLen = (origiNum + '').replace('.','').length;	// Returns the length of a float.
+			var intLen = ~~(Math.log(origiNum) / Math.LN10 + 1);	// Returns the length of an integer.
+			var deciLen = fracLen - intLen;							// Returns the length of fractional.
+			var numSplit = 0; //(fracVal + "").split(".");			// Splits a float at the decimal.
+			var leadSlice = 0; // numSplit.slice(0,1);				// Return the digit before the decimal.
+			var numSlice = 0; // numSplit.slice(1,deciLen);
+			
+			for(var j = 0; j < deciLen; j++){
+				fracVal = deciNum * 2;
+				numSplit = (fracVal + "").split(".");
+				leadSlice = numSplit.slice(0,1);
+				numSlice = numSplit.slice(1,deciLen);
+				
+			}
+			
+			
 			
 		</script>
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
