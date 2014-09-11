@@ -7,7 +7,7 @@
     
     <body>
 		<script>
-			var origiNum = prompt("Please enter a base 10 value to convert into binary.");
+			var origiNum = prompt("Please enter a positive base 10 value to convert into binary. (Decimals are fine, but don't forget the leading 0! e.g. 0.75)");
 			var firstNum = 0;
 			var num = origiNum;					
 			var intNum = parseInt(origiNum);	// Returns the value to the left of the decimal.
@@ -40,9 +40,9 @@
 			var fracLen = (origiNum + '').replace('.','').length;	// Returns the length of a float.
 			var intLen = ~~(Math.log(origiNum) / Math.LN10 + 1);	// Returns the length of an integer.
 			var deciLen = fracLen - intLen;							// Returns the length of fractional.
-			var numSplit = 0; //(fracVal + "").split(".");			// Splits a float at the decimal.
-			var leadSlice = 0; // numSplit.slice(0,1);				// Return the digit before the decimal.
-			var numSlice = 0; // numSplit.slice(1,deciLen);			// Return the digits after the decimal.
+			var numSplit = 0;										// Splits a float at the decimal.
+			var leadSlice = 0;										// Return the digit before the decimal.
+			var numSlice = 0;										// Return the digits after the decimal.
 			var decimal = ".";
 			
 			for(var j = 0; j < deciLen; j++){
