@@ -502,6 +502,7 @@ int main(){
 		namePos = binarySearch(names[], NUM_NAMES, nameSrch);
 		nameFind = names[namePos];
 		
+		// Print result
 		if(namePos == null){
 			cout << endl << nameSrch << " was not found!\n";
 		}else{
