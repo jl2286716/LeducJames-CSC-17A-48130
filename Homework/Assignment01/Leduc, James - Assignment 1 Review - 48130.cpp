@@ -27,8 +27,8 @@ void createTempTable();
 	float celsius(float);
 void displayWeather();
 void searchStrings();
+	void sortArray(string, int);
 	string binarySearch(const string, int, string);
-	void sortArray(int [], int);
 
 int main(){
 
@@ -489,15 +489,47 @@ int main(){
 									"Allison, Jeff", "Looney, Joe", "Wolfe, Bill", "James, Jean",
 									"Weaver, Jim", "Pore, Bob", "Rutherford, Greg", "Javens, Renee",
 									"Harrison, Rose", "Setzer, Cathy", "Pike, Gordon", "Holland, Beth"};
-									
-		// Insert your code
+		string nameSrch, nameFnd;
+		int namePos;
 		
-		cout << endl << "I have no idea what I'm supposed to do with this..." << endl << endl;
+		
+		// Sort the array
+		sortArray(names[], NUM_NAMES);
+		
+		// Search the array
+		cout << "Enter a name to search for: ";
+		cin >> nameSrch;
+		namePos = binarySearch(names[], NUM_NAMES, nameSrch);
+		nameFind = names[namePos];
+		
+		if(namePos == null){
+			cout << endl << nameSrch << " was not found!\n";
+		}else{
+			cout << endl << nameFind << " was found at index " << namePos << " of the names[] array.\n";
+		}
 		
 		system("pause");
 		system("cls");
 	}
+	
+	// The Bubble Sort Function
+	void sortArray(string array[], int size){
+		bool swap;
+		int temp;
 
+		do{
+			swap = false;
+			for (int count = 0; count < (size - 1); count++){
+				if (array[count] > array[count + 1]){
+					temp = array[count];
+					array[count] = array[count + 1];
+					array[count + 1] = temp;
+					swap = true;
+				}
+			}
+		}while (swap);
+	}	
+	
 	// The Binary Search Function
 	string binarySearch(const string array, int numElems, string name){
 		int first = 0,				// First array element.
@@ -520,20 +552,3 @@ int main(){
 		return position;
 	}
 
-	// The Bubble Sort Function
-	void sortArray(int array[], int size){
-		bool swap;
-		int temp;
-
-		do{
-			swap = false;
-			for (int count = 0; count < (size - 1); count++){
-				if (array[count] > array[count + 1]){
-					temp = array[count];
-					array[count] = array[count + 1];
-					array[count + 1] = temp;
-					swap = true;
-				}
-			}
-		}while (swap);
-	}
