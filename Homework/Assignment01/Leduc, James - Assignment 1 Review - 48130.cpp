@@ -27,8 +27,8 @@ void createTempTable();
 	float celsius(float);
 void displayWeather();
 void searchStrings();
-	void sortArray(string, int);
-	string binarySearch(const string, int, string);
+//	void sortArray(string, int);
+//	string binarySearch(const string, int, string);
 
 int main(){
 
@@ -489,24 +489,28 @@ int main(){
 									"Allison, Jeff", "Looney, Joe", "Wolfe, Bill", "James, Jean",
 									"Weaver, Jim", "Pore, Bob", "Rutherford, Greg", "Javens, Renee",
 									"Harrison, Rose", "Setzer, Cathy", "Pike, Gordon", "Holland, Beth"};
-		string nameSrch, nameFnd;
-		int namePos;
-		
+		string nameSrch, nameLook;
+		bool nameFind = false;	
 		
 		// Sort the array
-		sortArray(names[], NUM_NAMES);
+		//sortArray(names[], NUM_NAMES);
 		
 		// Search the array
-		cout << "Enter a name to search for: ";
+		cout << "Enter a name to search: ";
 		cin >> nameSrch;
-		namePos = binarySearch(names[], NUM_NAMES, nameSrch);
-		nameFind = names[namePos];
+		for(int i = 0; i < NUM_NAMES; i++){
+			nameLook = names[i];
+			if(nameLook == nameSrch){
+				nameFind = true;
+				i = NUM_NAMES - 1;
+			}
+		}
 		
-		// Print result
-		if(namePos == null){
-			cout << endl << nameSrch << " was not found!\n";
+		// Print the result
+		if(nameFind == true){
+			cout << endl << nameSrch << " was found!" << endl;
 		}else{
-			cout << endl << nameFind << " was found at index " << namePos << " of the names[] array.\n";
+			cout << endl << nameSrch << " was not found!" << endl;
 		}
 		
 		system("pause");
@@ -514,7 +518,7 @@ int main(){
 	}
 	
 	// The Bubble Sort Function
-	void sortArray(string array[], int size){
+/*	void sortArray(string array[], int size){
 		bool swap;
 		int temp;
 
@@ -530,9 +534,9 @@ int main(){
 			}
 		}while (swap);
 	}	
-	
+*/	
 	// The Binary Search Function
-	string binarySearch(const string array, int numElems, string name){
+/*	string binarySearch(const string array, int numElems, string name){
 		int first = 0,				// First array element.
 			last = numElems - 1,	// Last array element.
 			middle,					// Midpoint of search.
@@ -541,10 +545,10 @@ int main(){
 
 		while (!found && first <= last){
 			middle = (first + last) / 2;		// Calculate midpoint.
-			if (array[middle] == name){		// If name is found at mid.
+			if (array[middle] == name){			// If name is found at mid.
 				found = true;
 				position = middle;
-			}else if (array[middle] > name){	// If name is in lower half.
+			}else if (array[middle] > last){	// If name is in lower half.
 				last = middle - 1;
 			}else{
 				first = middle + 1;				// If name is in upper half.
@@ -552,4 +556,4 @@ int main(){
 		}
 		return position;
 	}
-
+*/
