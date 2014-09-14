@@ -2,7 +2,7 @@
 	Programmer: James Leduc
 	Program Name: Mode Investigation
 	Date Created: 09/14/2014
-	Date Modified: 09/13=4/2014
+	Date Modified: 09/14/2014
 	Purpose: A program to investigate modes.
 */
 
