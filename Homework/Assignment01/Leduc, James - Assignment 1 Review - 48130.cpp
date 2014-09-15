@@ -497,7 +497,9 @@ int main(){
 		
 		// Search the array
 		cout << "Enter a name to search: ";
-		cin >> nameSrch;
+		//cin >> nameSrch;
+		cin.ignore();						// ingnore blank spaces
+		getline(cin, nameSrch);				// get the whole line, not just up until the blank space
 		for(int i = 0; i < NUM_NAMES; i++){
 			nameLook = names[i];
 			if(nameLook == nameSrch){
