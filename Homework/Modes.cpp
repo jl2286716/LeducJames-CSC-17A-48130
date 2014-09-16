@@ -17,24 +17,25 @@ int main(){	// A mode is a value that occurs the most within a set.
 	const int SIZE = 20, ROWS = 2;
 	int numArr[SIZE];
 	int compArr[ROWS][SIZE];
-	int num,		// Random number from 1 - 10.
+	int num,		// Random number from 1 - 5.
 		arrVal,		// Value stored in array.
 		valComp,	// Comparison value.
 		count = 0;	// Instance counter.
 
 	// Fill the array with random number.
 	for(int i = 0; i < SIZE; i++){
-		num = rand() * 10 + 1;	// Generate random a number from 1 to 10.
-		numArr[i] = num;		// Place that random number into the array.
+                // use mod operator instead
+		num = rand() * 5 + 1;	// Generate random a number from 1 to 5.
+		numArr[i] = num;	// Place that random number into the array.
 	}
 	
 	// Compare values and their iterations and place them into compArr array.
 	for(int j = 0; j < SIZE; j++){
-		arrVal = numArr[j];				// Pull a value to compare.
+		arrVal = numArr[j];		// Pull a value to compare.
 		for(int k = 0; k < SIZE; k++){
-			valComp = numArr[k];		// Pull another value to compare.
+			valComp = numArr[k];	// Pull another value to compare.
 			if(arrVal == valComp){
-				count++;				// If both values are the same, the counter increases.
+				count++;	// If both values are the same, the counter increases.
 			}
 		}
 		compArr[0][j] = arrVal;
