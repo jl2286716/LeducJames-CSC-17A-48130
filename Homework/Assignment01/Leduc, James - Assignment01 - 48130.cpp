@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
 
     //Create the array
     int size;
-	cin >> size;
+	cin >> "What size would you like your array?" >> size;
 	
     int *a=fillArray(size,5);
 	
@@ -41,12 +41,17 @@ int main(int argc, char** argv) {
     //Print the result
     printArray(a,size,10);
     printArray(b,size,10);
+
+	//Calculate the modes
+	int modes = *mode(*b,size);
 	
     //Deallocate memory and exit
     delete []a;
     delete []b;
     return 0;
 }
+
+// Function Definitions
 
 int *sort(int *a,int n){
 
@@ -111,4 +116,9 @@ float median(int *b,int n){
 		val=((static_cast<float>(b[intMid]))+(static_cast<float>(b[intMid+1])))/2;
 	}
 	return val;
+}
+
+int *mode(int *b,int n){
+	int modal[n+2];
+
 }
