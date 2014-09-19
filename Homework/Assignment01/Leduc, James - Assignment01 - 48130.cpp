@@ -103,10 +103,10 @@ float avg(int *b,int n){
 
 float median(int *b,int n){
 	float val=0;
-	float mid=((n+1)/2)-1;
+	float mid=((static_cast<float>(n)+1)/2)-1;
 	int intMid=mid;
 	if(mid==intMid){
-		val=b[intMid];
+		val=static_cast<float>(b[intMid]);
 	}else{
 		val=((static_cast<float>(b[intMid]))+(static_cast<float>(b[intMid+1])))/2;
 	}
