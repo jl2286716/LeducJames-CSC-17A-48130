@@ -25,17 +25,17 @@ int main(int argc, char** argv) {
     int size;
 	cin >> "What size would you like your array?" >> size;
 	
-    int *a=fillArray(size,5);
+    int *a = fillArray(size,5);
 	
     //Sort the array
-    int *b=sort(a,size);
+    int *b = sort(a,size);
 	
 	//Calculate the average
-	float c=avg(b,size);
+	float c = avg(b,size);
 	cout << endl << "The average is " << c << endl; //Output average
 
 	//Calculate the median
-	float d=median(b,size);
+	float d = median(b,size);
 	cout << endl << "The median is " << d << endl; //Output average
 	
     //Print the result
@@ -48,6 +48,7 @@ int main(int argc, char** argv) {
     //Deallocate memory and exit
     delete []a;
     delete []b;
+	delete []modes;
     return 0;
 }
 
@@ -122,7 +123,9 @@ int *mode(int *b,int n){
 	//int modal[n+2];
 	int modeComp = 0,		// Mode Compare variable
 		modeChk = 0, 		// Mode Check variable
-		modeCnt = 0;		// Mode Count variable
+		modeCnt = 0,		// Mode Count variable
+		modeNum = 0,		// Incremented by modeChk
+		modeVal = 0;		// Mode number value
 	bool isMode = false;	// Mode Flag
 	
 	
@@ -139,7 +142,12 @@ int *mode(int *b,int n){
 			isMode=true;	// A mode must have at least 2 or more of the same value.
 		}else{
 			isMode=false;	// If the values aren't the same, they're not modes.
-		}			
+		}
+
+		if(isMode == true){
+			modeNum = modeChk;
+			modeVal = b[i];
+		}
 	}
 
 }
