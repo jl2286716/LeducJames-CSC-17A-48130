@@ -50,7 +50,11 @@ int main(int argc, char** argv) {
     printArray(b,size,pLine);
 
 	// Calculate the modes
-	int modes = *mode(*b,size,range);
+	int aSize = (size / (range-1)) + 2;
+	int modes = *mode(*b,size,aSize);
+	
+	// Show the modes
+	printArray(modes,aSize,pLine);
 	
     // Deallocate memory and exit
     delete []a;
@@ -135,10 +139,9 @@ int *mode(int *b,int n, int r){
 		modeInc = 0;		// Mode Increment
 		
 	// Declare, allocate, and clean out arrays.
-	int arrSize = (n / (r-1)) + 2;
 	int modalSrch[n][2];
-	int modal[arrSize];
-	for(int j=0;j<arrSize;j++){
+	int modal[r];
+	for(int j=0;j<r;j++){
 		modal[j]=NULL;
 	}
 	
