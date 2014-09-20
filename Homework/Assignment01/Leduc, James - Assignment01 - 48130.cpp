@@ -119,6 +119,27 @@ float median(int *b,int n){
 }
 
 int *mode(int *b,int n){
-	int modal[n+2];
+	//int modal[n+2];
+	int modeComp = 0,		// Mode Compare variable
+		modeChk = 0, 		// Mode Check variable
+		modeCnt = 0;		// Mode Count variable
+	bool isMode = false;	// Mode Flag
+	
+	
+	for(int i=0;i<n;i++){
+		modeComp = b[i]-b[i+1];			// Compare elements in array.
+		
+		if(modeComp == 0){
+			modeChk++;		// If the values are the same, increment the modeChk.
+		}else{
+			modeChk=0;		// If the values are different, the modeChk resets.
+		}
+		
+		if(modeChk >= 2){
+			isMode=true;	// A mode must have at least 2 or more of the same value.
+		}else{
+			isMode=false;	// If the values aren't the same, they're not modes.
+		}			
+	}
 
 }
