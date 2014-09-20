@@ -128,30 +128,43 @@ float median(int *b,int n){
 
 int *mode(int *b,int n, int r){
 	
-	// Declare, allocate, and clean array.
+	// Declare, allocate, and clean arrays.
 	int arrSize = (n / r) + 2;
+	int modalSrch[n][2];
 	int modal[arrSize];
 	for(int j=0;j<arrSize;j++){modal[j]=NULL;}
 	
 	int modeComp = 0,		// Mode Compare variable
-		modeChk = 0, 		// Mode Check variable
+		modeChk = 1, 		// Mode Check variable
 		modeCnt = 0,		// Mode Count variable
 		modeFreq = 0,		// Incremented by modeChk
 		modeVal = 0,		// Mode number value
 		modeCntr = 0;		//
 	bool isMode = false;	// Mode Flag
-	
-	
-	for(int i=1;i<n;i++){
-	
-		modeComp = b[i-1] - b[i];		// Compare elements in array.
 		
-		if(modeComp == 0){modeChk++;}	// If the values are the same, increment the modeChk.
-		else{modeChk=0;}				// If the values are different, modeChk resets.
+	// Create the modalSrch array which stores values and their frequencies.
+	for(int i=1;i<=n;i++){
 		
-		if(modeChk >= 2){isMode=true;}	// A mode must have at least 2 or more of the same value.
-		else{isMode=false;}				// If not, they're not modes.
-
+		modalSrch[i-1][0] = b[i-1];
+		modalSrch[i-1][1] = modeChk;
+		
+		modeComp = b[i-1] - b[i];	// Compare elements in array.
+		
+		if(modeComp == 0){
+			modeChk++;		// If the values are the same, increment the modeChk.
+		}else{
+			modeChk=1;		// If the values are different, modeChk resets.
+		}
+	}	
+		
+		
+	/*	if(modeChk >= 2){
+			isMode=true;	// A mode must have at least 2 or more of the same value.
+		}else{
+			isMode=false;	// If not, they're not modes.
+		}
+		
+		
 		if(isMode == true){
 			modeFreq = modeChk;
 			if(modeFreq > modal[2]){
@@ -168,12 +181,10 @@ int *mode(int *b,int n, int r){
 			modal[k] = modeVal;
 			k++;
 		}
+	*/	
 		
-		
-		
-		return modal;
-	}
+	
 	
 	//output {num of modes, mode frequency, modes values}
-
+	return modal;
 }
