@@ -23,9 +23,15 @@ int main(int argc, char** argv) {
 
     //Create the array
     int size;
-	cin >> "What size would you like your array?" >> size;
+	cin >> "Enter a size: " >> size;
 	
-    int *a = fillArray(size,5);
+	cout << endl;
+	
+	int range;
+	cin >> "Enter a max value: " >> range;
+	range++;
+	
+    int *a = fillArray(size,range);
 	
     // Sort the array
     int *b = sort(a,size);
@@ -39,8 +45,9 @@ int main(int argc, char** argv) {
 	cout << endl << "The median is " << d << endl;
 	
     // Show the result
-    printArray(a,size,10);
-    printArray(b,size,10);
+	int pLine = range*2;
+    printArray(a,size,pLine);
+    printArray(b,size,pLine);
 
 	// Calculate the modes
 	int modes = *mode(*b,size);
@@ -78,12 +85,12 @@ int *sort(int *a,int n){
 }
 
 void printArray(int *a,int n,int perLine){
-    cout<<endl;
+    cout << endl;
     for(int i=0;i<n;i++){
         cout<<a[i]<<" ";
         if(i%perLine==(perLine-1))cout<<endl;
     }
-    cout<<endl;
+    cout << endl;
 }
 
 int *fillArray(int n,int mod){
@@ -120,36 +127,40 @@ float median(int *b,int n){
 }
 
 int *mode(int *b,int n){
-	int modal1[],
-		modal2[];
+	int modal[];
 	int modeComp = 0,		// Mode Compare variable
 		modeChk = 0, 		// Mode Check variable
 		modeCnt = 0,		// Mode Count variable
-		modeNum = 0,		// Incremented by modeChk
-		modeVal = 0;		// Mode number value
+		modeFreq = 0,		// Incremented by modeChk
+		modeVal = 0,		// Mode number value
+		modeSize = 0;		//
 	bool isMode = false;	// Mode Flag
 	
 	
 	for(int i=1;i<n;i++){
-		modeComp = b[i-1] - b[i];	// Compare elements in array.
+	
+		modeComp = b[i-1] - b[i];		// Compare elements in array.
 		
-		if(modeComp == 0){
-			modeChk++;		// If the values are the same, increment the modeChk.
-		}else{
-			modeChk=0;		// If the values are different, modeChk resets.
-		}
+		if(modeComp == 0){modeChk++;}	// If the values are the same, increment the modeChk.
+		else{modeChk=0;}				// If the values are different, modeChk resets.
 		
-		if(modeChk >= 2){
-			isMode=true;	// A mode must have at least 2 or more of the same value.
-		}else{
-			isMode=false;	// If not, they're not modes.
-		}
+		if(modeChk >= 2){isMode=true;}	// A mode must have at least 2 or more of the same value.
+		else{isMode=false;}				// If not, they're not modes.
 
 		if(isMode == true){
-			modeNum = modeChk;
+			modeFreq = modeChk;
 		}else if(isMode == false && modeNum >= 2){
 			modeVal = b[i-1];
+			modeCnt++;
 		}
+		
+		modal[1] = modeCnt;
+		modal[2] = modeFreq;
+		modal[3] = modeVal;
+		
+		
 	}
+	
+	//output {num of modes, mode frequency, modes values}
 
 }
