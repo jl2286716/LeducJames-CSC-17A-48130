@@ -16,7 +16,7 @@ void printArray(int *,int,int);
 int *sort(int *,int);
 float avg(int *,int);
 float median(int *,int);
-int *mode(int *,int);
+int *mode(int *,int, int);
 
 //Execution begins here
 int main(int argc, char** argv) {
@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
     printArray(b,size,pLine);
 
 	// Calculate the modes
-	int modes = *mode(*b,size);
+	int modes = *mode(*b,size,range);
 	
     // Deallocate memory and exit
     delete []a;
@@ -126,14 +126,19 @@ float median(int *b,int n){
 	return val;
 }
 
-int *mode(int *b,int n){
-	int modal[];
+int *mode(int *b,int n, int r){
+	
+	// Declare, allocate, and clean array.
+	int arrSize = (n / r) + 2;
+	int modal[arrSize];
+	for(int j=0;j<arrSize;j++){modal[j]=NULL;}
+	
 	int modeComp = 0,		// Mode Compare variable
 		modeChk = 0, 		// Mode Check variable
 		modeCnt = 0,		// Mode Count variable
 		modeFreq = 0,		// Incremented by modeChk
 		modeVal = 0,		// Mode number value
-		modeSize = 0;		//
+		modeCntr = 0;		//
 	bool isMode = false;	// Mode Flag
 	
 	
@@ -149,16 +154,24 @@ int *mode(int *b,int n){
 
 		if(isMode == true){
 			modeFreq = modeChk;
-		}else if(isMode == false && modeNum >= 2){
+			if(modeFreq > modal[2]){
+				modal[2] = modeFreq;
+				modeCnt = 1;
+			}
+		}else if(isMode == false && modeFreq >= 2){
 			modeVal = b[i-1];
 			modeCnt++;
+			
+			int k = 3;
+			modal[1] = modeCnt;
+			modal[2] = modeFreq;
+			modal[k] = modeVal;
+			k++;
 		}
 		
-		modal[1] = modeCnt;
-		modal[2] = modeFreq;
-		modal[3] = modeVal;
 		
 		
+		return modal;
 	}
 	
 	//output {num of modes, mode frequency, modes values}
