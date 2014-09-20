@@ -14,9 +14,9 @@ using namespace std;
 int *fillArray(int,int);
 void printArray(int *,int,int);
 int *sort(int *,int);
-int *mode(int *,int);
 float avg(int *,int);
 float median(int *,int);
+int *mode(int *,int);
 
 //Execution begins here
 int main(int argc, char** argv) {
@@ -27,25 +27,25 @@ int main(int argc, char** argv) {
 	
     int *a = fillArray(size,5);
 	
-    //Sort the array
+    // Sort the array
     int *b = sort(a,size);
 	
-	//Calculate the average
+	// Calculate and show the average
 	float c = avg(b,size);
-	cout << endl << "The average is " << c << endl; //Output average
+	cout << endl << "The average is " << c << endl;
 
-	//Calculate the median
+	// Calculate and show the median
 	float d = median(b,size);
-	cout << endl << "The median is " << d << endl; //Output average
+	cout << endl << "The median is " << d << endl;
 	
-    //Print the result
+    // Show the result
     printArray(a,size,10);
     printArray(b,size,10);
 
-	//Calculate the modes
+	// Calculate the modes
 	int modes = *mode(*b,size);
 	
-    //Deallocate memory and exit
+    // Deallocate memory and exit
     delete []a;
     delete []b;
 	delete []modes;
@@ -109,7 +109,7 @@ float avg(int *b,int n){
 
 float median(int *b,int n){
 	float val=0;
-	float mid=((static_cast<float>(n)+1)/2)-1;
+	float mid=((static_cast<float>(n) + 1) / 2) - 1;
 	int intMid=mid;
 	if(mid==intMid){
 		val=static_cast<float>(b[intMid]);
@@ -120,7 +120,8 @@ float median(int *b,int n){
 }
 
 int *mode(int *b,int n){
-	//int modal[n+2];
+	int modal1[],
+		modal2[];
 	int modeComp = 0,		// Mode Compare variable
 		modeChk = 0, 		// Mode Check variable
 		modeCnt = 0,		// Mode Count variable
@@ -129,24 +130,25 @@ int *mode(int *b,int n){
 	bool isMode = false;	// Mode Flag
 	
 	
-	for(int i=0;i<n;i++){
-		modeComp = b[i]-b[i+1];			// Compare elements in array.
+	for(int i=1;i<n;i++){
+		modeComp = b[i-1] - b[i];	// Compare elements in array.
 		
 		if(modeComp == 0){
 			modeChk++;		// If the values are the same, increment the modeChk.
 		}else{
-			modeChk=0;		// If the values are different, the modeChk resets.
+			modeChk=0;		// If the values are different, modeChk resets.
 		}
 		
 		if(modeChk >= 2){
 			isMode=true;	// A mode must have at least 2 or more of the same value.
 		}else{
-			isMode=false;	// If the values aren't the same, they're not modes.
+			isMode=false;	// If not, they're not modes.
 		}
 
 		if(isMode == true){
 			modeNum = modeChk;
-			modeVal = b[i];
+		}else if(isMode == false && modeNum >= 2){
+			modeVal = b[i-1];
 		}
 	}
 
