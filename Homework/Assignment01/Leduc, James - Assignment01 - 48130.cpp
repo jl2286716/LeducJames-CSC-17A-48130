@@ -1,7 +1,8 @@
 /* 
- * Author: 	James Leduc
- * Created: Sep 18, 2014
- * Purpose: Modes
+ * Author: 		James Leduc
+ * Created:		Sep 18, 2014
+ * Modified:	Sep 23, 2014
+ * Purpose:		Average, Median, Mode
  */
 
 //System Libraries
@@ -16,19 +17,21 @@ void printArray(int *,int,int);
 int *sort(int *,int);
 float avg(int *,int);
 float median(int *,int);
-int *mode(int *,int, int);
+int *mode(int *,int);
 
 //Execution begins here
-int main(int argc, char** argv) {
+int main() {
 
     //Create the array
     int size;
-	cin >> "Enter a size: " >> size;
+	cout << "Enter a size: ";
+	cin >> size;
 	
 	cout << endl;
 	
 	int range;
-	cin >> "Enter a max value: " >> range;
+	cout << "Enter a max value: ";
+	cin >> range;
 	range++;
 	
     int *a = fillArray(size,range);
@@ -51,7 +54,7 @@ int main(int argc, char** argv) {
 
 	// Calculate the modes
 	int aSize = (size / (range-1)) + 2;
-	int modes = *mode(*b,size,aSize);
+	int *modes = mode(b,size);
 	
 	// Show the modes
 	printArray(modes,aSize,pLine);
@@ -130,58 +133,10 @@ float median(int *b,int n){
 	return val;
 }
 
-int *mode(int *b,int n, int r){
-	
-	int modeComp = 0,		// Mode Compare
-		modeChk = 1, 		// Mode Check
-		modeCnt = 0,		// Mode Count
-		modeFreq = 0,		// Mode Frequency
-		modeInc = 0;		// Mode Increment
+int *mode(int *b,int n){
+	int freq=0;
+	for(int i=0;i<n;i++){
 		
-	// Declare, allocate, and clean out arrays.
-	int modalSrch[n][2];
-	int modal[r];
-	for(int j=0;j<r;j++){
-		modal[j]=NULL;
 	}
 	
-	// Create the 'modalSrch' array, which stores values and their frequencies.
-	for(int i=1;i<=n;i++){
-		
-		modalSrch[i-1][0] = b[i-1];
-		modalSrch[i-1][1] = modeChk;
-		
-		modeComp = b[i-1] - b[i];	// Compare elements in array.
-		
-		if(modeComp == 0){
-			modeChk++;		// If the values are the same, increment the 'modeChk'.
-		}else{
-			modeChk=1;		// If the values are different, 'modeChk' resets.
-		}
-	}	
-	
-	// Count the modes, their frequencies, and place them into the 'modal' array
-	for(int m=1;m<=n;m++){
-		if(modalSrch[m-1][1] > modalSrch[m][1] && modalSrch[m-1][1] > modeFreq){
-			modeFreq = modalSrch[m-1][1];
-			modeCnt = 1;
-			modal[1] = modeCnt;
-			modal[2] = modeFreq;
-		}else if(modalSrch[m-1][1] > modalSrch[m][1] && modalSrch[m-1][1] == modeFreq){
-			modeCnt++;
-			modal[1] = modeCnt;
-			modal[2] = modeFreq;
-		}
-	}
-	
-	// Search for and place modes into the 'modal' array.
-	for(int k=0;k<n;k++){
-		if(modalSrch[k][1] == modeFreq){
-			modal[3+modeInc] = modalSrch[k][0];
-			modeInc++;
-		}
-	}	
-	
-	//output {num of modes, mode frequency, modes values}
-	return modal;
 }
