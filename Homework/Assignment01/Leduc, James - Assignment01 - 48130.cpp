@@ -1,7 +1,7 @@
 /* 
  * Author: 		James Leduc
  * Created:		Sep 18, 2014
- * Modified:	Sep 23, 2014
+ * Modified:	Sep 25, 2014
  * Purpose:		Average, Median, Mode
  */
 
@@ -18,6 +18,7 @@ int *sort(int *,int);
 float avg(int *,int);
 float median(int *,int);
 int *mode(int *,int);
+void printMode(int *);
 
 //Execution begins here
 int main() {
@@ -57,7 +58,7 @@ int main() {
 	int *modes = mode(b,size);
 	
 	// Show the modes
-	printArray(modes,aSize,pLine);
+	printMode(modes);
 	
     // Deallocate memory and exit
     delete []a;
@@ -138,7 +139,7 @@ int *mode(int *b,int n){
 	int count=0,
 		freq=0;
 	for(int i=1;i<n;i++){
-		if(b[i])==b[i-1]){
+		if(b[i]==b[i-1]){
 			count++;
 			if(freq<count){
 				freq=count;
@@ -185,11 +186,12 @@ int *mode(int *b,int n){
 
 void printMode(int *m){
 	// Print the modal array
-	cout << endl;
-	for(int m=0;m<n;m++){
-		cout << b[m] << " ";
-		if(m%perLine==(perLine-1)){
-			cout << endl;
+	if(m[0]==0){
+		cout << "The mode set is {0}" << endl;
+	}else{
+		cout << "The mode set is {";
+		for(int i=2;1<m[0]+2;i++){
+			cout << "}" << endl;
 		}
 	}
 }
