@@ -134,9 +134,62 @@ float median(int *b,int n){
 }
 
 int *mode(int *b,int n){
-	int freq=0;
-	for(int i=0;i<n;i++){
-		
+	// Determine max frequency
+	int count=0,
+		freq=0;
+	for(int i=1;i<n;i++){
+		if(b[i])==b[i-1]){
+			count++;
+			if(freq<count){
+				freq=count;
+			}
+		}else{
+			count=0;
+		}
 	}
-	
+	cout << "The maximum frequency is = " << freq+1 << endl;
+
+	// Count modes
+	int modeNum=0;
+		count=0;
+	for(int j=1;j<n;j++){
+		if(b[j]==b[j-1]){
+			count++;
+			if(freq==count){
+				modeNum++;
+			}
+		}else{
+			count=0;
+		}
+	}
+	cout << "There are " << modeNum << " modes." << endl;
+
+	// Declare and fill mode array
+	int *modal=new int[modeNum+2];
+	modal[0]=modeNum;
+	modal[1]=freq+1;
+	modeNum=2;
+	count=0;
+	for(int k=1;k<n;k++){
+		if(b[k]==b[k-1]){
+			count++;
+			if(freq==count){
+				modal[modeNum++]=b[k];
+			}
+		}else{
+			count=0;
+		}
+	}
+	return modal;
+}
+
+void printMode(int *m){
+	// Print the modal array
+	cout << endl;
+	for(int m=0;m<n;m++){
+		cout << b[m] << " ";
+		if(m%perLine==(perLine-1)){
+			cout << endl;
+		}
+	}
 }
