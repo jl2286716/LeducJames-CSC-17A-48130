@@ -48,13 +48,12 @@ int main() {
 	float d = median(b,size);
 	cout << endl << "The median is " << d << endl;
 	
-    // Show the result
+    // Show test results
 	int pLine = range*2;
     printArray(a,size,pLine);
     printArray(b,size,pLine);
 
 	// Calculate the modes
-	int aSize = (size / (range-1)) + 2;
 	int *modes = mode(b,size);
 	
 	// Show the modes
