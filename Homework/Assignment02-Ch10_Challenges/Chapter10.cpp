@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <string>
-#incluse <cstring>
+#include <cstring>
 #include <cctype>
 #include <cstdlib>
 
@@ -19,9 +19,10 @@ using namespace std;
 	void menu(int);
 /*		Challenge 1	*/
 	void strLen();
-	int cntChar(string *);
-	
-void backStr();
+	int cntChar(char *);
+/*		Challenge 2	*/
+	void backStr();
+string flipStr(string);
 void wrdCnt();
 void avNumLet();
 void sentCap();
@@ -58,7 +59,7 @@ int main(){
 					system("pause");
 					system("cls");
 				}
-			}while(c != 1001 || c != 1002 || c !=1003 || c !=1004 || c !=1005)
+			}while(c != 1001 || c != 1002 || c !=1003 || c !=1004 || c !=1005);
 			cout << endl;
 			return c;
 		}
@@ -72,7 +73,6 @@ int main(){
 				case 1005:	sentCap();	break;
 				default:	cout << endl << "If this got through, THERE'S A PROBLEM!\n\n";
 			}
-			return 0;
 		}
 		
 //	Programming Challenge #1. String Length
@@ -82,7 +82,9 @@ int main(){
 //		passes it to the function, and then displays the function's return value.
 void strLen(){
 	const int SIZE = 101;
-	string *str[SIZE];
+	//char *str[SIZE];
+	char *str;
+	str = new char[SIZE];
 	int count;
 	
 	cout << "Please, enter a few words or a phrase \n";
@@ -90,7 +92,7 @@ void strLen(){
 	
 	cin.ignore();	//	Clears the buffer
 	cin.getline(str,SIZE);
-	count = cntChar(*str);
+	count = cntChar(str);
 	cin.ignore();	//	Clears the buffer
 	
 	if(count<1){
@@ -100,10 +102,9 @@ void strLen(){
 	}else if(count>1){
 		cout << "Your string is " << count << " characters in length." << endl;
 	}
-	return 0;
 }
 
-int cntChar(string *s){	//	Counts each character in the string.
+int cntChar(char *s){	//	Counts each character in the string.
 //	int c=strlen(s);
 	int c=0;	// Counter initialized to 0
 	while(s[c] != '\0'){
@@ -119,26 +120,32 @@ int cntChar(string *s){	//	Counts each character in the string.
 //		input a string and then passes it to the function.
 void backStr(){
 	string str, flipArr;
-	int len;
+	int len=0;
 	
 	cout << "Enter a string: ";
 	cin >> str;
 	cout << endl << "You wrote: " << endl;
 	cout << "'" << str << "'" << endl;
 	
-	flipArr = flipStr(*s);
+	flipArr = flipStr(str);
 	
 	cout << "But I flipped it on you!" << endl;
-	len = strlen(str)+1;	//	+1 to include the null terminator, '\0'
+	//len = strlen(str)+1;	//	+1 to include the null terminator, '\0'
+	while(str[len] != '\0'){
+		len++;
+	}
+
 	for(int i=0;i<len;i++){
 		cout << flipArr[i];
 	}
 	cout << endl << "BWAAAAHAHAHAHAHAHAAHAAAAA!" << endl;
-	
-	return 0;
 }
 string flipStr(string *s){
-	int ln = strlen(s);
+	int ln = 0;//strlen(s);
+	while(s[ln] != '\0'){
+		ln++;
+	}
+
 	int j = ln-1;						//	-1 because the index begins at 0
 	string *flip = new string[ln+1];	//	+1 to include the null terminator, '\0'
 	for(int i=0;i<ln;i++){
@@ -153,17 +160,17 @@ string flipStr(string *s){
 //	Programming Challenge #3. Word Counter
 void wrdCnt(){
 
-	return 0;
+
 }
 
 //	Programming Challenge #4. Average Number of Letters
 void avNumLet(){
 
-	return 0;
+
 }
 
 //	Programming Challenge #5. Sentence Capitalizer
 void sentCap(){
 
-	return 0;
+
 }
