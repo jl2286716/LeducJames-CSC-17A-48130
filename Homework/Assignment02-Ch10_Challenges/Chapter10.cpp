@@ -26,13 +26,13 @@ using namespace std;
 	void swap(char *, int);
 /*		Challenge 3		*/	
 	void wrdCnt();
-	int cntWrds(int *);
+	int cntWrds(char *);
 /*		Challenge 4		*/
 	void avNumLet();
-	float avLetWrd(int *,int);
+	float avLetWrd(char *,int);
 /*		Challenge 5		*/
 	void sentCap();
-	void capFrst(int *);
+	void capFrst(char *,int);
 
 int main(){
 	char ans;
@@ -46,7 +46,7 @@ int main(){
 		menu(choice);
 		
 		cout << "AGAIN? (Y/N)" << endl;
-		cin << ans;
+		cin >> ans;
 		ans = toupper(ans);
 	}while(ans=='Y');
 	
@@ -70,13 +70,13 @@ int showMenu(){
 		cout << "Enter your choice: ";
 		cin >> c;
 		cout << endl;
-		if(c != 1001 || c != 1002 || c !=1003 || c !=1004 || c !=1005){
+		if(c < 1001 || c > 1005){
 			cout << "You have entered an invalid choice!" << endl;
 			cout << "Please choose a number from 1001 to 1005." << endl;
 			system("pause");
 			system("cls");
 		}
-	}while(c != 1001 || c != 1002 || c !=1003 || c !=1004 || c !=1005);
+	}while(c < 1001 || c > 1005);
 	cout << endl;
 	return c;
 }
@@ -152,13 +152,13 @@ int cntChar(char *s){	//	Counts each character in the string.
 //		should display "ytivarG". Demonstrate the function in a program that asks the user to 
 //		input a string and then passes it to the function.
 void backStr(){
-	int size = 101;			// C-String size
-	char str[size];			// C-String
+	const int SIZE = 101;			// C-String size
+	char str[SIZE];			// C-String
 	int newSize;
 	
 	cout << "Enter a string: ";
 	cin.ignore();			//	Clears the buffer
-	cin.getline(str,size);	//	Get the whole line entered by the user and place it into the C-string 'str' array.
+	cin.getline(str,SIZE);	//	Get the whole line entered by the user and place it into the C-string 'str' array.
 	cout << endl << "You wrote: " << endl;
 	cout << "'" << str << "'" << endl;
 	
@@ -185,7 +185,11 @@ void swap(char *s, int n){	//	Pass in the C-string 's[]' array as a pointer and 
 		back--;				//	Move the 'back' pointer backward one index.
 	}
 	cout << "But I flipped it on you!" << endl;
-	cout >> s >> endl;		//	Output the C-string 's[]' array in reverse.
+	//for(int j=0;j<(strlen(s-1));j++){
+	//while(*s != '\0'){
+		cout << s << endl;		//	Output the C-string 's[]' array in reverse.
+		//s++;
+	//}
 }
 
 //	Programming Challenge #3. Word Counter
@@ -195,13 +199,13 @@ void swap(char *s, int n){	//	Pass in the C-string 's[]' array as a pointer and 
 //		program that asks the user to input a string and then passes it to the function. The number 
 //		of words in the string should be displayed on the screen.
 void wrdCnt(){
-	int size = 101;
-	char str[size];
+	const int SIZE = 101;
+	char str[SIZE];
 	int num;
 	
 	cout << "Enter a string: ";
 	cin.ignore();
-	cin.getline(str,size);
+	cin.getline(str,SIZE);
 	cout << "You wrote: " << endl;
 	cout << "'" << str << "'" << endl;
 	
@@ -212,10 +216,10 @@ void wrdCnt(){
 		cout << "Which is " << num << " word long." << endl;
 	}
 }
-int cntWrds(int *s){
+int cntWrds(char *s){
 	int cnt=1;
 	while(*s != '\0'){
-		if(*s == " ") cnt++;
+		if(*s == ' ') cnt++;	// Single-quotes for a character array
 		s++;
 	}
 	return cnt;
@@ -225,14 +229,14 @@ int cntWrds(int *s){
 //		Modify the program you wrote for Challenge 3 (Word Count), 
 //		so it also displays the average number of letters in each word.
 void avNumLet(){
-	int size = 101;
-	char str[size];
+	const int SIZE = 101;
+	char str[SIZE];
 	int num;
 	float avLet;
 	
-	cout << "Enter a string (" << size-1 << " char max): ";
+	cout << "Enter a string (" << SIZE-1 << " char max): ";
 	cin.ignore();
-	cin.getline(str,size);
+	cin.getline(str,SIZE);
 	cout << "You wrote: " << endl;
 	cout << "'" << str << "'" << endl;
 	
@@ -247,9 +251,9 @@ void avNumLet(){
 	cout << setprecision(2) << fixed << showpoint;
 	cout << "With an average of " << avLet << " letters per word." << endl;
 }
-float avLetWrd(int *s,int n){	//	'n' is the number of words
+float avLetWrd(char *s,int n){	//	'n' is the number of words
 	float ave;					//	Average variable
-	float len=(strlen(s))-1;	//	Length of the C-string minus the null terminator
+	float len=(strlen(s));	//	Length of the C-string minus the null terminator
 	float punct=0;				// 	Punctuation, space, & number counter
 	float spcs=n-1;				//	Number of spaces
 
@@ -274,26 +278,32 @@ float avLetWrd(int *s,int n){	//	'n' is the number of words
 //		program that asks the user to input a string and then passes it to the function. The 
 //		modified string should be displayed on the screen.
 void sentCap(){
-	int size=101;
-	char str[size];
+	const int SIZE=101;
+	char str[SIZE];
 	int len;
 	
-	cout << "Enter a few short uncapitalized sentences (" << size-1 << " char max): " << endl;
+	cout << "Enter a few short uncapitalized sentences (" << SIZE-1 << " char max): " << endl;
 	cin.ignore();
-	cin.getline(str,size);
+	cin.getline(str,SIZE);
 	cout << "You wrote: " << endl;
 	cout << "'" << str << "'" << endl;
 	
-	//len=strlen(str);
+	len=strlen(str);
 	
-	capFrst(str);
+	capFrst(str,len);
 
 }
-void capFrst(int *s){
-	while(*s != '\0'){
-		if(i==0) s[0]=toupper(s[0]);
-		if(ispunct(s[i-2])) s[i]=toupper(s[i]);
-		s++;
+void capFrst(char *s,int len){
+	//int i=0;
+	for(int i=0;i<len;i++){
+		
+		if(i==0){
+			s[0]=toupper(s[0]);
+		}
+		if(ispunct(s[i])){
+			s[i+2] = toupper(s[i+2]);
+		}
+		
 	}
 	cout << endl << "Properly capitalized, your sentences should look like:" << endl;
 	cout << "'" << s << "'" << endl;
