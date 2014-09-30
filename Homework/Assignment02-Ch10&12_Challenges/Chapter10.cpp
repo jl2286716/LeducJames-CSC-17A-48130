@@ -1,7 +1,7 @@
 /*
 *	Author: 	James Leduc
 *	Created:	Sep 25, 2014
-*	Modified:	Sep 27, 2014
+*	Modified:	Sep 29, 2014
 *	Purpose:	A menu-driven program that runs through 5 problems from Gaddis, 8th Edition, Chapter 10.
 */
 
