@@ -1,7 +1,7 @@
 /*
 *	Author: 	James Leduc
 *	Created:	Sep 30, 2014
-*	Modified:	Sep 30, 2014
+*	Modified:	Oct 01, 2014
 *	Purpose:	A menu-driven program that runs through 5 problems from Gaddis, 8th Edition, Chapter 12.
 */
 
@@ -19,10 +19,15 @@ using namespace std;
 	int showMenu();
 	void menu(int);
 /*		Challenge 1		*/
+	void fileHead();
 /*		Challenge 2		*/
-/*		Challenge 3		*/	
+	void fileDisp();
+/*		Challenge 3		*/
+	void punchLine();
 /*		Challenge 4		*/
+	void tailPro();
 /*		Challenge 5		*/
+	void lineNum();
 
 int main(){
 	char ans;
@@ -101,16 +106,104 @@ void menu(int c){
 //		Write a program that asks the user for the name of a file. The program should 
 //		display the first 10 lines of the file on the screen (the "head" of the file). 
 //		If the file has fewer than 10 lines, the entire file should be displayed, with 
-//		a message indicating the entire fie has been displayed.
+//		a message indicating the entire file has been displayed.
+void fileHead(){
+	ifstream inFile;
+	bool failed;	//	Is 'true' if file opening fails.
+	int lnCnt=0;	//	Line counter initialized to zero.
+	string line;	//	Stores the lines to be written to the console.
+	
+	//	Open file with fail condition. DONT FORGET TO CLOSE THE FILE!!!!!
+	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
+		//	Get file name from user.
+		cout << "Enter the name of the file: ";
+		cin >> inFile;
+		cout << endl;
+		//	Test file opening.
+		inFile.open(inFile,ios::in);
+		if(inFile.fail()){
+			cout << "File opening failed! Be sure to include the file extension.\n";
+			failed=true;
+		}else if(inFile.eof()){
+			cout << "This file is empty!" << endl;
+			cout << "Give me something with SOMETHING in it!" << endl;
+			failed=true;
+		}
+	}while(failed==true);
+	
+	
+	while(lnCnt<10 || !inFile.eof()){
+		//	Get line from file
+		getline(inFile,line,'\n');
+		//	Write line to console
+		cout << line << endl;
+		//	Increment counter
+		lnCnt++;
+	}
+	
+	if(lnCnt<10){
+		cout << endl << "The entire file has been displayed." << endl;
+	}else{
+		cout << endl << "The 10 lines above make up the 'HEAD' of the '" << inFile << "' file.\n";
+	}
+	
+	inFile.close();
+}
 
 
 //	Programming Challenge #2. File Display Program
 //		Write a program that asks the user for the name of a file. The program should 
-//		display the contents of the file on the creen. If the file's contents won't fit 
+//		display the contents of the file on the screen. If the file's contents won't fit 
 //		on a single screen, the program should display 24 lines of output at a time, and 
 //		then pause. Each time the program pauses, it should wait for the user to strike 
 //		a key before the next 24 lines are displayed.
-
+void fileDisp(){
+	ifstream inFile;
+	bool failed;	//	Is 'true' if file opening fails.
+	int linePer=24,	//	Number of lines printed per screen.
+		lineCnt=0,	//	Line counter initialized to zero.
+		newCnt=0;	//	New line counter initialized to zero.
+	string line;	//	Stores the lines to be written to the console.
+	
+	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
+		//	Get file name from user.
+		cout << "Enter the name of the file: ";
+		cin >> inFile;
+		cout << endl;
+		//	Test file opening.
+		inFile.open(inFile,ios::in);
+		if(inFile.fail()){
+			cout << "File opening failed! Be sure to include the file extension.\n";
+			failed=true;
+		}else if(inFile.eof()){
+			cout << "This file is empty!" << endl;
+			cout << "Give me something with SOMETHING in it!" << endl;
+			failed=true;
+		}
+	}while(failed==true);
+	
+	cout << "SUCCESS!" << endl << "Press any key to continue...\n";
+	system("pause");
+	
+	while(!inFile.eof()){// count total lines
+		inFile.get(ch);
+		if(ch=='\n'){	//	might have to test it with '\0'
+			lineCnt++;
+		}
+	}
+	
+	while(!inFile.eof()){
+		for(int i;i<lnCnt;i++){
+			while(newCnt<linePer || inFile.eof()){
+				getline(inFile,line,'\n');
+				cout << line << endl;
+				newCnt++;
+			}
+			system("pause");
+			newCnt=0;
+		}
+	}
+}
 
 //	Programming Challenge #3. Punch Line
 //		Write a program that reads and prints a joke and its punch line from two different 
@@ -122,14 +215,14 @@ void menu(int c){
 //		of the file it is passed (the punch line file). It should find this line by seeking 
 //		to the end of the file and then backing up to the beginning of the last line. Data 
 //		to test your program can be found in the joke.txt and punchline.txt files.
-
+	void punchLine();
 
 //	Programming Challenge #4. Tail Program
 //		Write a program that asks the user for the name of a file. The program should display 
 //		the last 10 lines of the file on the screen (the "tail" of the file). If the file has 
 //		fewer than 10 lines, the entire file should be displayed, with a message indicating 
 //		the entire file has been displayed.
-
+	void tailPro();
 
 //	Programming Challenge #5. Line Numbers
 //		(This assignment should be done as a modification to Programming Challenge 2.)
@@ -140,6 +233,7 @@ void menu(int c){
 //			1:George Rolland
 //			2:127 Academy Street
 //			3:Brasstown, NC 28706
-//		If the file's contents won't fit on a sigle screen, the program should display 24 
+//		If the file's contents won't fit on a single screen, the program should display 24 
 //		lines of output at a time, and then pause. Each time the program pauses, it should 
 //		wait for the user to strike a key before the next 24 lines are displayed.
+	void lineNum();
