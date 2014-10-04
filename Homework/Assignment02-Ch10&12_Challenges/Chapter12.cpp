@@ -199,10 +199,10 @@ void fileDisp(){
 
 	inFile.open(fName.c_str(),ios::in);
 
+	//	This loop doesn't work... why?
 	while(!inFile.eof()){
 		if(lineCnt<linePer){
 			for(int j=0;j<lineCnt;j++){
-			cin.ignore();
 				getline(inFile,line,'\n');
 				cout << line << endl;
 			}
