@@ -225,7 +225,10 @@ void punchLine(){
 	string line;		//	Stores the lines to be written to the console.
 	long int bytes=0;	//	Counts the bytes of the punchline.txt file.
 	char ch,			//	Character placeholder.
-		punch=[];
+		val,
+		*punch;
+	int lines=0,
+		idx;
 	
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Test file opening.
@@ -256,20 +259,35 @@ void punchLine(){
 	//	Count the file bytes
 	inFile.seekg(0L,ios::end);
 	bytes = inFile.tellg();
-	cout << "'punchline.txt' has " << bytes << " byte(s) in it.\n";
 
 	//	return to the begining
 	inFile.seekg(0L,ios::beg);
 
+	// Create and fill the array
+	punch=new char[bytes];
 	for(int i=0;i<bytes;i++){
 		inFile.get(ch);
 		punch[i]=ch;
 	}
 	inFile.close();
 
+	//	Count lines
 	for(int j=0;j<bytes;j++){
-		cout << punch[j];
+		if(punch[j]=='\n'){
+			lines++;
+		}
 	}
+
+	//	Output the punchline
+	idx=bytes;
+	do{
+		val=punch[idx];
+		idx--;
+	}while(val != '\n');
+	for(idx;idx<bytes;idx++){
+		cout << punch[idx];
+	}
+	cout << endl;
 }
 
 //	Programming Challenge #4. Tail Program
