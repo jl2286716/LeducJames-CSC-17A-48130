@@ -24,7 +24,7 @@ using namespace std;
 /*		Challenge 2		*/
 	void fileDisp();
 /*		Challenge 3		*/
-	//void punchLine();
+	void punchLine();
 /*		Challenge 4		*/
 	//void tailPro();
 /*		Challenge 5		*/
@@ -87,7 +87,7 @@ void menu(int c){
 			system("pause");
 			system("cls");
 			break;
-		case 1203:	//punchLine();
+		case 1203:	punchLine();
 			system("pause");
 			system("cls");
 			break;
@@ -126,10 +126,6 @@ void fileHead(){
 		inFile.open(fName.c_str(),ios::in);
 		if(inFile.fail()){
 			cout << "File opening failed! Be sure to include the file extension.\n";
-			failed=true;
-		}else if(inFile.eof()){
-			cout << "This file is empty!" << endl;
-			cout << "Give me something with SOMETHING in it!" << endl;
 			failed=true;
 		}
 	}while(failed==true);
@@ -180,10 +176,6 @@ void fileDisp(){
 		if(inFile.fail()){
 			cout << "File opening failed! Be sure to include the file extension.\n";
 			failed=true;
-		}else if(inFile.eof()){
-			cout << "This file is empty!" << endl;
-			cout << "Give me something with SOMETHING in it!" << endl;
-			failed=true;
 		}
 	}while(failed==true);
 	inFile.close();
@@ -231,24 +223,57 @@ void fileDisp(){
 void punchLine(){
 	ifstream inFile;
 	bool failed;	//	Is 'true' if file opening fails.
-	int lnCnt=0;	//	Line counter initialized to zero.
 	string line;	//	Stores the lines to be written to the console.
+	int byteCnt=0,	//	Counts the bytes of the punchline.txt file.
+		lineCnt=0,	//	Counts the lines of the punchline.txt file.
+		distFrmEnd;	//	Stores the distance from the end.
+	char ch;		//	Character placeholder.
 	
-	//	Open file with fail condition. DONT FORGET TO CLOSE THE FILE!!!!!
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Test file opening.
 		inFile.open("joke.txt",ios::in);
 		if(inFile.fail()){
-			cout << "File opening failed!\n";
+			cout << "Where's the joke?\n";
 			failed=true;
 		}
 	}while(failed==true);
 	
+	//	Read and write joke.txt to the console.
 	while(!inFile.eof()){
 		getline(inFile,line,'\n');
 		cout << line << endl;
 	}
+	system("pause");
+	inFile.close();
 
+	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
+		//	Test file opening.
+		inFile.open("punchline.txt",ios::in);
+		if(inFile.fail()){
+			cout << "Where's the punchline?\n";
+			failed=true;
+		}
+	}while(failed==true);
+	
+	//	Count the bytes & lines of the punchline.txt file. For some reason, THE COUNT ISN'T WORKING!
+	while(!inFile.eof()){
+		inFile.get(ch);
+		byteCnt++;
+		if(ch=='\n'){
+			lineCnt++;
+		}
+	//	Count test lines.
+	cout << "'punchline.txt' has " << byteCnt << " byte(s) in it.\n";
+	cout << "'punchline.txt' has " << lineCnt << " line(s) in it.\n\n";
+	inFile.close();
+	
+	//	Read and write the last line of the punchline.txt to the console.
+	inFile.open("punchline.txt",ios::in);
+	for(int i=0;i<lineCnt-1;i++){
+		getline(inFile,line,'\n');
+	}
+	getline(inFile,line);
+	cout << endl << line << endl;
 	inFile.close();
 }
 
