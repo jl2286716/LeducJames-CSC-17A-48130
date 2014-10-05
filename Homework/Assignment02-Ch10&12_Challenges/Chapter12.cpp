@@ -164,7 +164,6 @@ void fileDisp(){
 		newCnt=0;	//	New line counter initialized to zero.
 	string line,	//	Stores the lines to be written to the console.
 		fName;		//	Holds the file name entered by the user.
-	char ch;		//	Holds a character from the string.
 	
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Get file name from user.
@@ -262,9 +261,14 @@ void punchLine(){
 		if(ch=='\n'){
 			lineCnt++;
 		}
+	}
 	//	Count test lines.
 	cout << "'punchline.txt' has " << byteCnt << " byte(s) in it.\n";
 	cout << "'punchline.txt' has " << lineCnt << " line(s) in it.\n\n";
+	if(byteCnt==0 || lineCnt==0){
+		cout << "MY COUNTS ARE BROKEN!\n";
+	}
+	//	close the file
 	inFile.close();
 	
 	//	Read and write the last line of the punchline.txt to the console.
