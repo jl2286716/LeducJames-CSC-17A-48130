@@ -49,20 +49,23 @@ int main() {
 	cout << endl << "The median is " << d << endl;
 	
     // Show test results
-	int pLine = range*2;
-    printArray(a,size,pLine);
-    printArray(b,size,pLine);
+	//int pLine = range*2;
+    //printArray(a,size,pLine);
+    //printArray(b,size,pLine);
+
+
+	cout << endl << "I can't get the modes to work!\n";
 
 	// Calculate the modes
-	int *modes = mode(b,size);
+	//int *modes = mode(b,size);
 	
 	// Show the modes
-	printMode(modes);
+	//printMode(modes);
 	
     // Deallocate memory and exit
     delete []a;
     delete []b;
-	delete []modes;
+	//delete []modes;
     return 0;
 }
 
