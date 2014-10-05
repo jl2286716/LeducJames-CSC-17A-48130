@@ -231,7 +231,7 @@ void punchLine(){
 		idx;			//	Array index placeholder.
 	
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
-		//	Test file opening.
+		//	Test the opening of the 'joke.txt' file.
 		inFile.open("joke.txt",ios::in);
 		if(inFile.fail()){
 			cout << "Where's the joke?\n";
@@ -248,7 +248,7 @@ void punchLine(){
 	inFile.close();
 
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
-		//	Test file opening.
+		//	Test the opening of the 'punchline.txt' file.
 		inFile.open("punchline.txt",ios::in);
 		if(inFile.fail()){
 			cout << "Where's the punchline?\n";
@@ -260,10 +260,10 @@ void punchLine(){
 	inFile.seekg(0L,ios::end);
 	bytes = inFile.tellg();
 
-	//	return to the begining
+	//	Return to the beginning of the 'punchline.txt' file.
 	inFile.seekg(0L,ios::beg);
 
-	// Create and fill the array
+	// Create and fill the 'punch' array
 	punch=new char[bytes];
 	for(int i=0;i<bytes;i++){
 		inFile.get(ch);
