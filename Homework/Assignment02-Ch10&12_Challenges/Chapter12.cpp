@@ -339,7 +339,7 @@ void tailPro(){
 
 	//	Count lines
 	for(int j=0;j<bytes;j++){
-		cout << arr[j];		//	test
+		cout << arr[j];		//	test -- TOO MUCH CRAP IS GOING INTO THE ARRAY!
 		if(arr[j]=='\n'){
 			lines++;
 		}
@@ -353,7 +353,7 @@ void tailPro(){
 		}
 		cout << endl << endl << "The entire file has been displayed." << endl;
 	}else{
-		for(idx=bytes;lnBack==10;idx--){
+		for(idx=bytes;lnBack<10;idx--){
 			if(arr[idx]=='\n'){
 				lnBack++;
 			}
