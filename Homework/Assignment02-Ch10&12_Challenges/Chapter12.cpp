@@ -26,7 +26,7 @@ using namespace std;
 /*		Challenge 3		*/
 	void punchLine();
 /*		Challenge 4		*/
-	//void tailPro();
+	void tailPro();
 /*		Challenge 5		*/
 	//void lineNum();
 
@@ -91,7 +91,7 @@ void menu(int c){
 			system("pause");
 			system("cls");
 			break;
-		case 1204:	//tailPro();
+		case 1204:	tailPro();
 			system("pause");
 			system("cls");
 			break;
@@ -295,7 +295,76 @@ void punchLine(){
 //		the last 10 lines of the file on the screen (the "tail" of the file). If the file has 
 //		fewer than 10 lines, the entire file should be displayed, with a message indicating 
 //		the entire file has been displayed.
-	//void tailPro();
+void tailPro(){
+	ifstream inFile;
+	bool failed;		//	Is 'true' if file opening fails.
+	string line,		//	Stores the lines to be written to the console.
+		fName;			//	Holds the name entered by the user.
+	long int bytes=0;	//	Counts the bytes of the punchline.txt file.
+	char ch,			//	Character placeholder.
+		val,			//	Array character placeholder.
+		*arr;			//	Array to hold the file.
+	int lines=1,		//	Line counter.
+		lnBack=0,
+		backCnt=0,
+		idx;			//	Array index placeholder.
+
+	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
+		//	Get file name from user.
+		cout << "Enter the name of the file: ";
+		cin >> fName;
+		cout << endl;
+		//	Test file opening.
+		inFile.open(fName.c_str(),ios::in);
+		if(inFile.fail()){
+			cout << "File opening failed! Be sure to include the file extension.\n";
+			failed=true;
+		}
+	}while(failed==true);
+
+	//	Count the file bytes
+	inFile.seekg(0L,ios::end);
+	bytes = inFile.tellg();
+
+	//	Return to the beginning of the 'punchline.txt' file.
+	inFile.seekg(0L,ios::beg);
+
+	// Create and fill the 'punch' array
+	arr=new char[bytes];
+	for(int i=0;i<bytes;i++){
+		inFile.get(ch);
+		arr[i]=ch;
+	}
+	inFile.close();
+
+	//	Count lines
+	for(int j=0;j<bytes;j++){
+		cout << arr[j];		//	test
+		if(arr[j]=='\n'){
+			lines++;
+		}
+	}
+	cout << endl << lines << " lines.\n";	//	test
+
+	//	Display last 10 lines
+	if(lines<10){
+		for(idx=0;idx<bytes;idx++){
+			cout << arr[idx];
+		}
+		cout << endl << endl << "The entire file has been displayed." << endl;
+	}else{
+		for(idx=bytes;lnBack==10;idx--){
+			if(arr[idx]=='\n'){
+				lnBack++;
+			}
+			backCnt++;
+		}
+		for(int ind=(bytes-backCnt);ind<bytes;ind++){
+			cout << arr[ind];
+		}
+		cout << endl << "The 10 lines above make up the 'TAIL' of the '" << fName << "' file.\n";
+	}
+}
 
 //	Programming Challenge #5. Line Numbers
 //		(This assignment should be done as a modification to Programming Challenge 2.)
