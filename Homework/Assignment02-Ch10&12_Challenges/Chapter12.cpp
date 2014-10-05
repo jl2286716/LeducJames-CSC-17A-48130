@@ -225,10 +225,10 @@ void punchLine(){
 	string line;		//	Stores the lines to be written to the console.
 	long int bytes=0;	//	Counts the bytes of the punchline.txt file.
 	char ch,			//	Character placeholder.
-		val,
-		*punch;
-	int lines=0,
-		idx;
+		val,			//	Array character placeholder.
+		*punch;			//	Array to hold the punchline file.
+	int lines=0,		//	Line counter.
+		idx;			//	Array index placeholder.
 	
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Test file opening.
