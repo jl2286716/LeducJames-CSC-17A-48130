@@ -326,29 +326,31 @@ void tailPro(){
 	inFile.seekg(0L,ios::end);
 	bytes = inFile.tellg();
 
-	//	Return to the beginning of the 'punchline.txt' file.
+	//	Return to the beginning of the file.
 	inFile.seekg(0L,ios::beg);
 
-	// Create and fill the 'punch' array
-	arr=new char[bytes];
-	for(int i=0;i<bytes;i++){
-		inFile.get(ch);
-		arr[i]=ch;
+	// Create and fill the array -- TOO MUCH CRAP IS GOING INTO THE ARRAY!
+	while(!inFile.eof()){
+		arr=new char[bytes];
+		for(int i=0;i<bytes;i++){
+			
+			inFile.get(ch);
+			arr[i]=ch;
+			
+		}
 	}
 	inFile.close();
 
 	//	Count lines
 	for(int j=0;j<bytes;j++){
-		cout << arr[j];		//	test -- TOO MUCH CRAP IS GOING INTO THE ARRAY!
 		if(arr[j]=='\n'){
 			lines++;
 		}
 	}
-	cout << endl << lines << " lines.\n";	//	test
 
 	//	Display last 10 lines
 	if(lines<10){
-		for(idx=0;idx<bytes;idx++){
+		for(idx=0;idx<(bytes-(lines-1));idx++){
 			cout << arr[idx];
 		}
 		cout << endl << endl << "The entire file has been displayed." << endl;
@@ -359,10 +361,10 @@ void tailPro(){
 			}
 			backCnt++;
 		}
-		for(int ind=(bytes-backCnt);ind<bytes;ind++){
+		for(int ind=(bytes-backCnt);ind<(bytes-(lines-1));ind++){
 			cout << arr[ind];
 		}
-		cout << endl << "The 10 lines above make up the 'TAIL' of the '" << fName << "' file.\n";
+		cout << endl << endl << "The 10 lines above make up the 'TAIL' of the '" << fName << "' file.\n";
 	}
 }
 
