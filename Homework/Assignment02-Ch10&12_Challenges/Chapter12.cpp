@@ -228,7 +228,29 @@ void fileDisp(){
 //		of the file it is passed (the punch line file). It should find this line by seeking 
 //		to the end of the file and then backing up to the beginning of the last line. Data 
 //		to test your program can be found in the joke.txt and punchline.txt files.
-	//void punchLine();
+void punchLine(){
+	ifstream inFile;
+	bool failed;	//	Is 'true' if file opening fails.
+	int lnCnt=0;	//	Line counter initialized to zero.
+	string line;	//	Stores the lines to be written to the console.
+	
+	//	Open file with fail condition. DONT FORGET TO CLOSE THE FILE!!!!!
+	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
+		//	Test file opening.
+		inFile.open("joke.txt",ios::in);
+		if(inFile.fail()){
+			cout << "File opening failed!\n";
+			failed=true;
+		}
+	}while(failed==true);
+	
+	while(!inFile.eof()){
+		getline(inFile,line,'\n');
+		cout << line << endl;
+	}
+
+	inFile.close();
+}
 
 //	Programming Challenge #4. Tail Program
 //		Write a program that asks the user for the name of a file. The program should display 
