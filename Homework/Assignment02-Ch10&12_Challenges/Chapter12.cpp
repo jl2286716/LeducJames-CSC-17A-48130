@@ -190,7 +190,7 @@ void fileDisp(){
 
 	inFile.open(fName.c_str(),ios::in);
 
-	//	This loop doesn't work... why?
+	//	THIS LOOP DOES NOT WORK... WHY?
 	while(!inFile.eof()){
 		if(lineCnt<linePer){
 			for(int j=0;j<lineCnt;j++){
@@ -329,7 +329,7 @@ void tailPro(){
 	//	Return to the beginning of the file.
 	inFile.seekg(0L,ios::beg);
 
-	// Create and fill the array -- TOO MUCH CRAP IS GOING INTO THE ARRAY!
+	// Create and fill the array.
 	while(!inFile.eof()){
 		arr=new char[bytes];
 		for(int i=0;i<bytes;i++){
@@ -350,7 +350,7 @@ void tailPro(){
 
 	//	Display last 10 lines
 	if(lines<10){
-		for(idx=0;idx<(bytes-(lines-1));idx++){
+		for(idx=0;idx<(bytes-(lines-1));idx++){		//	Subtract lines-1 because for some reason, it's adding that amount of extra crap.
 			cout << arr[idx];
 		}
 		cout << endl << endl << "The entire file has been displayed." << endl;
