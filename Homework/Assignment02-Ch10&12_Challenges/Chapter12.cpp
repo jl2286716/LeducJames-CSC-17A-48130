@@ -221,12 +221,11 @@ void fileDisp(){
 //		to test your program can be found in the joke.txt and punchline.txt files.
 void punchLine(){
 	ifstream inFile;
-	bool failed;	//	Is 'true' if file opening fails.
-	string line;	//	Stores the lines to be written to the console.
-	int byteCnt=0,	//	Counts the bytes of the punchline.txt file.
-		lineCnt=0,	//	Counts the lines of the punchline.txt file.
-		distFrmEnd;	//	Stores the distance from the end.
-	char ch;		//	Character placeholder.
+	bool failed;		//	Is 'true' if file opening fails.
+	string line;		//	Stores the lines to be written to the console.
+	long int bytes=0;	//	Counts the bytes of the punchline.txt file.
+	char ch,			//	Character placeholder.
+		punch=[];
 	
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Test file opening.
@@ -254,31 +253,23 @@ void punchLine(){
 		}
 	}while(failed==true);
 	
-	//	Count the bytes & lines of the punchline.txt file. For some reason, THE COUNT ISN'T WORKING!
-	while(!inFile.eof()){
+	//	Count the file bytes
+	inFile.seekg(0L,ios::end);
+	bytes = inFile.tellg();
+	cout << "'punchline.txt' has " << bytes << " byte(s) in it.\n";
+
+	//	return to the begining
+	inFile.seekg(0L,ios::beg);
+
+	for(int i=0;i<bytes;i++){
 		inFile.get(ch);
-		byteCnt++;
-		if(ch=='\n'){
-			lineCnt++;
-		}
+		punch[i]=ch;
 	}
-	//	Count test lines.
-	cout << "'punchline.txt' has " << byteCnt << " byte(s) in it.\n";
-	cout << "'punchline.txt' has " << lineCnt << " line(s) in it.\n\n";
-	if(byteCnt==0 || lineCnt==0){
-		cout << "MY COUNTS ARE BROKEN!\n";
-	}
-	//	close the file
 	inFile.close();
-	
-	//	Read and write the last line of the punchline.txt to the console.
-	inFile.open("punchline.txt",ios::in);
-	for(int i=0;i<lineCnt-1;i++){
-		getline(inFile,line,'\n');
+
+	for(int j=0;j<bytes;j++){
+		cout << punch[j];
 	}
-	getline(inFile,line);
-	cout << endl << line << endl;
-	inFile.close();
 }
 
 //	Programming Challenge #4. Tail Program
@@ -291,7 +282,7 @@ void punchLine(){
 //	Programming Challenge #5. Line Numbers
 //		(This assignment should be done as a modification to Programming Challenge 2.)
 //		Write a program that asks the user for the name of a file. The program should display 
-//		the contents of the file on the screen. Each line of scree output should be preceded 
+//		the contents of the file on the screen. Each line of screen output should be preceded 
 //		with a line number, followed by a colon. The line numbering should start at 1. 
 //		Here is an example:
 //			1:George Rolland
