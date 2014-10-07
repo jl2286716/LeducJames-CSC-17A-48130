@@ -28,7 +28,7 @@ using namespace std;
 /*		Challenge 4		*/
 	void tailPro();
 /*		Challenge 5		*/
-	//void lineNum();
+	void lineNum();
 
 int main(){
 	char ans;
@@ -95,7 +95,7 @@ void menu(int c){
 			system("pause");
 			system("cls");
 			break;
-		case 1205:	//lineNum();
+		case 1205:	lineNum();
 			system("pause");
 			system("cls");
 			break;
@@ -191,7 +191,6 @@ void fileDisp(){
 
 	//	Iterate through and display the file.
 	while(!inFile.eof()){
-		cout<<"Second Loop happened"<<endl;
 		if(lineCnt<linePer){
 			for(int j=0;j<lineCnt;j++){
 				getline(inFile,line,'\n');
@@ -385,7 +384,7 @@ void lineNum(){
 	bool failed;	//	Is 'true' if file opening fails.
 	int linePer=24,	//	Number of lines printed per screen.
 		lineCnt=0,	//	Line counter initialized to zero.
-		lineNum=0;	//	New line counter initialized to zero.
+		lines=1;	//	New line counter initialized to zero.
 	string line,	//	Stores the lines to be written to the console.
 		fName;		//	Holds the file name entered by the user.
 	
@@ -416,17 +415,18 @@ void lineNum(){
 
 	//	Iterate through and display the file.
 	while(!inFile.eof()){
-		cout<<"Second Loop happened"<<endl;
 		if(lineCnt<linePer){
 			for(int j=0;j<lineCnt;j++){
 				getline(inFile,line,'\n');
-				cout << line << endl;
+				cout << lines << ": " << line << endl;
+				lines++;
 			}
 		}else if(lineCnt>=linePer){
 			for(int i=0;i<linePer;i++){
 				getline(inFile,line,'\n');
-				cout << line << endl;
+				cout << lines << ": " << line << endl;
 				lineCnt--;
+				lines++;
 			}
 			system("pause");
 		}
