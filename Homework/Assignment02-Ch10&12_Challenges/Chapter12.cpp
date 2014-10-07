@@ -115,7 +115,7 @@ void fileHead(){
 	string line,	//	Stores the lines to be written to the console.
 		fName;		//	Holds the file name from the user.
 	
-	//	Open file with fail condition. DONT FORGET TO CLOSE THE FILE!!!!!
+	//	Open file with fail condition.
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Get file name from user.
 		cout << "Enter the name of the file: ";
@@ -130,7 +130,7 @@ void fileHead(){
 		}
 	}while(failed==true);
 	
-	
+	//	Count the number of lines in the file and output the results.
 	while(lnCnt<10 && !inFile.eof()){
 		//	Get line from file
 		getline(inFile,line,'\n');
@@ -139,13 +139,11 @@ void fileHead(){
 		//	Increment counter
 		lnCnt++;
 	}
-	
 	if(lnCnt<10){
 		cout << endl << "The entire file has been displayed." << endl;
 	}else{
 		cout << endl << "The 10 lines above make up the 'HEAD' of the '" << fName << "' file.\n";
 	}
-	
 	inFile.close();
 }
 
@@ -164,6 +162,7 @@ void fileDisp(){
 	string line,	//	Stores the lines to be written to the console.
 		fName;		//	Holds the file name entered by the user.
 	
+	//	File opening check.
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Get file name from user.
 		cout << "Enter the name of the file: ";
@@ -176,17 +175,15 @@ void fileDisp(){
 			failed=true;
 		}
 	}while(failed==true);
-	inFile.close();
-	
-	inFile.open(fName.c_str(),ios::in);
+
+	//	Count the number of lines in the file.
 	while(!inFile.eof()){
 		getline(inFile,line,'\n');
 		lineCnt++;
 	}
 
-	cout << "There are " << lineCnt << " line(s) in this file.\n";
-
 	//	Go to the beninning of the file.
+	inFile.clear();
 	inFile.seekg(0L,ios::beg);
 
 	//	Iterate through and display the file.
@@ -229,6 +226,7 @@ void punchLine(){
 	int lines=0,		//	Line counter.
 		idx;			//	Array index placeholder.
 	
+	//	File opening check.
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Test the opening of the 'joke.txt' file.
 		inFile.open("joke.txt",ios::in);
@@ -244,8 +242,10 @@ void punchLine(){
 		cout << line << endl;
 	}
 	system("pause");
+	inFile.clear();
 	inFile.close();
 
+	//	File opening check.
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Test the opening of the 'punchline.txt' file.
 		inFile.open("punchline.txt",ios::in);
@@ -259,7 +259,8 @@ void punchLine(){
 	inFile.seekg(0L,ios::end);
 	bytes = inFile.tellg();
 
-	//	Return to the beginning of the 'punchline.txt' file.
+	//	Go to the beninning of the file.
+	inFile.clear();
 	inFile.seekg(0L,ios::beg);
 
 	// Create and fill the 'punch' array
@@ -308,6 +309,7 @@ void tailPro(){
 		backCnt=0,
 		idx;			//	Array index placeholder.
 
+	//	File opening check.
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Get file name from user.
 		cout << "Enter the name of the file: ";
@@ -325,17 +327,16 @@ void tailPro(){
 	inFile.seekg(0L,ios::end);
 	bytes = inFile.tellg();
 
-	//	Return to the beginning of the file.
+	//	Go to the beninning of the file.
+	inFile.clear();
 	inFile.seekg(0L,ios::beg);
 
 	// Create and fill the array.
 	while(!inFile.eof()){
 		arr=new char[bytes];
 		for(int i=0;i<bytes;i++){
-			
 			inFile.get(ch);
 			arr[i]=ch;
-			
 		}
 	}
 	inFile.close();
@@ -388,6 +389,7 @@ void lineNum(){
 	string line,	//	Stores the lines to be written to the console.
 		fName;		//	Holds the file name entered by the user.
 	
+	//	File opening check.
 	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
 		//	Get file name from user.
 		cout << "Enter the name of the file: ";
@@ -402,15 +404,15 @@ void lineNum(){
 	}while(failed==true);
 	inFile.close();
 	
+	//	Count the number of lines in the file.
 	inFile.open(fName.c_str(),ios::in);
 	while(!inFile.eof()){
 		getline(inFile,line,'\n');
 		lineCnt++;
 	}
 
-	cout << "There are " << lineCnt << " line(s) in this file.\n";
-
 	//	Go to the beninning of the file.
+	inFile.clear();
 	inFile.seekg(0L,ios::beg);
 
 	//	Iterate through and display the file.
