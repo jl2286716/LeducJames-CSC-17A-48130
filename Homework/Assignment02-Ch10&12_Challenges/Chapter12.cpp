@@ -160,8 +160,7 @@ void fileDisp(){
 	ifstream inFile;
 	bool failed;	//	Is 'true' if file opening fails.
 	int linePer=24,	//	Number of lines printed per screen.
-		lineCnt=0,	//	Line counter initialized to zero.
-		newCnt=0;	//	New line counter initialized to zero.
+		lineCnt=0;	//	Line counter initialized to zero.
 	string line,	//	Stores the lines to be written to the console.
 		fName;		//	Holds the file name entered by the user.
 	
@@ -184,14 +183,15 @@ void fileDisp(){
 		getline(inFile,line,'\n');
 		lineCnt++;
 	}
-	inFile.close();
 
 	cout << "There are " << lineCnt << " line(s) in this file.\n";
 
-	inFile.open(fName.c_str(),ios::in);
+	//	Go to the beninning of the file.
+	inFile.seekg(0L,ios::beg);
 
-	//	THIS LOOP DOES NOT WORK... WHY?
+	//	Iterate through and display the file.
 	while(!inFile.eof()){
+		cout<<"Second Loop happened"<<endl;
 		if(lineCnt<linePer){
 			for(int j=0;j<lineCnt;j++){
 				getline(inFile,line,'\n');
@@ -380,4 +380,56 @@ void tailPro(){
 //		If the file's contents won't fit on a single screen, the program should display 24 
 //		lines of output at a time, and then pause. Each time the program pauses, it should 
 //		wait for the user to strike a key before the next 24 lines are displayed.
-	//void lineNum();
+void lineNum(){
+	ifstream inFile;
+	bool failed;	//	Is 'true' if file opening fails.
+	int linePer=24,	//	Number of lines printed per screen.
+		lineCnt=0,	//	Line counter initialized to zero.
+		lineNum=0;	//	New line counter initialized to zero.
+	string line,	//	Stores the lines to be written to the console.
+		fName;		//	Holds the file name entered by the user.
+	
+	do{	failed=false;	//	Set the flag to 'false' for a fresh start.
+		//	Get file name from user.
+		cout << "Enter the name of the file: ";
+		cin >> fName;
+		cout << endl;
+		//	Test file opening.
+		inFile.open(fName.c_str(),ios::in);
+		if(inFile.fail()){
+			cout << "File opening failed! Be sure to include the file extension.\n";
+			failed=true;
+		}
+	}while(failed==true);
+	inFile.close();
+	
+	inFile.open(fName.c_str(),ios::in);
+	while(!inFile.eof()){
+		getline(inFile,line,'\n');
+		lineCnt++;
+	}
+
+	cout << "There are " << lineCnt << " line(s) in this file.\n";
+
+	//	Go to the beninning of the file.
+	inFile.seekg(0L,ios::beg);
+
+	//	Iterate through and display the file.
+	while(!inFile.eof()){
+		cout<<"Second Loop happened"<<endl;
+		if(lineCnt<linePer){
+			for(int j=0;j<lineCnt;j++){
+				getline(inFile,line,'\n');
+				cout << line << endl;
+			}
+		}else if(lineCnt>=linePer){
+			for(int i=0;i<linePer;i++){
+				getline(inFile,line,'\n');
+				cout << line << endl;
+				lineCnt--;
+			}
+			system("pause");
+		}
+	}
+	inFile.close();
+}
