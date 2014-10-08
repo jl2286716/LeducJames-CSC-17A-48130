@@ -57,10 +57,10 @@ int main() {
 	cout << endl << "I can't get the modes to work!\n";
 
 	// Calculate the modes
-	//int *modes = mode(b,size);
+	int *modes = mode(b,size);
 	
 	// Show the modes
-	//printMode(modes);
+	printMode(modes);
 	
     // Deallocate memory and exit
     delete []a;
@@ -151,6 +151,7 @@ int *mode(int *b,int n){
 		}
 	}
 	cout << "The maximum frequency is = " << freq+1 << endl;
+	system("pause");
 
 	// Count modes
 	int modeNum=0;
@@ -166,8 +167,9 @@ int *mode(int *b,int n){
 		}
 	}
 	cout << "There are " << modeNum << " modes." << endl;
+	system("pause");
 
-	// Declare and fill mode array
+	// Declare and fill mode array - THIS IS WHERE IT BREAKS!!
 	int *modal=new int[modeNum+2];
 	modal[0]=modeNum;
 	modal[1]=freq+1;
