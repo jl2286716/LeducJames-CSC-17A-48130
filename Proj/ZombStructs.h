@@ -144,78 +144,82 @@ struct MemInv{		//	team member inventory
 			bare.eff2=speed-5;
 			bare.weight=load-0;
 	//	Slippers
-		type 	= armor;
-		wear 	= feet;
-		effect1 = 0 health base;
-		effect2 = -2 speed;
-		weight 	= -2 load;
+		Equipment slips[5];
+			slips.type="armor";
+			slips.wear="feet";
+			slips.eff1=healthBase+0;
+			slips.eff2=speed-1;
+			slips.weight=load-1;
 	//	Sneakers
-		type 	= armor;
-		wear 	= feet;
-		effect1 = 5 health base;
-		effect2 = +2 speed;
-		weight 	= -3 load;
+		Equipment sneaks[5];
+			sneaks.type="armor";
+			sneaks.wear="feet";
+			sneaks.eff1=healthBase+5;
+			sneaks.eff2=speed+2;
+			sneaks.weight=load-3;
 	//	Work Boots
-		type 	= armor;
-		wear 	= feet;
-		effect1 = 10 health base;
-		effect2 = -2 speed;
-		weight 	= -5 load;
+		Equipment boots[5];
+			boots.type="armor";
+			boots.wear="feet";
+			boots.eff1=healthBase+10;
+			boots.eff2=speed-2;
+			boots.weight=load-5;
 	//	Steel-Toe Boots
-		type 	= armor;
-		wear 	= feet;
-		effect1 = 20 health base;
-		effect2 = -5 speed;
-		weight 	= -8 load;
-
+		Equipment steels[5];
+			steels.type="armor";
+			steels.wear="feet";
+			steels.eff1=healthBase+20;
+			steels.eff2=speed-5;
+			steels.weight=load-8;
+			
 //	Storage Items
 	//	Fanny Pack
-		type	= store;	//	type1 = {armor,store,quiv}
-		wear	= waist;	//	wear = {chest,feet,back,waist}
-		effect1	= +10 load base;	//	effect1 = health(chest,feet)/load(back,waist)
-		effect2	= 0 speed;	//	effect2 = speed
-		weight	= -2 load;	//	weight effects the load
+		Equipment fanny[5];
+			fanny.type="store";
+			fanny.wear="waist";
+			fanny.eff1=loadBase+10;
+			fanny.eff2=speed-0;
+			fanny.weight=load-2;
 	//	Quiver - holds 25 arrows
-		type	= quiv;
-		wear	= back;
-		effect1	= +25 arrow load base;
-		effect2	= -2 speed;
-		weight	= -2 load;
+		Equipment quiver[5];
+			quiver.type="quiv";
+			quiver.wear="back";
+			quiver.eff1=arLoadBase+25;
+			quiver.eff2=speed-2;
+			quiver.weight=load-2;
 	//	The Zelda - holds 50 arrows
-		type	= quiv;
-		wear	= back;
-		effect1	= +50 arrow load base;
-		effect2	= -4 speed;
-		weight	= -4 load;
+		Equipment zelda[5];
+			zelda.type="quiv";
+			zelda.wear="back";
+			zelda.eff1=arLoadBase+50;
+			zelda.eff2=speed-4;
+			zelda.weight=load-4;
 	//	Bookbag
-		type	= store;
-		wear	= back;
-		effect1	= +25 load base;
-		effect2	= -3 speed;
-		weight	= -3 load;
+		Equipment bookB[5];
+			bookB.type="store";
+			bookB.wear="back";
+			bookB.eff1=loadBase+25;
+			bookB.eff2=speed-3;
+			bookB.weight=load-3;
 	//	Backpack
-		type	= store;
-		wear	= back;
-		effect1	= 50 load base;
-		effect2	= -5 speed;
-		weight	= -5 load;
+		Equipment backP[5];
+			backP.type="store";
+			backP.wear="back";
+			backP.eff1=loadBase+50;
+			backP.eff2=speed-5;
+			backP.weight=load-5;
 	//	The Hiker
-		type	= store;
-		wear	= back;
-		effect1	= 75 load base;
-		effect2	= -10 speed;
-		weight	= -10 load;
+		Equipment hiker[5];
+			hiker.type="store";
+			hiker.wear="back";
+			hiker.eff1=loadBase+75;
+			hiker.eff2=speed-10;
+			hiker.weight=load-10;
 
 //	Ammo Items
-	const int AMSIZE=5;
 	//	.357mm Round
-		rnd357[AMSIZE];
-		rnd357[0]="supply";
-		rnd357[1]="
 	//	.39mm Round
-		rnd39[AMSIZE];
 	//	.9mm Round
-		rnd9[AMSIZE];
 	//	Shotgun Shell
 		type1 	= supply;	//	type1 = supply
 		type2 	= round;	//	type2 = {round,box,arrow} - round -> pocket, arrows -> quiver, box -> bag
