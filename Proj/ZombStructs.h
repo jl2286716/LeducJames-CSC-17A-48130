@@ -17,9 +17,9 @@ string getName(){
 	cout << endl << endl << "Good luck, " << pName << "!\n\n";
 	return pName;
 }
-Player setPlayer(pName){
+Player setPlayer(){
 	Player p1[9];
-		p1.name=pName;
+		p1.name=getName();
 		p1.health=200;
 		p1.healthBase=200;
 		p1.speed=50;
