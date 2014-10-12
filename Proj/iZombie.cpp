@@ -35,6 +35,7 @@ struct Weapon{
 	int weight;		//	weight = -load
 	string ammoTyp;	//	ammoTyp = {357mm(Python),39mm(AK-47),9mm(Glock 19,MAC-10),arrow,shell,blunt}
 	int ammoCnt;	//	ammoCnt = {0,NULL}
+	bool equipped;	//	equipped = {true,false} - Equipped or not
 };
 
 struct Equipment{	//	Holds storage and armor.
@@ -44,6 +45,7 @@ struct Equipment{	//	Holds storage and armor.
 	int eff1;		//	eff1 = health(chest,feet)/load(back,waist)
 	int eff2;		//	eff2 = speed
 	int weight;		//	weight effects the load
+	bool equipped;	//	equipped = {true,false}
 };
 
 struct Loadout{
@@ -56,8 +58,8 @@ struct Loadout{
 };
 
 struct Inventory{
-	Weapon
-	Equipment
+	Equipment gear;
+	Weapon arms;
 };
 
 
@@ -71,11 +73,11 @@ Equipment setEquip(string);
 string setInventory();	//	use an array to store the inventory
 Loadout setGear(Equipment,Loadout);
 Loadout setArms(Weapon,Loadout);
-Player updateStats(Player,Loadout);
+Player updateGear(Equipment,Player);
+Player updateArms(Weapon,Player);
 
 
 int main(){
-	string myName;
 	int choice;
 	string find;
 	Weapon magLite;
@@ -85,27 +87,19 @@ int main(){
 	//	Set player stats
 	Player player1 = setPlayer();
 
-	Loadout myGear = {empty,empty,empty,empty,empty,empty};
+	Loadout myGear = {"empty","empty","empty","empty","empty","empty"};
 
 	Weapon bareFist = setWeapon("Bare Fist");
 	myGear = setArms(bareFist,myGear);
+	player1 = updateArms(bareFist,player1);
 
 	Equipment tShrt = setEquip("T-Shirt");
 	myGear = setGear(tShrt,myGear);
+	player1 = updateGear(tShrt,player1);
 
 	Equipment bareFeet = setEquip("Bare Feet");
 	myGear = setGear(bareFeet,myGear);
-
-	player1 = updateStats(player1,myGear);
-
-	player1.healthBase += tShrt.eff1 + bareFeet.eff1;
-	player1.health = player1.healthBase;
-	player1.speed += bareFist.eff2 + tShrt.eff2 + bareFeet.eff2;
-	player1.power += bareFist.eff1;
-	player1.load += bareFist.weight + tShrt.weight + bareFeet.weight;
-
-	//	Set initial loadout.
-	myGear = setGear(left,right,back,waist,chest,feet);
+	player1 = updateGear(bareFeet,player1);
 
 	showIntro();
 	system("cls");
@@ -273,7 +267,7 @@ void displayStats(Player p1){
 Weapon setWeapon(string name){
 	ifstream inFile;
 	string line;
-	Weapon weap[12];
+	Weapon weap[13];
 	
 	//	Open the 'weapons.txt' file
 	inFile.open("weapons.txt",ios::in);
@@ -284,7 +278,7 @@ Weapon setWeapon(string name){
 	//	Search the 'weapons.txt' for the 'name' and set the stats
 	getline(inFile,line,'\n');
 	if(line==name){
-		for(int i;i<12;i++){
+		for(int i;i<13;i++){
 			weap[i]=line;
 			line++;
 		}
@@ -302,7 +296,7 @@ Weapon setWeapon(string name){
 Weapon setEquip(string name){
 	ifstream inFile;
 	string line;
-	Equipment equip[6];
+	Equipment equip[7];
 	
 	//	Open the 'equipment.txt' file
 	inFile.open("equipment.txt",ios::in);
@@ -313,7 +307,7 @@ Weapon setEquip(string name){
 	//	Search the 'equipment.txt' for the 'name' and set the stats
 	getline(inFile,line,'\n');
 	if(line==name){
-		for(int i;i<6;i++){
+		for(int i;i<7;i++){
 			equip[i]=line;
 			line++;
 		}
@@ -371,11 +365,27 @@ Loadout setGear(Equipment equip,Loadout gear){
 		return gear;
 }
 
-Player updateStats(Player p1,Loadout gear){
-	if
-	player1.healthBase += tShrt.eff1 + bareFeet.eff1;
-	player1.health = player1.healthBase;
-	player1.speed += bareFist.eff2 + tShrt.eff2 + bareFeet.eff2;
-	player1.power += bareFist.eff1;
-	player1.load += bareFist.weight + tShrt.weight + bareFeet.weight;
+Player updateArms(Weapon weap,Player p1){
+	p1.power += weap.eff1;
+	p1.speed += weap.eff2;
+	p1.load += weap.weight;
+
+	return p1;
+}
+
+Player updateGear(Equipment equip,Player p1){
+	if(equip.wear == "chest" || equip.wear == "feet"){
+		p1.healthBase += equip.eff1;
+		p1.health = p1.healthBase;
+	}else if(equip.type == "store"){
+		p1.loadBase += equip.eff1;
+		p1.load += equip.eff1;
+	}else if(equip.type == "quiv"){
+		p1.arLoadBase += equip.eff1;
+		p1.arLoad += equip.eff1;
+	}
+	p1.speed += equip.eff2;
+	p1.load += equip.weight;
+
+	return p1;
 }
