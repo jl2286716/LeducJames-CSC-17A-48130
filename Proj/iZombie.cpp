@@ -72,7 +72,7 @@ string getName(){
 
 void showIntro(){
 	ifstream inFile;
-	int linePer=22,	//	Number of lines printed per screen.
+	int linePer=22,		//	Number of lines printed per screen.
 		lineCnt=0;		//	Line counter initialized to zero.
 	string line;		//	Stores the lines to be written to the console.
 	
@@ -122,5 +122,5 @@ void displayStats(Player p1){
 		<< "Load Room: "	<< p1.load << endl
 		<< "Max Load: "		<< p1.loadBase << endl
 		<< "Arrow Room:	"	<< p1.arLoad << endl
-		<< "Max Arrows: "	<< p1.arLoadBase << endl;
+		<< "Max Arrows: "	<< p1.arLoadBase << endl << endl;
 }
