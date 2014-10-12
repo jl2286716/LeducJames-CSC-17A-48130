@@ -22,28 +22,85 @@ struct Player{
 	int arLoadBase;	//	=0
 };
 
+struct Weapon{
+	string name;	//	name = weapon name
+	string type;	//	type = weapon
+	string wear;	//	wear = {bag,self}
+	string wield;	//	wield = {single,double}
+	int eff1;		//	eff1 = +power
+	int eff2;		//	eff2 = +speed
+	float critVal;	//	accVal1 = % chance
+	string accTyp;	//	accTyp2 = {insta,jam,miss}
+	float accVal;	//	accVal2 = % chance
+	int weight;		//	weight = -load
+	string ammoTyp;	//	ammoTyp = {357mm(Python),39mm(AK-47),9mm(Glock 19,MAC-10),arrow,shell,blunt}
+	int ammoCnt;	//	ammoCnt = {0,NULL}
+};
+
+struct Equipment{	//	Holds storage and armor.
+	string name;	//	name = equipment name
+	string type;	//	type = {armor,store,quiv}
+	string wear;	//	wear = {chest,feet,back,waist}
+	int eff1;		//	eff1 = health(chest,feet)/load(back,waist)
+	int eff2;		//	eff2 = speed
+	int weight;		//	weight effects the load
+};
+
+struct Loadout{
+	string lHand;	//	can be equipped - default = fist
+	string rHand;	//	can be equipped - default = fist
+	string back;	//	is switched out; bag size effects load, hence, carried items - default = NULL
+	string waist;	//	is switched out - default = NULL
+	string chest;	//	coat can go over teflon & kevlar - default = shirt
+	string feet;	//	is switched out - default = bare
+};
+
+
+
+
 void showIntro();
 Player setPlayer();
 string getName();
 void displayStats(Player);
+Weapon setWeapon(string);
+Equipment setEquip(string);
+string setInventory();	//	use an array to store the inventory
+Loadout setGear();
 
 
 
 int main(){
 	string myName;
 	Player player1;
+	int choice;
+	string find;
+	Weapon bareFist;
+	Weapon magLite;
+	Loadout myGear;
+	Equipment tShrt;
 
 	cout << "WELCOME TO THE END OF THE WORLD!!!\n\n";
 
-	player1=setPlayer();
+	//	Set player stats
+	player1 = setPlayer();
+	bareFist = setWeapon("Bare Fist");
+	tShrt = setEquip("T-Shirt");
+	bareFeet = setEquip("Bare Feet");
+
+	//	Set inventory.
+
+
+	//	Set initial loadout.
+	myGear = setGear();
 
 	showIntro();
 	system("cls");
 
 	cout << "LEVEL 1: GET THE HELL OUT OF THERE!\n\n";
 	displayStats(player1);
+	//	Display inventory.
+	//	Display loadout.
 
-	int choice;
 	do{
 		cout << "Fight or flight?" << endl
 			<< "1: Look out the window?" << endl
@@ -69,17 +126,50 @@ int main(){
 			}while(choice != 1 || choice != 2 || choice != 3);
 
 			switch(choice){
-				case 1:
+				case 1:	//	Complete
 					break;
-				case 2:
+				case 2:	//	Complete
 					break;
-				case 3:
+				case 3:	//	Complete
 					break;
 			}
 			break;
 		}
 		case 2: {
-			cout << "You chose to look for a flashlight...\n"
+			cout << "You chose to look for a flashlight...\n";
+			do{
+				choice=0;	//	Reinitialize choice
+				cout << "1: Search the desk?" << endl
+					<< "2: Search the entertainment center?" << endl; 
+				if(choice != 1 || choice != 2){
+					cout << "Please, enter a valid choice (1 or 2)!" << endl;
+				}
+			}while(choice != 1 || choice != 2);
+
+			switch(choice){
+				case 1: {
+					find = "Mag-Light";
+					magLite = setWeapon(find);
+					cout << "You found the " << find << " !" << endl
+						<< "You can now see in the darkness!\n\n";
+					//	Check inventory.
+					//	Ask user to add Mag-Lite to inventory.
+					//	Ask user to equipt the Mag-Lite.
+					//	Update stats and equipment.
+					//	Show updated stats and equipment.
+					break;
+				}
+				case 2: {
+					cout << "You found the LED Flishlight!\n"
+						<< "You can now see in the darkness!\n\n";
+					//	Check inventory.
+					//	Ask user to add Mag-Lite to inventory.
+					//	Ask user to equipt the Mag-Lite.
+					//	Update stats and equipment.
+					//	Show updated stats and equipment.
+					break;
+				}
+			}
 			break;
 		}
 		default: cout << "If  this got through, there's a problem!" << endl;
@@ -164,4 +254,62 @@ void displayStats(Player p1){
 		<< "Max Load: "		<< p1.loadBase << endl
 		<< "Arrow Room:	"	<< p1.arLoad << endl
 		<< "Max Arrows: "	<< p1.arLoadBase << endl << endl;
+}
+
+Weapon setWeapon(string name){
+	ifstream inFile;
+	string line;
+	Weapon weap[12];
+	
+	//	Open the 'weapons.txt' file
+	inFile.open("weapons.txt",ios::in);
+	if(inFile.fail()){
+		cout << "No weapons for you!\n";
+	}
+
+	//	Search the 'weapons.txt' for the 'name' and set the stats
+	getline(inFile,line,'\n');
+	if(line==name){
+		for(int i;i<12;i++){
+			weap[i]=line;
+			line++;
+		}
+	}
+
+	//	Close the file
+	inFile.clear();
+	inFile.seekg(0L,ios::beg);
+	inFile.close();
+
+	//	Return the structure
+	return weap;
+}
+
+Weapon setEquip(string name){
+	ifstream inFile;
+	string line;
+	Equipment equip[6];
+	
+	//	Open the 'equipment.txt' file
+	inFile.open("equipment.txt",ios::in);
+	if(inFile.fail()){
+		cout << "No equipment for you!\n";
+	}
+
+	//	Search the 'equipment.txt' for the 'name' and set the stats
+	getline(inFile,line,'\n');
+	if(line==name){
+		for(int i;i<6;i++){
+			equip[i]=line;
+			line++;
+		}
+	}
+
+	//	Close the file
+	inFile.clear();
+	inFile.seekg(0L,ios::beg);
+	inFile.close();
+
+	//	Return the structure
+	return equip;
 }

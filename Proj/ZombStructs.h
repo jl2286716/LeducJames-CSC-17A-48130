@@ -329,7 +329,7 @@ struct Member{		//	used for team mates and villains
 	int powerBase;
 };
 
-struct Inventory{
+struct Equipped{
 	string lHand;	//	can be equipped - default = fist
 	string rHand;	//	can be equipped - default = fist
 	string back;	//	is switched out; bag size effects load, hence, carried items - default = NULL
