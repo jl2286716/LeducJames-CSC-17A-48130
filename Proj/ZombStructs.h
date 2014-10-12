@@ -1,5 +1,5 @@
 /*	Create the Player	*/
-struct Player{
+/*struct Player{
 	string name;
 	int health;		//	=200
 	int healthBase;	//	=200
@@ -31,7 +31,7 @@ Player setPlayer(){
 	return p1;
 }
 
-/*	Create Equipment	*/
+*/ /*	Create Equipment	*/ /*
 struct Equipment{	//	Holds storage and armor.
 	string type;	//	type = {armor,store,quiv}
 	string wear;	//	wear = {chest,feet,back,waist}
@@ -133,7 +133,7 @@ Equipment hiker[5];		//	The Hiker - heavy duty hiking backpack
 	hiker.eff2=speed-10;
 	hiker.weight=load-10;
 
-/*	Create Weapons	*/
+*/ /*	Create Weapons	*/ /*
 struct Weapon{
 	string type;	//	type = weapon
 	string wear;	//	wear = bag
@@ -434,4 +434,4 @@ struct MemInv{		//	team member inventory
 		wear 	= bag;
 		effect 	= +25 healh;
 		weight 	= -4 load;
-	
+	*/

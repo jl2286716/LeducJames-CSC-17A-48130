@@ -1,28 +1,16 @@
-#include "ZombStructs.h"
-#include <iostream>
-#include <string>
-#include <fstream>
+#ifndef ZOMBIEFUNC_H
+#define ZOMBIEFUNC_H
 
-using namespace std;
-
-void showIntro();
-
-int main(){
-	showIntro();
-	system("cls");
-	cout << "LEVEL 1: GET THE HELL OUT OF THERE!\n\n";
-	
-	return 0;
-}
-
-void showIntro(){
+//	Reads from and displays the 'intro.txt' file
+void showFile(string name,int lines){
 	ifstream inFile;
-	int linePer=22,	//	Number of lines printed per screen.
-		lineCnt=0;	//	Line counter initialized to zero.
-	string line;	//	Stores the lines to be written to the console.
+	int linePer=lines,	//	Number of lines printed per screen.
+		lineCnt=0;		//	Line counter initialized to zero.
+	string line,		//	Stores the lines to be written to the console.
+		fName=name;		//	Stores the name of the file to be opened.
 	
 	//	Open the 'intro.txt' file.
-	inFile.open("intro.txt",ios::in);
+	inFile.open(name,ios::in);
 	if(inFile.fail()){
 		cout << "The introduction is broken!\n";
 	}
@@ -56,3 +44,7 @@ void showIntro(){
 	}
 	inFile.close();
 }
+
+
+
+#endif
