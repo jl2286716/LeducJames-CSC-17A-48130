@@ -55,6 +55,10 @@ struct Loadout{
 	string feet;	//	is switched out - default = bare
 };
 
+struct Inventory{
+	Weapon
+	Equipment
+};
 
 
 
@@ -65,33 +69,43 @@ void displayStats(Player);
 Weapon setWeapon(string);
 Equipment setEquip(string);
 string setInventory();	//	use an array to store the inventory
-Loadout setGear();
-
+Loadout setGear(Equipment,Loadout);
+Loadout setArms(Weapon,Loadout);
+Player updateStats(Player,Loadout);
 
 
 int main(){
 	string myName;
-	Player player1;
 	int choice;
 	string find;
-	Weapon bareFist;
 	Weapon magLite;
-	Loadout myGear;
-	Equipment tShrt;
 
 	cout << "WELCOME TO THE END OF THE WORLD!!!\n\n";
 
 	//	Set player stats
-	player1 = setPlayer();
-	bareFist = setWeapon("Bare Fist");
-	tShrt = setEquip("T-Shirt");
-	bareFeet = setEquip("Bare Feet");
+	Player player1 = setPlayer();
 
-	//	Set inventory.
+	Loadout myGear = {empty,empty,empty,empty,empty,empty};
 
+	Weapon bareFist = setWeapon("Bare Fist");
+	myGear = setArms(bareFist,myGear);
+
+	Equipment tShrt = setEquip("T-Shirt");
+	myGear = setGear(tShrt,myGear);
+
+	Equipment bareFeet = setEquip("Bare Feet");
+	myGear = setGear(bareFeet,myGear);
+
+	player1 = updateStats(player1,myGear);
+
+	player1.healthBase += tShrt.eff1 + bareFeet.eff1;
+	player1.health = player1.healthBase;
+	player1.speed += bareFist.eff2 + tShrt.eff2 + bareFeet.eff2;
+	player1.power += bareFist.eff1;
+	player1.load += bareFist.weight + tShrt.weight + bareFeet.weight;
 
 	//	Set initial loadout.
-	myGear = setGear();
+	myGear = setGear(left,right,back,waist,chest,feet);
 
 	showIntro();
 	system("cls");
@@ -312,4 +326,56 @@ Weapon setEquip(string name){
 
 	//	Return the structure
 	return equip;
+}
+
+Loadout setArms(Weapon weap,Loadout gear){
+	//	Equipt weapon.
+	if(weap.wield == "single"){
+		if(gear.rHand == "empty"){
+			gear.rHand = weap.name;
+		}else if(gear.lHand == "empty"){
+			gear.lHand = weap.name;
+		}else {unequip();}	//	Still need to write this function
+	}else if(weap.wield = "double"){
+		if(gear.rHand == "empty" && gear.lHand == "empty"){
+			gear.rHand = weap.name;
+			gear.lHand = weap.name;
+		}else {unequip();}	//	Still need to write this function
+	}
+	return gear;
+}
+
+Loadout setGear(Equipment equip,Loadout gear){
+	//	Equipt gear.
+	if(equip.type == "armor" && equip.wear == "chest"){
+		if(gear.chest == "empty"){
+			gear.chest = equip.name;
+		}else {unequip();}	//	Still need to write this function
+	}else if(equip.type == "armor" && equip.wear == "feet"){
+		if(gear.feet == "empty"){
+			gear.feet = equip.name;
+		}else {unequip();}	//	Still need to write this function
+	}else if(equip.type == "store" && equip.wear == "waist"){
+		if(gear.waist == "empty"){
+			gear.waist = equip.name;
+		}else {unequip();}	//	Still need to write this function
+	}else if(equip.type == "store" && equip.wear == "back"){
+		if(gear.back == "empty"){
+			gear.back = equip.name;
+		}else {unequip();}	//	Still need to write this function
+	}else if(equip.type == "quiv" && equip.wear == "back"){
+		if(gear.back == "empty"){
+			gear.back = equip.name;
+		}else {unequip();}	//	Still need to write this function
+	}
+		return gear;
+}
+
+Player updateStats(Player p1,Loadout gear){
+	if
+	player1.healthBase += tShrt.eff1 + bareFeet.eff1;
+	player1.health = player1.healthBase;
+	player1.speed += bareFist.eff2 + tShrt.eff2 + bareFeet.eff2;
+	player1.power += bareFist.eff1;
+	player1.load += bareFist.weight + tShrt.weight + bareFeet.weight;
 }
