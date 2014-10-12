@@ -10,6 +10,7 @@ miss
 0
 blunt
 NULL
+false
 Crossbow
 weapon
 bag
@@ -22,6 +23,7 @@ insta
 -5
 arrow
 3
+false
 Shovel
 weapon
 bag
@@ -34,6 +36,7 @@ insta
 -15
 blunt
 NULL
+false
 Crowbar
 weapon
 bag
@@ -46,6 +49,7 @@ miss
 -5
 blunt
 NULL
+false
 Hammer
 weapon
 bag
@@ -58,6 +62,7 @@ miss
 -3
 blunt
 NULL
+false
 Hatchet
 weapon
 bag
@@ -70,6 +75,7 @@ miss
 -5
 blunt
 NULL
+false
 Mag-Lite
 weapon
 bag
@@ -82,6 +88,7 @@ miss
 -3
 blunt
 NULL
+false
 Defender 1300
 weapon
 bag
@@ -94,6 +101,7 @@ insta
 -10
 shell
 5
+false
 Bowie Knife
 weapon
 bag
@@ -106,6 +114,7 @@ miss
 -3
 blunt
 NULL
+false
 Ginsu Knife
 weapon
 bag
@@ -118,6 +127,7 @@ miss
 2
 blunt
 NULL
+false
 Glock 19
 weapon
 bag
@@ -130,6 +140,7 @@ jam
 -2
 9mm
 15
+false
 Python
 weapon
 bag
@@ -142,6 +153,7 @@ insta
 -3
 357mm
 6
+false
 Survival Knife
 weapon
 bag
@@ -154,6 +166,7 @@ miss
 -3
 blunt
 NULL
+false
 AK-47
 weapon
 bag
@@ -166,6 +179,7 @@ insta
 -10
 39mm
 30
+false
 MAC-10
 weapon
 bag
@@ -178,6 +192,7 @@ insta
 -7
 9mm
 32
+false
 Machete
 weapon
 bag
@@ -190,3 +205,4 @@ insta
 -7
 blunt
 NULL
+false
