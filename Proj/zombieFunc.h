@@ -1,5 +1,5 @@
-#ifndef ZOMBIEFUNC_H
-#define ZOMBIEFUNC_H
+//#ifndef ZOMBIEFUNC_H
+//#define ZOMBIEFUNC_H
 
 //	Reads from and displays the 'intro.txt' file
 void showFile(string name,int lines){
@@ -47,4 +47,4 @@ void showFile(string name,int lines){
 
 
 
-#endif
+//#endif
