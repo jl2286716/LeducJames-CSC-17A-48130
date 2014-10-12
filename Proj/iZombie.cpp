@@ -57,25 +57,17 @@ struct Loadout{
 	string feet;	//	is switched out - default = bare
 };
 
-struct Inventory{
-	Equipment gear;
-	Weapon arms;
-};
-
-
-
 void showIntro();
 Player setPlayer();
 string getName();
 void displayStats(Player);
+void displayLoad(Loadout);
 Weapon setWeapon(string);
 Equipment setEquip(string);
-string setInventory();	//	use an array to store the inventory
 Loadout setGear(Equipment,Loadout);
 Loadout setArms(Weapon,Loadout);
 Player updateGear(Equipment,Player);
 Player updateArms(Weapon,Player);
-
 
 int main(){
 	int choice;
@@ -107,7 +99,7 @@ int main(){
 	cout << "LEVEL 1: GET THE HELL OUT OF THERE!\n\n";
 	displayStats(player1);
 	//	Display inventory.
-	//	Display loadout.
+	displayLoad(myGear);
 
 	do{
 		cout << "Fight or flight?" << endl
@@ -388,4 +380,14 @@ Player updateGear(Equipment equip,Player p1){
 	p1.load += equip.weight;
 
 	return p1;
+}
+
+void displayLoad(gear){
+	cout << "Current Player Loadout:\n"
+		<< "Left Hand: "	<< gear.lHand << endl
+		<< "Right Hand: "	<< gear.rHand << endl
+		<< "Back: "			<< gear.back << endl
+		<< "Waist: "		<< gear.waist << endl
+		<< "Chest: "		<< gear.chest << endl
+		<< "Feet: "			<< gear.feet << endl << endl;
 }
