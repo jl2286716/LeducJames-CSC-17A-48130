@@ -43,7 +43,48 @@ int main(){
 	cout << "LEVEL 1: GET THE HELL OUT OF THERE!\n\n";
 	displayStats(player1);
 
-	
+	int choice;
+	do{
+		cout << "Fight or flight?" << endl
+			<< "1: Look out the window?" << endl
+			<< "2: Search for a flashlight?" << endl;
+		if(choice != 1 || choice != 2){
+			cout << "Please, enter a valid choice (1 or 2)!" << endl;
+		}
+	}while(choice != 1 || choice != 2);
+
+	switch(choice){
+		case 1: {
+			cout << "You look out the window...\n"
+				<< "and see a woman running from two ghoulish men.\n";
+
+			do{
+				choice=0;	//	Reinitialize choice
+				cout << "1: Keep watching?" << endl
+					<< "2: Run out and help?" << endl
+					<< "3: Ignore and grab supplies?" << endl; 
+				if(choice != 1 || choice != 2 || choice != 3){
+					cout << "Please, enter a valid choice (1, 2 or 3)!" << endl;
+				}
+			}while(choice != 1 || choice != 2 || choice != 3);
+
+			switch(choice){
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+			}
+			break;
+		}
+		case 2: {
+			cout << "You chose to look for a flashlight...\n"
+			break;
+		}
+		default: cout << "If  this got through, there's a problem!" << endl;
+	}
+
 	return 0;
 }
 
