@@ -56,18 +56,24 @@ struct Loadout{
 	string chest;	//	coat can go over teflon & kevlar - default = shirt
 	string feet;	//	is switched out - default = bare
 };
-
-void showIntro();
+/*	Create the Player	*/
 Player setPlayer();
 string getName();
-void displayStats(Player);
-void displayLoad(Loadout);
+
+/*	Create and Equipt the Weapons	*/
 Weapon setWeapon(string);
+Loadout setArms(Weapon,Loadout);
+Player updateArms(Weapon,Player);
+
+/*	Create and Equipt the Gear	*/
 Equipment setEquip(string);
 Loadout setGear(Equipment,Loadout);
-Loadout setArms(Weapon,Loadout);
 Player updateGear(Equipment,Player);
-Player updateArms(Weapon,Player);
+
+/*	Display Info and Stats	*/
+void showIntro();
+void displayStats(Player);
+void displayLoad(Loadout);
 
 int main(){
 	int choice;
@@ -100,7 +106,7 @@ int main(){
 	displayStats(player1);
 	//	Display inventory.
 	displayLoad(myGear);
-
+/*
 	do{
 		cout << "Fight or flight?" << endl
 			<< "1: Look out the window?" << endl
@@ -174,7 +180,7 @@ int main(){
 		}
 		default: cout << "If  this got through, there's a problem!" << endl;
 	}
-
+*/
 	return 0;
 }
 
@@ -259,7 +265,7 @@ void displayStats(Player p1){
 Weapon setWeapon(string name){
 	ifstream inFile;
 	string line;
-	Weapon weap[13];
+	Weapon weap;
 	
 	//	Open the 'weapons.txt' file
 	inFile.open("weapons.txt",ios::in);
@@ -270,10 +276,52 @@ Weapon setWeapon(string name){
 	//	Search the 'weapons.txt' for the 'name' and set the stats
 	getline(inFile,line,'\n');
 	if(line==name){
-		for(int i;i<13;i++){
-			weap[i]=line;
-			line++;
-		}
+		weap.name=line;
+
+		getline(inFile,line,'\n');
+		weap.type=line;
+
+		getline(inFile,line,'\n');
+		weap.wear=line;
+
+		getline(inFile,line,'\n');
+		weap.wield=line;
+
+		getline(inFile,line,'\n');
+		const char *eff1 = line.c_str();
+		weap.eff1=atoi(eff1);
+
+		getline(inFile,line,'\n');
+		const char *eff2 = line.c_str();
+		weap.eff2=atoi(eff2);;
+
+		getline(inFile,line,'\n');
+		const char *crit = line.c_str();
+		weap.critVal=atof(crit);
+
+		getline(inFile,line,'\n');
+		weap.accTyp=line;
+
+		getline(inFile,line,'\n');
+		const char *acc = line.c_str();
+		weap.accVal=atof(acc);
+
+		getline(inFile,line,'\n');
+		const char *load = line.c_str();
+		weap.weight=atoi(load);
+
+		getline(inFile,line,'\n');
+		weap.ammoTyp=line;
+
+		getline(inFile,line,'\n');
+		const char *ammo = line.c_str();
+		weap.ammoCnt=atoi(ammo);
+
+		getline(inFile,line,'\n');
+		const char *val = line.c_str();
+		bool eq=false;
+		if(val==0) eq=false;
+		weap.equipped=eq;
 	}
 
 	//	Close the file
@@ -285,7 +333,7 @@ Weapon setWeapon(string name){
 	return weap;
 }
 
-Weapon setEquip(string name){
+Equipment setEquip(string name){
 	ifstream inFile;
 	string line;
 	Equipment equip[7];
