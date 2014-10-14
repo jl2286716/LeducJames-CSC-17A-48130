@@ -578,18 +578,3 @@ Player getDefaults(Player p1){
 	//	Return the value
 	return p1;
 }
-
-
-Player removeArms(Loadout gear,Player p1,string field){	//	updates players stats
-	int defVal = getDefVal(field);
-	if(field=
-}
-
-Loadout unequipGear(Equipment equip,Loadout gear){
-
-}
-
-Player removeGear(Equipment equip,Player p1){
-
-}
-
