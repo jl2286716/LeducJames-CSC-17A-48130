@@ -34,7 +34,6 @@ struct Weapon{
 	int weight;		//	weight = -load
 	string ammoTyp;	//	ammoTyp = {357mm(Python),39mm(AK-47),9mm(Glock 19,MAC-10),arrow,shell,blunt}
 	int ammoCnt;	//	ammoCnt = {0,NULL}
-	bool equipped;	//	equipped = {true,false} - Equipped or not
 };
 
 struct Equipment{	//	Holds storage and armor.
@@ -44,7 +43,6 @@ struct Equipment{	//	Holds storage and armor.
 	int eff1;		//	eff1 = health(chest,feet)/load(back,waist)
 	int eff2;		//	eff2 = speed
 	int weight;		//	weight effects the load
-	bool equipped;	//	equipped = {true,false}
 };
 
 struct Loadout{
@@ -83,7 +81,7 @@ int main(){
 	//	Set player stats
 	Player player1 = setPlayer();
 
-	Loadout myGear = {"empty","empty","empty","empty","empty","empty"};
+	Loadout myGear = {"empty","empty","empty","empty","empty"};
 	Loadout preGear = myGear;
 
 	Weapon bareFist = setWeapon("Bare Fist");
@@ -334,7 +332,7 @@ Weapon setWeapon(string name){
 Equipment setEquip(string name){
 	ifstream inFile;
 	string line;
-	Equipment equip[6];
+	Equipment equip;
 	
 	//	Open the 'equipment.txt' file
 	inFile.open("equipment.txt",ios::in);
@@ -345,10 +343,25 @@ Equipment setEquip(string name){
 	//	Search the 'equipment.txt' for the 'name' and set the stats
 	getline(inFile,line,'\n');
 	if(line==name){
-		for(int i=0;i<6;i++){
-			equip[i]=line;
-			line++;
-		}
+		equip.name=line;
+
+		getline(inFile,line,'\n');
+		equip.type=line;
+
+		getline(inFile,line,'\n');
+		equip.wear=line;
+
+		getline(inFile,line,'\n');
+		const char *eff1 = line.c_str();
+		equip.eff1=atoi(eff1);
+
+		getline(inFile,line,'\n');
+		const char *eff2 = line.c_str();
+		equip.eff2=atoi(eff2);;
+
+		getline(inFile,line,'\n');
+		const char *weight = line.c_str();
+		equip.weight=atoi(weight);
 	}
 
 	//	Close the file
