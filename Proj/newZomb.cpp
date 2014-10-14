@@ -30,7 +30,7 @@ struct Gear{
 };
 
 /*	Create the Player	*/
-Player setPlayer();
+Stats setPlayer();
 string getName();
 /*	Default Gear	*/
 Gear bareFist();
@@ -42,14 +42,11 @@ Stats defStats(string);
 
 /*	Display Info and Stats	*/
 void showIntro();
-void displayStats(Player);
+void displayStats(Stats);
 
 
 
 int main(){
-	int choice;
-	string find;
-
 	cout << "WELCOME TO THE END OF THE WORLD!!!\n\n";
 
 	//	Set player default stats
@@ -59,8 +56,8 @@ int main(){
 	Gear feet = bareFeet();
 	Gear chest = tShrt();
 	//	Update player stats
-	Stats def = defStats(player1.name);
-	Stats player1 = update(def,player1,hand,feet,chest);
+	//Stats def = defStats(player1.name);
+	//player1 = update(def,player1,hand,feet,chest);
 	//	Display intro
 	showIntro();
 	system("cls");
@@ -85,7 +82,7 @@ Stats setPlayer(){
 	};
 	return p1;
 }
-Stats defStats(name){
+Stats defStats(string name){
 	Stats p1 = {
 		name,		//	player1.name
 		200,		//	player1.health
@@ -170,7 +167,7 @@ Stats update(Stats d,Stats p1,Gear h,Gear f,Gear c){
 		cout << "Do you wish to equip " << h.name << "?\n";
 		cin >> ans;
 		//	if yes
-		if(toupper(ans) == "Y"){
+		if(toupper(ans) == 'Y'){
 			//	remove old stats
 			p1.hand="empty";
 			p1.power=d.power;
@@ -195,7 +192,7 @@ Stats update(Stats d,Stats p1,Gear h,Gear f,Gear c){
 		cout << "Do you wish to equip " << f.name << "?\n";
 		cin >> ans;
 		//	if yes
-		if(toupper(ans) == "Y"){
+		if(toupper(ans) == 'Y'){
 			//	remove old stats
 			p1.feet="empty";
 			p1.speed=d.speed;
@@ -220,7 +217,7 @@ Stats update(Stats d,Stats p1,Gear h,Gear f,Gear c){
 		cout << "Do you wish to equip " << c.name << "?\n";
 		cin >> ans;
 		//	if yes
-		if(toupper(ans) == "Y"){
+		if(toupper(ans) == 'Y'){
 			//	remove old stats
 			p1.chest="empty";
 			p1.base=d.base;
@@ -238,6 +235,7 @@ Stats update(Stats d,Stats p1,Gear h,Gear f,Gear c){
 		p1.chest=c.name;
 		p1.base+=c.effect;
 	}
+	return p1;
 }
 
 
@@ -249,10 +247,9 @@ Gear bareFist(){
 		"weapon",
 		"hand",
 		0,
-		20,
-		0.01,
+		0.01f,
 		"miss",
-		0.1,
+		0.1f
 	};
 	return fist;
 }
@@ -262,10 +259,9 @@ Gear tShrt(){
 		"armor",
 		"chest",
 		1,
-		0,
 		NULL,
 		NULL,
-		NULL,
+		NULL
 	};
 	return shirt;
 }
@@ -275,10 +271,9 @@ Gear bareFeet(){
 		"armor",
 		"chest",
 		-5,
-		-5,
 		NULL,
 		NULL,
-		NULL,
+		NULL
 	};
 	return feet;
 }
