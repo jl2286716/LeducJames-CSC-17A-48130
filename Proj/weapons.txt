@@ -1,7 +1,6 @@
 Bare Fist
 weapon
 self
-double
 0
 20
 0.01
@@ -10,11 +9,9 @@ miss
 0
 blunt
 NULL
-0
 Crossbow
 weapon
 bag
-double
 15
 15
 0.1
@@ -23,11 +20,9 @@ insta
 -5
 arrow
 3
-0
 Shovel
 weapon
 bag
-double
 20
 -2
 0.75
@@ -36,11 +31,9 @@ insta
 -15
 blunt
 NULL
-0
 Crowbar
 weapon
 bag
-single
 10
 8
 0.5
@@ -49,11 +42,9 @@ miss
 -5
 blunt
 NULL
-0
 Hammer
 weapon
 bag
-single
 6
 10
 0.15
@@ -62,11 +53,9 @@ miss
 -3
 blunt
 NULL
-0
 Hatchet
 weapon
 bag
-single
 7
 10
 0.2
@@ -75,11 +64,9 @@ miss
 -5
 blunt
 NULL
-0
 Mag-Lite
 weapon
 bag
-single
 5
 9
 0.05
@@ -88,11 +75,9 @@ miss
 -3
 blunt
 NULL
-0
 Defender 1300
 weapon
 bag
-double
 35
 5
 0.8
@@ -101,11 +86,9 @@ insta
 -10
 shell
 5
-0
 Bowie Knife
 weapon
 bag
-single
 9
 12
 0.7
@@ -114,11 +97,9 @@ miss
 -3
 blunt
 NULL
-0
 Ginsu Knife
 weapon
 bag
-single
 6
 12
 0.3
@@ -127,11 +108,9 @@ miss
 2
 blunt
 NULL
-0
 Glock 19
 weapon
 bag
-single
 20
 13
 0.4
@@ -140,11 +119,9 @@ jam
 -2
 9mm
 15
-0
 Python
 weapon
 bag
-single
 25
 14
 0.85
@@ -153,11 +130,9 @@ insta
 -3
 357mm
 6
-0
 Survival Knife
 weapon
 bag
-single
 8
 12
 0.6
@@ -166,11 +141,9 @@ miss
 -3
 blunt
 NULL
-0
 AK-47
 weapon
 bag
-double
 30
 20
 0.9
@@ -179,11 +152,9 @@ insta
 -10
 39mm
 30
-0
 MAC-10
 weapon
 bag
-single
 15
 30
 0.35
@@ -192,11 +163,9 @@ insta
 -7
 9mm
 32
-0
 Machete
 weapon
 bag
-single
 10
 10
 0.5
@@ -205,4 +174,3 @@ insta
 -7
 blunt
 NULL
-0

@@ -26,7 +26,6 @@ struct Weapon{
 	string name;	//	name = weapon name
 	string type;	//	type = weapon
 	string wear;	//	wear = {bag,self}
-	string wield;	//	wield = {single,double}
 	int eff1;		//	eff1 = +power
 	int eff2;		//	eff2 = +speed
 	float critVal;	//	accVal1 = % chance
@@ -49,8 +48,7 @@ struct Equipment{	//	Holds storage and armor.
 };
 
 struct Loadout{
-	string lHand;	//	can be equipped - default = fist
-	string rHand;	//	can be equipped - default = fist
+	string hand;	//	can be equipped - default = fist
 	string back;	//	is switched out; bag size effects load, hence, carried items - default = NULL
 	string waist;	//	is switched out - default = NULL
 	string chest;	//	coat can go over teflon & kevlar - default = shirt
@@ -63,12 +61,12 @@ string getName();
 /*	Create and Equipt the Weapons	*/
 Weapon setWeapon(string);
 Loadout setArms(Weapon,Loadout);
-Player updateArms(Weapon,Player);
+Player updateArms(Weapon,Player,Loadout);
 
 /*	Create and Equipt the Gear	*/
 Equipment setEquip(string);
 Loadout setGear(Equipment,Loadout);
-Player updateGear(Equipment,Player);
+Player updateGear(Equipment,Player,Loadout,Loadout);
 
 /*	Display Info and Stats	*/
 void showIntro();
@@ -86,18 +84,21 @@ int main(){
 	Player player1 = setPlayer();
 
 	Loadout myGear = {"empty","empty","empty","empty","empty","empty"};
+	Loadout preGear = myGear;
 
 	Weapon bareFist = setWeapon("Bare Fist");
-	myGear = setArms(bareFist,myGear);
-	player1 = updateArms(bareFist,player1);
+		myGear = setArms(bareFist,myGear);
+		player1 = updateArms(bareFist,player1,myGear);
 
 	Equipment tShrt = setEquip("T-Shirt");
-	myGear = setGear(tShrt,myGear);
-	player1 = updateGear(tShrt,player1);
+		preGear = myGear;
+		myGear = setGear(tShrt,myGear);
+		player1 = updateGear(tShrt,player1,myGear,preGear);
 
 	Equipment bareFeet = setEquip("Bare Feet");
-	myGear = setGear(bareFeet,myGear);
-	player1 = updateGear(bareFeet,player1);
+		preGear = myGear;
+		myGear = setGear(bareFeet,myGear);
+		player1 = updateGear(bareFeet,player1,myGear,preGear);
 
 	showIntro();
 	system("cls");
@@ -184,6 +185,7 @@ int main(){
 	return 0;
 }
 
+//	Initializes the player
 Player setPlayer(){
 	Player p1 = {
 		getName(),	//	player1.name
@@ -199,6 +201,7 @@ Player setPlayer(){
 	return p1;
 }
 
+//	Get the name from the user.
 string getName(){
 	string pName;
 	cout << "What's your name?: ";
@@ -207,6 +210,7 @@ string getName(){
 	return pName;
 }
 
+//	Shows the intro
 void showIntro(){
 	ifstream inFile;
 	int linePer=22,		//	Number of lines printed per screen.
@@ -249,6 +253,7 @@ void showIntro(){
 	inFile.close();
 }
 
+//	Displays Player stats
 void displayStats(Player p1){
 	cout << "Current Player Stats:\n"
 		<< "Player Name: "	<< p1.name << endl
@@ -262,6 +267,7 @@ void displayStats(Player p1){
 		<< "Max Arrows: "	<< p1.arLoadBase << endl << endl;
 }
 
+//	Sets the weapon item
 Weapon setWeapon(string name){
 	ifstream inFile;
 	string line;
@@ -283,9 +289,6 @@ Weapon setWeapon(string name){
 
 		getline(inFile,line,'\n');
 		weap.wear=line;
-
-		getline(inFile,line,'\n');
-		weap.wield=line;
 
 		getline(inFile,line,'\n');
 		const char *eff1 = line.c_str();
@@ -316,12 +319,6 @@ Weapon setWeapon(string name){
 		getline(inFile,line,'\n');
 		const char *ammo = line.c_str();
 		weap.ammoCnt=atoi(ammo);
-
-		getline(inFile,line,'\n');
-		const char *val = line.c_str();
-		bool eq=false;
-		if(val==0) eq=false;
-		weap.equipped=eq;
 	}
 
 	//	Close the file
@@ -333,10 +330,11 @@ Weapon setWeapon(string name){
 	return weap;
 }
 
+//	Sets the equipment (armor and storage)
 Equipment setEquip(string name){
 	ifstream inFile;
 	string line;
-	Equipment equip[7];
+	Equipment equip[6];
 	
 	//	Open the 'equipment.txt' file
 	inFile.open("equipment.txt",ios::in);
@@ -347,7 +345,7 @@ Equipment setEquip(string name){
 	//	Search the 'equipment.txt' for the 'name' and set the stats
 	getline(inFile,line,'\n');
 	if(line==name){
-		for(int i;i<7;i++){
+		for(int i=0;i<6;i++){
 			equip[i]=line;
 			line++;
 		}
@@ -365,56 +363,24 @@ Equipment setEquip(string name){
 // Checks the arms loadout and updates as needed.
 Loadout setArms(Weapon weap,Loadout gear){
 	char ans;
-	char choice;
-	if(weap.wield == "single"){
-		if(gear.rHand == "empty"){
-			gear.rHand = weap.name;
-		}else if(gear.lHand == "empty"){
-			gear.lHand = weap.name;
-		}else{
-			do{
-				cout << "Do you want to remove your " << gear.rHand << " or " << gear.lHand
-					<< " to equip the " << weap.name << " you just found?(Y/N): ";
-				cin >> ans;
-				if(toupper(ans)=='N'){
-					cout << gear.rHand << " and " << gear.lHand << " will remain equipt!\n";
-				}else if(toupper(ans)=='Y'){
-					do{
-						cout << "Which hand do you want to free-up?(R/L): ";
-						cin >> choice;
-						if(choice=="R"){
-							gear.lHand = weap.name;
-						}else if(choice=="L"){
-							gear.lHand = weap.name;
-						}else{
-							cout << "Please enter a valid choice,\n"
-								<< "'L' for Left-Hand or 'R' for Right-Hand!\n\n";
-						}
-					}while(toupper(choice)!="R" || toupper(choice)!="L");
-				}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
-					cout << "Please enter either 'Y' or 'N'!\n\n";
-				}
-			}while(toupper(ans)!='Y' || toupper(ans)!='N');
-		}
-	}else if(weap.wield = "double"){
-		if(gear.rHand == "empty" && gear.lHand == "empty"){
-			gear.rHand = weap.name;
-			gear.lHand = weap.name;
-		}else{
-			do{
-				cout << "Do you want to remove your " << gear.rHand 
-					<< " to equip the " << weap.name << " you just found?(Y/N): ";
-				cin >> ans;
-				if(toupper(ans)=='N'){
-					cout << gear.rHand << " will remain equipt!\n";
-				}else if(toupper(ans)=='Y'){
-					gear.rHand = weap.name;
-					gear.lHand = weap.name;
-				}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
-					cout << "Please enter either 'Y' or 'N'!\n\n";
-				}
-			}while(toupper(ans)!='Y' || toupper(ans)!='N');
-		}
+
+	if(gear.hand=="empty"){
+		gear.hand=weap.name;
+	}else{
+		do{
+			cout << "Do you want to remove your " << gear.hand
+				<< " to equip the " << weap.name << " you just found?(Y/N): ";
+			cin >> ans;
+
+			if(toupper(ans)=="N"){
+				cout << "The " << gear.hand << " will remain equipt!\n";
+			}else if(toupper(ans)=="Y"){
+				gear.hand=weap.name;
+				cout << gear.hand << " is now your current weapon!\n";
+			}else{
+				cout << "Please enter a valid choice - 'Y' or 'N'!\n\n";
+			}
+		}while(toupper(ans)!="Y" || toupper(ans)!="N");
 	}
 	return gear;
 }
@@ -510,28 +476,69 @@ Loadout setGear(Equipment equip,Loadout gear){
 	return gear;
 }
 
-Player updateArms(Weapon weap,Player p1){
-	p1.power += weap.eff1;
-	p1.speed += weap.eff2;
-	p1.load += weap.weight;
+Player updateArms(Weapon weap,Player p1,Loadout gear){
+	Player def=getDefaults(p1);
+	if(gear.hand==weap.name){
+		p1.power = def.power;
+		p1.power += weap.eff1;
 
+		p1.speed = def.speed;
+		p1.speed += weap.eff2;
+
+		p1.load = def.load;
+		p1.load += weap.weight;
+	}
 	return p1;
 }
 
-Player updateGear(Equipment equip,Player p1){
-	if(equip.wear == "chest" || equip.wear == "feet"){
-		p1.healthBase += equip.eff1;
-		p1.health = p1.healthBase;
+Player updateGear(Equipment equip,Player p1,Loadout gear,Loadout pre){
+	Player def=getDefaults(p1);
+	Equipment preEquip;
+	if(equip.wear == "chest"){
+		if(gear.chest != "empty"){
+			preEquip = setEquip(pre.chest);
+			p1.healthBase -= preEquip.eff1;
+			p1.health = p1.healthBase;
+			p1.speed -= preEquip.eff2;
+		}else{
+			p1.healthBase += equip.eff1;
+			p1.health = p1.healthBase;
+			p1.speed += equip.eff2;
+		}
+	}else if(equip.wear == "feet"){
+		if(gear.feet != "empty"){
+			preEquip = setEquip(pre.feet);
+			p1.healthBase -= preEquip.eff1;
+			p1.health = p1.healthBase;
+			p1.speed -= preEquip.eff2;
+		}else{
+			p1.healthBase += equip.eff1;
+			p1.health = p1.healthBase;
+			p1.speed += equip.eff2;
+		}
 	}else if(equip.type == "store"){
+		p1.loadBase = def.loadBase;
 		p1.loadBase += equip.eff1;
-		p1.load += equip.eff1;
+		if(gear.back != "empty"){
+			preEquip = setEquip(pre.back);
+			p1.speed -= preEquip.eff2;
+			p1.load -= preEquip.weight;
+		}else{
+			p1.speed += equip.eff2;
+			p1.load += equip.weight;
+		}
 	}else if(equip.type == "quiv"){
-		p1.arLoadBase += equip.eff1;
-		p1.arLoad += equip.eff1;
+		p1.arLoadBase = def.arLoadBase;	// resets the load
+		p1.arLoadBase += equip.eff1;	// increases the load
+		if(gear.back != "empty"){
+			preEquip = setEquip(pre.back);	//	looks up the pre equipment
+			p1.speed -= preEquip.eff2;
+			p1.load -= preEquip.weight;		//	subtracts the old load
+		}else{
+			p1.speed += equip.eff2;
+			p1.load += equip.weight;	// updates the load if 'empty'
+		}
 	}
-	p1.speed += equip.eff2;
-	p1.load += equip.weight;
-
 	return p1;
 }
 
@@ -545,7 +552,8 @@ void displayLoad(gear){
 		<< "Feet: "			<< gear.feet << endl << endl;
 }
 
-int getDefVal(field){	//	Get the default value of a specified field.
+//	Get the default value of a specified field.
+Player getDefaults(Player p1){
 	ifstream inFile;
 	string line;
 	int val;
@@ -557,12 +565,10 @@ int getDefVal(field){	//	Get the default value of a specified field.
 	}
 
 	//	Search the 'defaultStats.txt' for the 'field' and set the stat
-	do{
+	for(int i=1;i<9;i++){
 		getline(inFile,line,'\n');
-		if(line==field){
-			getline(inFile,val,'\n');
-		}
-	}while(line!=field)
+		p1[0]=static_cast<int>line;
+	}
 
 	//	Close the file
 	inFile.clear();
@@ -570,25 +576,9 @@ int getDefVal(field){	//	Get the default value of a specified field.
 	inFile.close();
 
 	//	Return the value
-	return val;
+	return p1;
 }
 
-Loadout unequipArms(Weapon weap,Loadout gear){	//	updates the loadout
-	char ans;
-	do{
-		cout << "Do you want to remove your " << gear.lHand
-			<< " and equip the " << weap.name << " you just found?(Y/N): ";
-		cin >> ans;
-		if(toupper(ans)=='N'){
-			cout << gear.lHand << " will remain equipt!\n";
-		}else if(toupper(ans)=='Y'){
-			gear.lHand = "empty";
-		}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
-			cout << "Please enter either 'Y' or 'N'!\n\n";
-		}
-	}while(toupper(ans)!='Y' || toupper(ans)!='N');
-	return gear;
-}
 
 Player removeArms(Loadout gear,Player p1,string field){	//	updates players stats
 	int defVal = getDefVal(field);
