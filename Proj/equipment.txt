@@ -1,9 +1,12 @@
-T-Shirt
-armor
-chest
-1
-0
--1
+name = T-Shirt
+type = armor
+wear = chest
+eff1 = 1
+eff2 = 0
+crit = NULL
+accTyp = NULL
+accVal = NULL
+weight = -1
 Coat
 armor
 chest

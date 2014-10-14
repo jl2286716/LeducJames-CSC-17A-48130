@@ -1,14 +1,12 @@
-Bare Fist
-weapon
-self
-0
-20
-0.01
-miss
-0.1
-0
-blunt
-NULL
+name = Bare Fist
+type = weapon
+wear = hand
+eff1 = 0
+eff2 = 20
+crit = 0.01
+accTyp = miss
+accVal = 0.1
+weight = 0
 Crossbow
 weapon
 bag
