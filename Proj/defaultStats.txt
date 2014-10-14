@@ -1,0 +1,16 @@
+health
+200
+healthBase
+200
+speed
+50
+power
+20
+load
+25
+loadBase
+25
+arLoad
+0
+arLoadBase
+0

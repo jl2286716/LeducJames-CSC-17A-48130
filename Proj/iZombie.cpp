@@ -439,3 +439,60 @@ void displayLoad(gear){
 		<< "Chest: "		<< gear.chest << endl
 		<< "Feet: "			<< gear.feet << endl << endl;
 }
+
+int getDefVal(field){	//	Get the default value of a specified field.
+	ifstream inFile;
+	string line;
+	int val;
+	
+	//	Open the 'defaultStats.txt' file
+	inFile.open("defaultStats.txt",ios::in);
+	if(inFile.fail()){
+		cout << "No stats for you!\n";
+	}
+
+	//	Search the 'defaultStats.txt' for the 'field' and set the stat
+	do{
+		getline(inFile,line,'\n');
+		if(line==field){
+			getline(inFile,val,'\n');
+		}
+	}while(line!=field)
+
+	//	Close the file
+	inFile.clear();
+	inFile.seekg(0L,ios::beg);
+	inFile.close();
+
+	//	Return the value
+	return val;
+}
+
+Loadout unequipArms(Weapon weap,Loadout gear){
+	char ans;
+	do{
+		cout << "Do you want to remove your " << gear.lHand
+			<< " and equip the " << weap.name << " you just found?(Y/N): ";
+		cin >> ans;
+		if(toupper(ans)=='N'){
+			cout << gear << " will remain equipt!\n";
+		}else if(toupper(ans)=='Y'){
+			//	equip
+		}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
+			cout << "Please enter either 'Y' or 'N'!\n\n";
+		}
+	}while(toupper(ans)!='Y' || toupper(ans)!='N');
+}
+
+Player removeArms(Weapon weap,Player p1){
+
+}
+
+Loadout unequipGear(Equipment equip,Loadout gear){
+
+}
+
+Player removeGear(Equipment equip,Player p1){
+
+}
+
