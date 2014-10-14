@@ -362,47 +362,152 @@ Equipment setEquip(string name){
 	return equip;
 }
 
+// Checks the arms loadout and updates as needed.
 Loadout setArms(Weapon weap,Loadout gear){
-	//	Equipt weapon.
+	char ans;
+	char choice;
 	if(weap.wield == "single"){
 		if(gear.rHand == "empty"){
 			gear.rHand = weap.name;
 		}else if(gear.lHand == "empty"){
 			gear.lHand = weap.name;
-		}else {unequip();}	//	Still need to write this function
+		}else{
+			do{
+				cout << "Do you want to remove your " << gear.rHand << " or " << gear.lHand
+					<< " to equip the " << weap.name << " you just found?(Y/N): ";
+				cin >> ans;
+				if(toupper(ans)=='N'){
+					cout << gear.rHand << " and " << gear.lHand << " will remain equipt!\n";
+				}else if(toupper(ans)=='Y'){
+					do{
+						cout << "Which hand do you want to free-up?(R/L): ";
+						cin >> choice;
+						if(choice=="R"){
+							gear.lHand = weap.name;
+						}else if(choice=="L"){
+							gear.lHand = weap.name;
+						}else{
+							cout << "Please enter a valid choice,\n"
+								<< "'L' for Left-Hand or 'R' for Right-Hand!\n\n";
+						}
+					}while(toupper(choice)!="R" || toupper(choice)!="L");
+				}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
+					cout << "Please enter either 'Y' or 'N'!\n\n";
+				}
+			}while(toupper(ans)!='Y' || toupper(ans)!='N');
+		}
 	}else if(weap.wield = "double"){
 		if(gear.rHand == "empty" && gear.lHand == "empty"){
 			gear.rHand = weap.name;
 			gear.lHand = weap.name;
-		}else {unequip();}	//	Still need to write this function
+		}else{
+			do{
+				cout << "Do you want to remove your " << gear.rHand 
+					<< " to equip the " << weap.name << " you just found?(Y/N): ";
+				cin >> ans;
+				if(toupper(ans)=='N'){
+					cout << gear.rHand << " will remain equipt!\n";
+				}else if(toupper(ans)=='Y'){
+					gear.rHand = weap.name;
+					gear.lHand = weap.name;
+				}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
+					cout << "Please enter either 'Y' or 'N'!\n\n";
+				}
+			}while(toupper(ans)!='Y' || toupper(ans)!='N');
+		}
 	}
 	return gear;
 }
 
+// Checks the gear loadout and updates as needed.
 Loadout setGear(Equipment equip,Loadout gear){
-	//	Equipt gear.
 	if(equip.type == "armor" && equip.wear == "chest"){
 		if(gear.chest == "empty"){
 			gear.chest = equip.name;
-		}else {unequip();}	//	Still need to write this function
+		}else{
+			do{
+				cout << "Do you want to remove your " << gear.chest 
+					<< " to equip the " << equip.name << " you just found?(Y/N): ";
+				cin >> ans;
+				if(toupper(ans)=='N'){
+					cout << gear.chest << " will remain equipt!\n";
+				}else if(toupper(ans)=='Y'){
+					gear.chest = equip.name;
+				}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
+					cout << "Please enter either 'Y' or 'N'!\n\n";
+				}
+			}while(toupper(ans)!='Y' || toupper(ans)!='N');
+		}
 	}else if(equip.type == "armor" && equip.wear == "feet"){
 		if(gear.feet == "empty"){
 			gear.feet = equip.name;
-		}else {unequip();}	//	Still need to write this function
+		}else{
+			do{
+				cout << "Do you want to remove your " << gear.feet 
+					<< " to equip the " << equip.name << " you just found?(Y/N): ";
+				cin >> ans;
+				if(toupper(ans)=='N'){
+					cout << gear.feet << " will remain equipt!\n";
+				}else if(toupper(ans)=='Y'){
+					gear.feet = equip.name;
+				}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
+					cout << "Please enter either 'Y' or 'N'!\n\n";
+				}
+			}while(toupper(ans)!='Y' || toupper(ans)!='N');
+		}
 	}else if(equip.type == "store" && equip.wear == "waist"){
 		if(gear.waist == "empty"){
 			gear.waist = equip.name;
-		}else {unequip();}	//	Still need to write this function
+		}else{
+			do{
+				cout << "Do you want to remove your " << gear.waist 
+					<< " to equip the " << equip.name << " you just found?(Y/N): ";
+				cin >> ans;
+				if(toupper(ans)=='N'){
+					cout << gear.waist << " will remain equipt!\n";
+				}else if(toupper(ans)=='Y'){
+					gear.waist = equip.name;
+				}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
+					cout << "Please enter either 'Y' or 'N'!\n\n";
+				}
+			}while(toupper(ans)!='Y' || toupper(ans)!='N');
+		}
 	}else if(equip.type == "store" && equip.wear == "back"){
 		if(gear.back == "empty"){
 			gear.back = equip.name;
-		}else {unequip();}	//	Still need to write this function
+		}else{
+			do{
+				cout << "Do you want to remove your " << gear.back 
+					<< " to equip the " << equip.name << " you just found?(Y/N): ";
+				cin >> ans;
+				if(toupper(ans)=='N'){
+					cout << gear.back << " will remain equipt!\n";
+				}else if(toupper(ans)=='Y'){
+					gear.back = equip.name;
+				}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
+					cout << "Please enter either 'Y' or 'N'!\n\n";
+				}
+			}while(toupper(ans)!='Y' || toupper(ans)!='N');
+		}
 	}else if(equip.type == "quiv" && equip.wear == "back"){
 		if(gear.back == "empty"){
 			gear.back = equip.name;
-		}else {unequip();}	//	Still need to write this function
+		}else {
+			do{
+				cout << "Do you want to remove your " << gear.back 
+					<< " to equip the " << equip.name << " you just found?(Y/N): ";
+				cin >> ans;
+				if(toupper(ans)=='N'){
+					cout << gear.back << " will remain equipt!\n";
+				}else if(toupper(ans)=='Y'){
+					gear.back = equip.name;
+				}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
+					cout << "Please enter either 'Y' or 'N'!\n\n";
+				}
+			}while(toupper(ans)!='Y' || toupper(ans)!='N');
+		}
 	}
-		return gear;
+	return gear;
 }
 
 Player updateArms(Weapon weap,Player p1){
@@ -468,24 +573,26 @@ int getDefVal(field){	//	Get the default value of a specified field.
 	return val;
 }
 
-Loadout unequipArms(Weapon weap,Loadout gear){
+Loadout unequipArms(Weapon weap,Loadout gear){	//	updates the loadout
 	char ans;
 	do{
 		cout << "Do you want to remove your " << gear.lHand
 			<< " and equip the " << weap.name << " you just found?(Y/N): ";
 		cin >> ans;
 		if(toupper(ans)=='N'){
-			cout << gear << " will remain equipt!\n";
+			cout << gear.lHand << " will remain equipt!\n";
 		}else if(toupper(ans)=='Y'){
-			//	equip
+			gear.lHand = "empty";
 		}else if(toupper(ans)!='Y' || toupper(ans)!='N'){
 			cout << "Please enter either 'Y' or 'N'!\n\n";
 		}
 	}while(toupper(ans)!='Y' || toupper(ans)!='N');
+	return gear;
 }
 
-Player removeArms(Weapon weap,Player p1){
-
+Player removeArms(Loadout gear,Player p1,string field){	//	updates players stats
+	int defVal = getDefVal(field);
+	if(field=
 }
 
 Loadout unequipGear(Equipment equip,Loadout gear){
